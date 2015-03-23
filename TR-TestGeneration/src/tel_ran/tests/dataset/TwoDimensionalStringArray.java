@@ -33,9 +33,9 @@ public class TwoDimensionalStringArray {
 		return false;
 	}
 
-//	public String[][] getTDSA() {
-//		return tsArray;
-//	}
+	public String[][] getTDSA() {
+		return tsArray;
+	}
 //
 //	public int getWidth() {
 //		return width;

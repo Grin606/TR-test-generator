@@ -1,4 +1,5 @@
 package tel_ran.tests.dataset;
+import tel_ran.tests.pictures.Picture;
 
 /** Class, containing data set for problems and answers **/
 public class DataSet {

@@ -1,5 +1,7 @@
 package tel_ran.tests.dataset;
 
+import tel_ran.tests.pictures.Picture;
+
 public class TwoDimensionalPictureArray {
 	
 	public Picture[][] tpArray;
