@@ -3,18 +3,13 @@ package tel_ran.tests.processor;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.zip.CRC32;
-
 import javax.imageio.ImageIO;
-
+import tel_ran.tests.attention.AttentionNumTest;
 import tel_ran.tests.generator.*;
 import tel_ran.tests.images.Image;
 import tel_ran.tests.repository.QuestionsRepository;
@@ -27,7 +22,7 @@ public class TestProcessor {
 	public static final int SEQUENCE = 2;	
 	public static final int CHAR_SEQUENCE = 3;
 	public static final int NumTableTest = 4;
-	public static final int ONE_PROBLEM = 5;
+	public static final int ATTENTION = 5;
 	
 	private String baseName = "answers"; //name of answers' file
 	
@@ -101,7 +96,8 @@ public class TestProcessor {
 		case 1: testTask = new NumEstimations(); break;
 		case 2: testTask = new NumRandomSequence(); break;
 		case 3: testTask = new CharRandomSequence(); break;	
-		case 4: testTask = new NumTableTest(); break;		
+		case 4: testTask = new NumTableTest(); break;	
+		case 5: testTask = new AttentionNumTest(); break;
 		
 		default: assert false;
 		}
