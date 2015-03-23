@@ -2,6 +2,12 @@ package tel_ran.tests.dataset;
 
 public abstract class DataSet {
 	
+	public static final int ONE_DIM_STRING_ARRAY = 1; 
+	public static final int TWO_DIM_STRING_ARRAY = 2;
+	public static final int ONE_DIM_PICTURE_ARRAY = 3;
+	public static final int TWO_DIM_PICTURE_ARRAY = 4;
+	public static final int THREE_DIM_PICTURE_ARRAY = 5;
+	
 	public ExternalView exv;
 	int len;
 	int type;

@@ -22,7 +22,7 @@ public class TwoDimensionalPictureArray extends TwoDimensional {
 	}
 			
 	private void setType() {
-		super.type = Testing_Problem.TWO_DIM_PICTURE_ARRAY;	
+		super.type = DataSet.TWO_DIM_PICTURE_ARRAY;	
 	}
 	
 	public Picture[][] getData() {

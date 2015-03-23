@@ -1,7 +1,5 @@
 package tel_ran.tests.dataset;
 
-import tel_ran.tests.generator.Testing_Problem;
-
 public class OneDimensionalStringArray extends OneDimensional {
 	
 	public String[] data;
@@ -22,7 +20,7 @@ public class OneDimensionalStringArray extends OneDimensional {
 	}
 
 	private void setType() {
-		super.type = Testing_Problem.ONE_DIM_STRING_ARRAY;	
+		super.type = DataSet.ONE_DIM_STRING_ARRAY;	
 	}
 	
 	public String[] getData() {

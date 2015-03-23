@@ -22,7 +22,7 @@ public class TwoDimensionalStringArray extends TwoDimensional {
 	}
 			
 	private void setType() {
-		super.type = Testing_Problem.TWO_DIM_STRING_ARRAY;	
+		super.type = DataSet.TWO_DIM_STRING_ARRAY;	
 	}
 	
 	public String[][] getData() {

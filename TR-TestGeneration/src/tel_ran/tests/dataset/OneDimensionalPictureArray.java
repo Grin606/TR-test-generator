@@ -1,8 +1,5 @@
 package tel_ran.tests.dataset;
 
-
-import tel_ran.tests.generator.Testing_Problem;
-
 public class OneDimensionalPictureArray extends OneDimensional {
 
 	public Picture[] data;	
@@ -23,7 +20,7 @@ public class OneDimensionalPictureArray extends OneDimensional {
 	}
 	
 	private void setType() {
-		super.type = Testing_Problem.ONE_DIM_PICTURE_ARRAY;	
+		super.type = DataSet.ONE_DIM_PICTURE_ARRAY;	
 	}
 	
 	public Picture[] getData() {

@@ -1,14 +1,11 @@
 package tel_ran.tests.generator;
 
 import tel_ran.tests.dataset.*;
+import tel_ran.tests.repository.DescriptionBox;
 
 public abstract class Testing_Problem {
 	
-	public static final int ONE_DIM_STRING_ARRAY = 1; 
-	public static final int TWO_DIM_STRING_ARRAY = 2;
-	public static final int ONE_DIM_PICTURE_ARRAY = 3;
-	public static final int TWO_DIM_PICTURE_ARRAY = 4;
-	public static final int THREE_DIM_PICTURE_ARRAY = 5;
+
 	
 	String name;
 	
@@ -21,7 +18,7 @@ public abstract class Testing_Problem {
 	String correctAnswerChar;
 	
 	DescriptionBox dbox;
-	String description;
+
 	int numberOfDescripton;
 	
 	public static final String[] answerCharSymbols = {"A","B","C","D","E","F","G","H"};
