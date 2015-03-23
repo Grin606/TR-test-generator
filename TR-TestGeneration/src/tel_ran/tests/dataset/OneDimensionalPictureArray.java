@@ -1,27 +1,34 @@
 package tel_ran.tests.dataset;
 
-import java.util.Arrays;
 
-public class OneDimensionalPictureArray {
-	
-	public Picture[] opArray;
-	public int len;
+import tel_ran.tests.generator.Testing_Problem;
+
+public class OneDimensionalPictureArray extends OneDimensional {
+
+	public Picture[] data;	
 		
 	public OneDimensionalPictureArray() {
-		opArray = new Picture[0];
-		len = 0;
-	}
-	public OneDimensionalPictureArray(Picture[] p) {
-		
-		len = p.length;
-		if (len == 0) return;
-		
-		opArray = p;
+		super();
+		data = new Picture[0];
+		super.len = 0;
+		setType();
 	}
 	
-	public boolean isNotEmpty() {
-		if (len == 0) return false;
-		return true;
+	public OneDimensionalPictureArray(Picture[] p) {
+		super();
+		len = p.length;
+		data = new Picture[len];
+		System.arraycopy(p, 0, data, 0, len);
+		setType();
 	}
+	
+	private void setType() {
+		super.type = Testing_Problem.ONE_DIM_PICTURE_ARRAY;	
+	}
+	
+	public Picture[] getData() {
+		return data;
+	}
+
 
 }

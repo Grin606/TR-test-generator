@@ -1,47 +1,33 @@
 package tel_ran.tests.dataset;
 
-public class TwoDimensionalPictureArray {
+import tel_ran.tests.generator.Testing_Problem;
+
+public class TwoDimensionalPictureArray extends TwoDimensional {
 	
-	public Picture[][] tpArray;
-	public int width;
-	public int height;
+	public Picture[][] data;
 	
 	public TwoDimensionalPictureArray() {
-		
-		tpArray = new Picture[0][0];
-		width = 0;
-		height = 0;
+		super();
+		data = new Picture[0][0];
+		len = width = 0;
+		setType();
 	}
 	
-	public TwoDimensionalPictureArray(Picture[][] t) {
-		
-		height = t.length;
-	
-		if (height != 0) width = t[0].length;
-		else return;
-		
-		if (width == 0)return;
-		
-		tpArray = t;
+	public TwoDimensionalPictureArray(Picture[][] t) {		
+		super();
+		len = t.length;
+		width = findWidth(t);
+		data = new Picture[len][width];
+		copyTwoDim(t, data);	
+	}
+			
+	private void setType() {
+		super.type = Testing_Problem.TWO_DIM_PICTURE_ARRAY;	
 	}
 	
-	public boolean isNotEmpty() {
-		 
-		if (height != 0 && width != 0) return true;
-		return false;	
+	public Picture[][] getData() {
+		return data;
 	}
 
-//	public Picture[][] getTDPA() {
-//		
-//		return tpArray;
-//	}
-//	public int getWidth() {
-//		return width;
-//	}
-//	public int getHeight() {
-//		return height;
-//	}
-	
-	
 
 }

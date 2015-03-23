@@ -1,28 +1,33 @@
 package tel_ran.tests.dataset;
 
-public class OneDimensionalStringArray {
+import tel_ran.tests.generator.Testing_Problem;
 
-	public String[] osArray;
-	public int len = 0;
+public class OneDimensionalStringArray extends OneDimensional {
 	
+	public String[] data;
+		
 	public OneDimensionalStringArray() {
-		
+		super();		
 		len = 0;
-		osArray = new String[0];
+		setType();
+	}	
+	
+	public OneDimensionalStringArray(String[] data) {
+		super();
+		this.len = data.length;		
+		this.data = new String[this.len];
+		System.arraycopy(data, 0, this.data, 0, this.len);
+		setType();
+		
+	}
+
+	private void setType() {
+		super.type = Testing_Problem.ONE_DIM_STRING_ARRAY;	
 	}
 	
-	public OneDimensionalStringArray(String[] s) {
-		
-		if (s == null)return;
-		
-		len = s.length;
-		if (len == 0) return;
-		osArray = s;
+	public String[] getData() {
+		return data;
 	}
-	
-	public boolean isNotEmpty() {
-		
-		if (len == 0) return false;
-		return true;
-	}
+
+
 }
