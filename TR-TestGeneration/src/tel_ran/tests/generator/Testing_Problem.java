@@ -11,19 +11,19 @@ public abstract class Testing_Problem {
 	public static final int TWO_DIM_PICTURE_ARRAY = 4;
 	public static final int THREE_DIM_PICTURE_ARRAY = 5;
 	
-	String name;
+	protected String name;
 	
 	int numOfAnswers = 5;
 	int weight = 1;
 
-	String category="";
+	protected String category="";
 	int difLevel = 5;
 
-	String correctAnswerChar;
+	protected String correctAnswerChar;
 	
 	DescriptionBox dbox;
 	String description;
-	int numberOfDescripton;
+	protected int numberOfDescripton;
 	
 	public static final String[] answerCharSymbols = {"A","B","C","D","E","F","G","H"};
 	
