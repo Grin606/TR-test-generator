@@ -72,25 +72,25 @@ public class TaskDescription extends ImageObject {
 		
 	}
 
-	@Override
-	public BufferedImage draw(BufferedImage image) {
-		Graphics2D gr = image.createGraphics();
-		int y;
-		gr.setColor(this.fontColor);
-		gr.setFont(fontFields);
-		
-		Rectangle2D bounds = fontFields.getStringBounds(this.text[0], Image.frc);		
-		y = this.startY + (int)bounds.getHeight();
-				
-		for (int i = 0; i < this.text.length; i++) {
-			gr.drawString(text[i], startX, y);
-			y -= this.hRow;
-		}
-		
-		gr.dispose();
-		return image;
-		
-	}
+//	@Override
+//	public BufferedImage draw(BufferedImage image) {
+//		Graphics2D gr = image.createGraphics();
+//		int y;
+//		gr.setColor(this.fontColor);
+//		gr.setFont(fontFields);
+//		
+//		Rectangle2D bounds = fontFields.getStringBounds(this.text[0], Image.frc);		
+//		y = this.startY + (int)bounds.getHeight();
+//				
+//		for (int i = 0; i < this.text.length; i++) {
+//			gr.drawString(text[i], startX, y);
+//			y -= this.hRow;
+//		}
+//		
+//		gr.dispose();
+//		return image;
+//		
+//	}
 
 	@Override
 	public void draw(Graphics2D gr) {		
@@ -104,11 +104,11 @@ public class TaskDescription extends ImageObject {
 		for (int i = 0; i < this.text.length; i++) {
 			gr.drawString(text[i], startX, y);
 			y -= this.hRow;
-		}
-			
-		
+		}				
 		
 	}
+
+
 	
 
 }

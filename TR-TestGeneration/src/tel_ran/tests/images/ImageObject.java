@@ -34,6 +34,7 @@ public abstract class ImageObject {
 	protected Color fontColor; 		
 	/** Color of all borders in tables **/
 	protected Color borderColor;
+	protected int sizeCorrection = 0;
 	
 	/** 
 	 * 
@@ -124,16 +125,18 @@ public abstract class ImageObject {
 	/**
 	 * This method calculate height and width of the ImageObject based
 	 * on the preset parameters of the object
+	 * @throws Exception 
 	 */
-	public abstract void calculation(); 
+	public abstract void calculation() throws Exception; 
 	
 	/**
 	 * This method draws the ImageObject in BufferedImage
 	 * All required parameters must be defined before calling it.
-	 * @param image
+	 * @param pict
 	 * @return
 	 */
-	public abstract BufferedImage draw(BufferedImage image);
+//	public abstract BufferedImage draw(Graphics2D pict);	
 	public abstract void draw(Graphics2D gr);
+
 
 }

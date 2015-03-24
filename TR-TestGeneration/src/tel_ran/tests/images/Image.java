@@ -38,7 +38,7 @@ public class Image {
 	/** Size of text for task's description. Default value = 14 **/
 	private int fontTaskSize = 14;	
 	/** Size of text for answers's labels like 'A', 'B', 'C'... Default value = 16 **/ 
-	private int fontLabelsSize = 12;	
+	private int fontLabelsSize = 13;	
 	/** Size of text for answers. Default value = 14 **/
 	private int fontAnswerSize = 14;			
 		
@@ -98,10 +98,11 @@ public class Image {
 	* Method checks which elements are there in the task, calculates the picture's size
 	* and draws all the objects on it 
 	* @param task - the given task 
+	 * @throws Exception 
 	 * @throws GraphicException 
 	**/
 	
-	public BufferedImage getImage (Testing_Problem task) {		
+	public BufferedImage getImage (Testing_Problem task) throws Exception {		
 		
 		height = Image.margin; 							
 		
@@ -145,12 +146,19 @@ public class Image {
 		
 							long time12 = System.currentTimeMillis();
 		
+	
+							
 		if (task.WhatKindOfAnswers() == Testing_Problem.ONE_DIM_STRING_ARRAY) {
 						
 			temp = task.getNumOfAnswers();
 			String[] taskLabels = Arrays.copyOf(Testing_Problem.answerCharSymbols, temp);			
 			answers = new String[1][temp]; 
 			answers[0] = task.getODSA_a();
+//			answers[0][0] = "0";
+//			answers[0][1] = "2";
+//			answers[0][2] = "3";
+//			answers[0][3] = "4";
+//			answers[0][4] = "5";
 			
 			table = setTable(taskLabels, answers, fontLabels, fontAnswers, 2);	
 			allObject.add(table);
@@ -167,28 +175,22 @@ public class Image {
 		pict.setColor(Image.backgroundColor);
 		pict.fillRect(0, 0, minWidth, height);
 		
-//		pict.dispose();
 		
 		Iterator<ImageObject> it = allObject.iterator();			
 		while (it.hasNext()) {
-//			res = it.next().draw(res);
-			it.next().draw(pict);
-			
+			it.next().draw(pict);			
 		}
-		pict.dispose();
-		
 							long time11 = System.currentTimeMillis();
 							time01 += time10-time9; //calculation
 							time02 += time11-time10; //drawing
 							time03 += time12-time9; //calculation task
 							time04 += time10-time12; //calc answers
-							
-//		
-		return res;			
+		
+		return res;
 	}	
 	
-	private ImageObject setTable(String[] header, String[][]fields, Font fntH, Font fntF, int fr) {
-		ImageObject table = new Tables(header, fields, fntH, fntF, fr);
+	private ImageObject setTable(String[] header, String[][]fields, Font fntH, Font fntF, int fr) throws Exception {
+		ImageObject table = new TablesString(header, fields, fntH, fntF, fr);
 		table.setBorderColor(borderColor);
 		table.calculation();	
 		table.setStartX((Image.minWidth - Image.margin*2 - table.getWidth())/2);
@@ -198,7 +200,7 @@ public class Image {
 		return table;		
 	}
 
-	private ImageObject setDescr(ImageObject description, String task, int size) {
+	private ImageObject setDescr(ImageObject description, String task, int size) throws Exception {
 		description = new TaskDescription(task, fontMainText, size, Image.frc);
 		description.setMargin(padding);
 		description.setFontColor(fontColor);

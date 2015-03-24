@@ -3,12 +3,18 @@ package tel_ran.tests.processor;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.zip.CRC32;
+
 import javax.imageio.ImageIO;
+
 import tel_ran.tests.attention.AttentionNumTest;
 import tel_ran.tests.generator.*;
 import tel_ran.tests.images.Image;
@@ -63,7 +69,7 @@ public class TestProcessor {
 
 	
 
-	public void processStart(int testType, int number, String path, int maxLvl) throws IOException, NoSuchAlgorithmException {
+	public void processStart(int testType, int number, String path, int maxLvl) throws Exception {
 		
 						long time1 = System.currentTimeMillis();
 		Testing_Problem testTask = null;		
@@ -96,7 +102,7 @@ public class TestProcessor {
 		case 1: testTask = new NumEstimations(); break;
 		case 2: testTask = new NumRandomSequence(); break;
 		case 3: testTask = new CharRandomSequence(); break;	
-		case 4: testTask = new NumTableTest(); break;	
+		case 4: testTask = new NumTableTest(); break;
 		case 5: testTask = new AttentionNumTest(); break;
 		
 		default: assert false;
@@ -117,8 +123,7 @@ public class TestProcessor {
 			
 						time4 = System.currentTimeMillis();
 					
-			res = img.getImage(testTask);
-			
+			res = img.getImage(testTask);			
 			
 						time5 = System.currentTimeMillis();			
 			
