@@ -2,9 +2,9 @@ package tel_ran.tests.generator;
 
 public class TestingProblemsBox {
 	
-	public static final int numberOfTestingProblems = 5;
+	public static final int numberOfTestingProblems = 6;
 	
-	Testing_Problem[] tpBox;
+	public Testing_Problem[] tpBox;
 	
 	public TestingProblemsBox() {
 		
@@ -15,6 +15,8 @@ public class TestingProblemsBox {
 		tpBox[2] = new NumRandomSequence();
 		tpBox[3] = new CharRandomSequence();
 		tpBox[4] = new NumTableTest();
+		tpBox[5] = new Picture_211E_Test();
 	}
 
 }
+

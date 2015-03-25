@@ -103,15 +103,15 @@ public abstract class Testing_Problem {
 	public int getODSAlength_a() {
 		return a.os.len;
 	}
-//	public Picture[] getODPA_p() {
-//		return p.op.opArray;
-//	}
+	public Picture[] getODPA_p() {
+		return p.op.opArray;
+	}
 	public int getODPAlength_p() {
 		return p.op.len;
 	}
-//	public Picture[] getODPA_a() {
-//		return a.op.opArray;
-//	}
+	public Picture[] getODPA_a() {
+		return a.op.opArray;
+	}
 	public int getODPAlength_a() {
 		return a.op.len;
 	}
@@ -135,27 +135,27 @@ public abstract class Testing_Problem {
 		return res;
 	}
 		
-//	public Picture[][] getTDPA_p() {
-//		return p.tp.tpArray;
-//	}
+	public Picture[][] getTDPA_p() {
+		return p.tp.tpArray;
+	}
 	public int[] getTDPAdims_p() {
 		int[] res = new int[2];
 		res[0] = p.tp.width;
 		res[1] = p.tp.height;
 		return res;
 	}
-//	public Picture[][] getTDPA_a() {
-//		return a.tp.tpArray;
-//	}
+	public Picture[][] getTDPA_a() {
+		return a.tp.tpArray;
+	}
 	public int[] getTDPAdims_a() {
 		int[] res = new int[2];
 		res[0] = a.tp.width;
 		res[1] = a.tp.height;
 		return res;
 	}
-//	public Picture[][][] getTHDPA_p() {
-//		return p.thp.thpArray;
-//	}
+	public Picture[][][] getTHDPA_p() {
+		return p.thp.thpArray;
+	}
 	public int[] getTHDPAdims_p() {
 		int[] res = new int[3];
 		res[0] = p.thp.width;
@@ -163,9 +163,9 @@ public abstract class Testing_Problem {
 		res[2] = p.thp.deep;
 		return res;
 	}
-//	public Picture[][][] getTHDPA_a() {
-//		return a.thp.thpArray;
-//	}
+	public Picture[][][] getTHDPA_a() {
+		return a.thp.thpArray;
+	}
 	public int[] getTHDPAdims_a() {
 		int[] res = new int[3];
 		res[0] = a.thp.width;

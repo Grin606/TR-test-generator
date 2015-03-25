@@ -1,28 +1,37 @@
 package tel_ran.tests.generator;
 
-import tel_ran.tests.tools.RandFunc;
+import tel_ran.tests.dataset.DataSet;
+import tel_ran.tests.pictures.Table;
+
 
 public abstract class Test1 {
 
 	public static void main(String[] args) {
 		
-		TestingProblemsBox tpb = new TestingProblemsBox();
-		Testing_Problem r;
+	Testing_Problem r;
+	TestingProblemsBox tpb = new TestingProblemsBox();
+	
+	r = tpb.tpBox[5];
+	
+	int dL = 1;
+	r.generate(dL);
+	
+	System.out.println("Question");
+	System.out.println("Category: "+ r.category);
+	showDataSet(r.p);
+	System.out.println("Answers");
+	showDataSet(r.a);
+	System.out.println(r.correctAnswerChar);
+	}
+	
+	public static void showDataSet(DataSet ds) {
 		
-		int nProblem = tpb.tpBox.length;
+		Table t;
+		int deep = ds.thp.deep;
 		
-		for (int i=0; i < nProblem; i++) {
-			
-			r = tpb.tpBox[i];
-			r.generate(RandFunc.IntRandomInRange(1,5));
-			System.out.println("Name: " + r.getName() + ";  Category: " + r.getCategory() + ";   Difficulty level: " +r.getDifLevel() 
-					           + ";   Description number: " + r.getNumberOfDescripton());
-			System.out.println(r.getODSA_p()[0]);
-			for (int j=0; j < r.getODSAlength_a(); j++)
-				System.out.print(r.getODSA_a()[j]+ "    ");
-			System.out.println("\n");
+		for (int i=0; i<deep; i++) {
+			t = new Table(ds.thp.thpArray[i]);
+			t.display();
 		}
-	}	
   }
-
-
+}
