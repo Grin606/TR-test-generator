@@ -1,15 +1,12 @@
-package tel_ran.tests.pictures; 
-
-import java.awt.Color;
-import java.awt.Graphics2D;
+package tel_ran.tests.pictures;
+import java.awt.*;
 
 import tel_ran.tests.tools.RandFunc;
 
 public abstract class Picture {
 	
-	private int width=20;
-	private int height=20;
-	
+	private int width;
+	private int height;
 	
 	private Color color;
 	private int colorInt;
@@ -20,7 +17,6 @@ public abstract class Picture {
 	private String name = "";
 	
 	public static final int NUMBER_OF_SHAPES = 6;
-	public static final int THICK=3;
 	
 	public static final int EMPTY = 0;
 	public static final int TRIANGLE = 1;
@@ -28,6 +24,8 @@ public abstract class Picture {
 	public static final int CIRCLE = 3;
 	public static final int RECTANGLE = 4;
 	public static final int RUMB = 5;
+	
+	protected static final int THICK =3;
 	
 	public static final int NUMBER_OF_COLORS = 6;
 	public static final int COLOR_MAGENTA = 0;
@@ -48,21 +46,12 @@ public abstract class Picture {
 	public static final int INSIDE_NE_SW_LINE = 6;
 	public static final int INSIDE_OBLIQUE_CROSS = 7;
 	public static final String[] insideArray = {"Empty", "Full", "VertLine", "HorLine", "Erect cross", "NW-SE", "NE-SW", "Oblique cross"};
-	
-/*	abstract void draw (Graphics2D gr, int x_UpperLeft, int y_UpperLeft, int percent) {
-		double scale = (double)percent/100.;
-		
-		width = (int)(width*scale);
-		height = (int)(height*scale);
-		
-		draw(gr,x_UpperLeft,y_UpperLeft);
-	}
-*/	
+		 
 	abstract void draw(Graphics2D gr, int x_UpperLeft, int y_UpperLeft, int percent);
-	
 	public void draw(Graphics2D gr, int x, int y) {
 		draw(gr, x, y, 100);
-	}
+	}		 
+	
 	public void setRandomColor() {
 		setColor(RandFunc.IntRandomInRange(0, NUMBER_OF_COLORS-1));	
 	}
@@ -212,7 +201,11 @@ public abstract class Picture {
 	
 	public Color getColor() { 
 		return color;
-	}	
+	}
+	
+	public int getColorInt() {
+		return colorInt;
+	}
 	
 	public String getColorString() {
 		return colorArray[colorInt];
