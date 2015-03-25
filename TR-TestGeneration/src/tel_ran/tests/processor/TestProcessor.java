@@ -16,6 +16,7 @@ import java.util.zip.CRC32;
 import javax.imageio.ImageIO;
 
 import tel_ran.tests.attention.AttentionNumTest;
+import tel_ran.tests.attention.AttentionNumbersLoop;
 import tel_ran.tests.generator.*;
 import tel_ran.tests.images.Image;
 import tel_ran.tests.repository.QuestionsRepository;
@@ -29,6 +30,7 @@ public class TestProcessor {
 	public static final int CHAR_SEQUENCE = 3;
 	public static final int NumTableTest = 4;
 	public static final int ATTENTION = 5;
+	public static final int ATTENTION2 = 6;
 	
 	private String baseName = "answers"; //name of answers' file
 	
@@ -104,6 +106,7 @@ public class TestProcessor {
 		case 3: testTask = new CharRandomSequence(); break;	
 		case 4: testTask = new NumTableTest(); break;
 		case 5: testTask = new AttentionNumTest(); break;
+		case 6: testTask = new AttentionNumbersLoop(); break;
 		
 		default: assert false;
 		}

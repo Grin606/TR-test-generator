@@ -10,7 +10,7 @@ import tel_ran.tests.repository.QuestionsRepository;
 
 public class TestGenerationAppl {
 	
-	public static final int TYPE = TestProcessor.SEQUENCE;
+	public static final int TYPE = TestProcessor.ATTENTION2;
 	public static final int NUMB = 20;
 	public static final String PTH = "d:/res/";
 	public static final int DIF_LEVEL = 1;
@@ -18,7 +18,7 @@ public class TestGenerationAppl {
 	
 	
 	
-	public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
+	public static void main(String[] args) throws Exception {
 		
 	
        
