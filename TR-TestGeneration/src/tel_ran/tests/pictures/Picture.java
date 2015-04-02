@@ -28,12 +28,12 @@ public abstract class Picture {
 	protected static final int THICK =3;
 	
 	public static final int NUMBER_OF_COLORS = 6;
-	public static final int COLOR_MAGENTA = 0;
-	public static final int COLOR_BLACK = 1;
-	public static final int COLOR_BLUE = 2;
-	public static final int COLOR_GREEN = 3;
-	public static final int COLOR_YELLOW = 4;
-	public static final int COLOR_RED = 5;
+//	public static final int COLOR_MAGENTA = 0;
+//	public static final int COLOR_BLACK = 1;
+//	public static final int COLOR_BLUE = 2;
+//	public static final int COLOR_GREEN = 3;
+//	public static final int COLOR_YELLOW = 4;
+//	public static final int COLOR_RED = 5;
 	public static final String[] colorArray = {"Magenta", "Black", "Blue", "Green", "Yellow","Red"};
 	
 	public static final int NUMBER_OF_INSIDES = 8;
