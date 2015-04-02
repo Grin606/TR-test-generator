@@ -12,7 +12,7 @@ public class Square extends Picture {
 	}
 	
 	@Override
-	public void draw(Graphics2D gr, int x, int y, int percent) {		
+	public void draw(Graphics2D gr, int x, int y, int percent) {	
 		int width=getWidth();
 		int height=getHeight();
 		Color color = getColor();
@@ -32,8 +32,8 @@ public class Square extends Picture {
 		gr.fillPolygon(xPoints, yPoints, 5);
 		if (getInside()==Picture.INSIDE_EMPTY){
 			gr.setColor(Color.WHITE);
-			int xP[]={x+THICK, x+width-THICK, x+width-THICK, x+THICK, x+THICK};
-			int yP[]={y+THICK, y+THICK, y+height-THICK*2, y+height-THICK*2, y+THICK};
+			int xP[]={x+THICK-1, x+width-THICK, x+width-THICK, x+THICK-1, x+THICK-1};
+			int yP[]={y+THICK-1, y+THICK-1, y+height-THICK, y+height-THICK, y+THICK};
 			gr.drawPolygon(xP, yP, 5);
 			gr.fillPolygon(xP, yP, 5);
 		}
