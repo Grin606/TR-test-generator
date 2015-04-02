@@ -1,4 +1,4 @@
-package tel_ran.tests.generator;
+package tel_ran.tests.generator.numeric;
 
 import tel_ran.tests.numfunctions.FunctionsBox;
 import tel_ran.tests.numfunctions.NFunct;
@@ -70,4 +70,3 @@ public class NumTableTest extends NumTest {
 		setIntAnswers(correctAnswer, r);
 	}
 }
-

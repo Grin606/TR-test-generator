@@ -1,30 +1,32 @@
 package tel_ran.tests.sequences;
 
-import tel_ran.tests.generator.CharRandomSequence;
+import tel_ran.tests.generator.character.CharRandomSequence;
 import tel_ran.tests.tools.RandFunc;
 
-public class CesarSequence extends CharSequence{
+public class CesarSequence extends CharRandomSequence{
 	
 	static int STEP=3;
 	static int WORD_LENGHT=6;
 	
-	public static String desc;
-	
-	public String[] make (int l) {
+	public CesarSequence () {
+		super();
+		name = "Cesar Sequence";
 		
-	int step = RandFunc.IntRandomInRange(1, STEP);
-		
-	String[] res = new String[l];
-		
-	res[0] = CharRandomSequence.randomWord(WORD_LENGHT);
-	for (int i=1; i<l; i++) {
-		res[i] = cesarStep(step, res[i-1]);
 	}
-	
-	desc = "Cesar sequence with step "+Integer.toString(step);
-	range = step;
-
-	return res;
+	public void generate(int difficultyLevel) {
+		
+		setDifficultyLevel(difficultyLevel);
+		
+		int step = RandFunc.IntRandomInRange(1, STEP);
+		
+		String[] sequence = new String[lengthOfSequence];
+			
+		sequence[0] = CharRandomSequence.randomWord(WORD_LENGHT);
+		for (int i=1; i<lengthOfSequence; i++) {
+			sequence[i] = cesarStep(step, sequence[i-1]);
+		}
+		
+		make(sequence);
 }
 	
 	public static String cesarStep(int step, String s) {
@@ -50,3 +52,7 @@ public class CesarSequence extends CharSequence{
 		WORD_LENGHT = cesarWordLenght[difficultyLevel - 1];
 	}
 }
+	
+	
+
+

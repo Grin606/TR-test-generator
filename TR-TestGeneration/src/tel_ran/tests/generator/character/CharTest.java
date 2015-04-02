@@ -1,9 +1,10 @@
-package tel_ran.tests.generator;
+package tel_ran.tests.generator.character;
 
+import tel_ran.tests.generator.Testing_Problem;
 import tel_ran.tests.sequences.CesarSequence;
 import tel_ran.tests.tools.*;
 
-public abstract class CharTest extends OneDimStringAnswers {
+public abstract class CharTest extends Testing_Problem {
 
 	public CharTest() {
 		super();
@@ -12,7 +13,7 @@ public abstract class CharTest extends OneDimStringAnswers {
 	@Override
 	public abstract void generate(int difficultyLevel);
 	
-	void setCharAnswers(String charCorrAnswer, int range) {
+	void setCharAnswers(String charCorrAnswer) {
 		
 		String[] answers = new String[numOfAnswers];
 			
@@ -29,6 +30,10 @@ public abstract class CharTest extends OneDimStringAnswers {
 		
 		for (int i=0; i<numOfAnswers; i++)
 			if (answers[i].equals(charCorrAnswer)) correctAnswerChar = answerCharSymbols[i];
+	}
+	
+	public void setAnswers(String[] answers) {
+		a.setODSA(answers);
 	}
 	
 }

@@ -6,7 +6,7 @@ public class FunctionsBox {
 	
 	public NFunct[] fBox;
 	
-	public FunctionsBox() {
+	public FunctionsBox() { 
 		
 		fBox = new NFunct[NUMBER_OF_FUNCTIONS];
 		

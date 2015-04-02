@@ -1,37 +1,43 @@
 package tel_ran.tests.generator;
 
-import tel_ran.tests.dataset.DataSet;
+import tel_ran.tests.dataset.*;
+import tel_ran.tests.generator.pictures.Picture_311F_Test;
+import tel_ran.tests.pictures.Picture;
 import tel_ran.tests.pictures.Table;
-
 
 public abstract class Test1 {
 
 	public static void main(String[] args) {
 		
-	Testing_Problem r;
-	TestingProblemsBox tpb = new TestingProblemsBox();
+	Testing_Problem r = new Picture_311F_Test();
+	r.generate(0);
 	
-	r = tpb.tpBox[5];
-	
-	int dL = 1;
-	r.generate(dL);
-	
+	Table t;
 	System.out.println("Question");
-	System.out.println("Category: "+ r.category);
-	showDataSet(r.p);
+	for (Picture[][] pp: r.p.thp.thpArray) {
+		t = new Table(pp);
+		t.display();
+	}
 	System.out.println("Answers");
-	showDataSet(r.a);
+	for (Picture[][] pp: r.a.thp.thpArray) {
+		t = new Table(pp);
+		t.display();
+	}
 	System.out.println(r.correctAnswerChar);
+	
+	
+	
 	}
 	
-	public static void showDataSet(DataSet ds) {
+	
+	public static void showODSA(DataSet p) {
 		
-		Table t;
-		int deep = ds.thp.deep;
-		
-		for (int i=0; i<deep; i++) {
-			t = new Table(ds.thp.thpArray[i]);
-			t.display();
+		for (String s: p.os.osArray) {
+			System.out.print(s + "   ");
 		}
+		System.out.println();
   }
+	
+		
+	
 }

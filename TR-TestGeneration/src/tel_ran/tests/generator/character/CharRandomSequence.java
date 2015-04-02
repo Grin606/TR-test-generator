@@ -1,57 +1,47 @@
-package tel_ran.tests.generator;
+package tel_ran.tests.generator.character;
 
-import tel_ran.tests.sequences.*;
-import tel_ran.tests.sequences.CharSequence;
 import tel_ran.tests.tools.*;
+public abstract class CharRandomSequence extends CharTest{
 
-public class CharRandomSequence extends CharTest{
+	protected int lengthOfSequence = 6;
 	
-	private int NUMBER_OF_SEQUENCES;
-
-	private int lengthOfSequence = 6;
-	
-	private CharSequencesBox chSeq;
-	private CharSequence chS;
 	String[] sequence;
 	String sequenceDescription;
 	
-	private int range;
+//	private int range;
 	
 	public CharRandomSequence() {
 		
-		super();
-		
-		chSeq = new CharSequencesBox();
-		NUMBER_OF_SEQUENCES = CharSequencesBox.NUMBER_OF_SEQUENCES;			
-		weight = NUMBER_OF_SEQUENCES;
+		super();			
 		numberOfDescripton = 4;
 		sequence = new String[lengthOfSequence];
 		category = "Character Reasoning";
-		name = "CharRandom Sequence";
 	}
 	
 	@Override
-	public void generate(int difficultyLevel) {
+	public abstract void generate (int difficultyLevel);
+//	{
+//		
+//		if (difficultyLevel < 1 || difficultyLevel > 5) difficultyLevel = 5;
+//		
+//		difLevel = difficultyLevel;
+//
+//		int seq = RandFunc.IntRandomInRange(0, NUMBER_OF_SEQUENCES-1);
+//		
+//		chS = getCharSequence(seq);
+//		chS.setDifficultyLevel(difficultyLevel);
+//		sequence = chS.make(lengthOfSequence);
+//		range = chS.range;	
+	public void make (String[] sequence) {
+	
+		String correctAnswer = sequence[lengthOfSequence-1];
 		
-		if (difficultyLevel < 1 || difficultyLevel > 5) difficultyLevel = 5;
-		
-		difLevel = difficultyLevel;
-
-		int seq = RandFunc.IntRandomInRange(0, NUMBER_OF_SEQUENCES-1);
-		
-		chS = chSeq.seqBox[seq];
-		chS.setDifficultyLevel(difficultyLevel);
-		sequence = chS.make(lengthOfSequence);
-		range = chS.range;	
-		
-		correctAnswer = sequence[lengthOfSequence-1];
-		
-		p.setODSA(makeProblem());
-		setCharAnswers(correctAnswer, range);
+		p.setODSA(makeProblem(sequence));
+		setCharAnswers(correctAnswer);
 	}
 
 		
-		private String[] makeProblem() {
+		private String[] makeProblem(String[] sequence) {
 			
 			StringBuffer res = new StringBuffer();
 			
@@ -79,7 +69,7 @@ public class CharRandomSequence extends CharTest{
 		}
 		
 		return (init.toString());
-		
+					
 		}
 
 		public void setLengthOfSequence(int lengthOfSequence) {
@@ -91,3 +81,4 @@ public class CharRandomSequence extends CharTest{
 		}
 	
 }
+

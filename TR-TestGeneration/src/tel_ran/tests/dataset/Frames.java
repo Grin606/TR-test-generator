@@ -7,10 +7,12 @@ package tel_ran.tests.dataset;
 public class Frames {
 	
 	
-	public static final int NO_FRAMES = 0;
-	public static final int FRAME_OUT = 1;
-	public static final int ALL_FRAMES= 2;
-	public static final int FRAMES_IF_FULL = 3;
+	public static final int NO_BORDERS = 0;
+	public static final int OUT_BORDERS = 1;	
+	public static final int ALL_BORDERS = 2;
+	public static final int CELL_BORDERS_IF_FULL = 3;
+	public static final int GRID = 4;
+	public static final int INNER_OBJECT_BORDEDS = 5;
 	
 	public boolean frames_out;
 	public boolean frames_all;

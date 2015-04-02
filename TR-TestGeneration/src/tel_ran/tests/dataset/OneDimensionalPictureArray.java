@@ -23,5 +23,6 @@ public class OneDimensionalPictureArray {
 		if (len == 0) return false;
 		return true;
 	}
+	
 
 }

@@ -1,4 +1,4 @@
-package tel_ran.tests.generator;
+package tel_ran.tests.generator.pictures;
 
 import tel_ran.tests.dataset.*;
 import tel_ran.tests.pictures.*;

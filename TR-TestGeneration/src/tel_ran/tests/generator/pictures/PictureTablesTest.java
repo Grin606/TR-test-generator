@@ -1,5 +1,6 @@
-package tel_ran.tests.generator;
+package tel_ran.tests.generator.pictures;
 
+import tel_ran.tests.generator.Testing_Problem;
 import tel_ran.tests.pictures.Picture;
 import tel_ran.tests.tools.RandFunc;
 

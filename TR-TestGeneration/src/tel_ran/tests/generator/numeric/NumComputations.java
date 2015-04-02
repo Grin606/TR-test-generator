@@ -1,4 +1,4 @@
-package tel_ran.tests.generator;
+package tel_ran.tests.generator.numeric;
 
 import tel_ran.tests.tools.*;
 	

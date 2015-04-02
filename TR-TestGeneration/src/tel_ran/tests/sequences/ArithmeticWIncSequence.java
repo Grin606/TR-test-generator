@@ -1,37 +1,39 @@
 package tel_ran.tests.sequences;
 
+import tel_ran.tests.generator.*;
+import tel_ran.tests.generator.numeric.NumRandomSequence;
 import tel_ran.tests.tools.RandFunc;
 
-public class ArithmeticWIncSequence extends NumSequence{
+public class ArithmeticWIncSequence extends NumRandomSequence{
 	
 	int BASE_RANGE = 100;
 	int STEP_RANGE = 20;
 	int INCREMENT_RANGE = 5;
 	
-	public static String desc;
-	
-	public int[] make(int l) {
+	public ArithmeticWIncSequence() {
+		super();
+		name = "Arithmetic Sequence Wuith Increment";
 		
-		int[] res = new int[l];
-		
-		int base = RandFunc.IntRandomInRangeExept(-BASE_RANGE, BASE_RANGE,0);
-		int step0 = RandFunc.IntRandomInRangeExept(- STEP_RANGE, STEP_RANGE,0);
-		int inc = RandFunc.IntRandomInRange(1, INCREMENT_RANGE);
-		
-		res[0] = base;
-		int step = step0;
-		for (int i=1; i < l; i++) {
-			res[i] = res[i-1]+step;
-			step += inc;
-		}
-		range = STEP_RANGE;
-		
-		desc = "Arithmetic sequence with base " + Integer.toString(base)+ 
-			   ", initial step "+ Integer.toString(step0) + 
-			   " and step increment "+ Integer.toString(inc);
-		return res;
 	}
+	public void generate(int difficultyLevel) {
+		
+	setDifficultyLevel(difficultyLevel);
+	
+	int base = RandFunc.IntRandomInRangeExept(-BASE_RANGE, BASE_RANGE,0);
+	int step0 = RandFunc.IntRandomInRangeExept(- STEP_RANGE, STEP_RANGE,0);
+	int inc = RandFunc.IntRandomInRange(1, INCREMENT_RANGE);
 
+	sequence[0] = base;
+	int step = step0;
+	for (int i=1; i < lengthOfSequence; i++) {
+		sequence[i] = sequence[i-1]+step;
+		step += inc;
+	}	
+	
+	make(sequence,STEP_RANGE);
+	
+	}
+	
 	public void setDifficultyLevel(int difficultyLevel) {
 		
 		int[] arithmeticWIncBaseRange = { 10, 30, 100, 100, 200 };

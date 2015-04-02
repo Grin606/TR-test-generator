@@ -1,6 +1,7 @@
 package tel_ran.tests.generator;
 
 import tel_ran.tests.dataset.*;
+
 import tel_ran.tests.pictures.Picture;
 
 public abstract class Testing_Problem {
@@ -13,16 +14,16 @@ public abstract class Testing_Problem {
 	
 	protected String name;
 	
-	int numOfAnswers = 5;
-	int weight = 1;
+	protected int numOfAnswers = 5;
+	protected int weight = 1;
 
 	protected String category="";
-	int difLevel = 5;
+	protected int difLevel = 5;
 
 	protected String correctAnswerChar;
 	
-	DescriptionBox dbox;
-	String description;
+	protected DescriptionBox dbox;
+	protected String description;
 	protected int numberOfDescripton;
 	
 	public static final String[] answerCharSymbols = {"A","B","C","D","E","F","G","H"};
@@ -194,3 +195,8 @@ public abstract class Testing_Problem {
 	
 	
 }
+	
+
+
+	
+

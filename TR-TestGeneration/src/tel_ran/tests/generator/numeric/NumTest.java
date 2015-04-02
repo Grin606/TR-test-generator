@@ -1,9 +1,10 @@
-package tel_ran.tests.generator;
+package tel_ran.tests.generator.numeric;
 
+import tel_ran.tests.generator.Testing_Problem;
 import tel_ran.tests.tools.*;
 
 
-public abstract class NumTest extends OneDimStringAnswers {
+public abstract class NumTest extends Testing_Problem {
 	
 	public NumTest() {
 		super();
@@ -23,7 +24,7 @@ public abstract class NumTest extends OneDimStringAnswers {
 			answers[i]= Integer.toString(
 					              intCorrAnswer+RandFunc.SignRandom()*RandFunc.IntRandomInRange(range*(i-1), range*i-1));
 		}  
-		correctAnswer = Integer.toString(intCorrAnswer);
+		String correctAnswer = Integer.toString(intCorrAnswer);
 		
 		answers[0] = correctAnswer;
 		answers = ArrayFun.shuffle(answers);
@@ -32,6 +33,10 @@ public abstract class NumTest extends OneDimStringAnswers {
 		
 		for (int i=0; i<numOfAnswers; i++)
 			if (answers[i].equals(correctAnswer)) correctAnswerChar = answerCharSymbols[i];
+	}
+	
+	public void setAnswers(String[] answers) {
+		a.setODSA(answers);
 	}
 	
 }

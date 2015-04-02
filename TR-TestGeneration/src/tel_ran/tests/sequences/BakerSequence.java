@@ -1,29 +1,31 @@
 package tel_ran.tests.sequences;
 
-import tel_ran.tests.generator.CharRandomSequence;
+import tel_ran.tests.generator.character.CharRandomSequence;
 
-public class BakerSequence extends CharSequence{
+public class BakerSequence extends CharRandomSequence{
 	
 	static int WORD_LENGHT=6;
 	static int MIX_RANGE = 8;
 	
-	public static String desc;
-	
-	public String[] make (int l) {
+	public BakerSequence () {
+		super();
+		name = "Cesar Sequence";
 		
-	String[] res = new String[l];
-
-	res[0] = CharRandomSequence.randomWord(WORD_LENGHT);
-	for (int i=1; i < l; i++) {
-		res[i] = bakerStep(res[i-1]);
 	}
+	public void generate(int difficultyLevel) {
+		
+		setDifficultyLevel(difficultyLevel);
+		
+		String[] sequence = new String[lengthOfSequence];
+			
+		sequence[0] = CharRandomSequence.randomWord(WORD_LENGHT);
+		for (int i=1; i<lengthOfSequence; i++) {
+			sequence[i] = bakerStep(sequence[i-1]);
+		}
+		
+		make(sequence);
+}
 	
-	desc = "Baker sequence";
-	range = MIX_RANGE;
-
-	return res;
-	}
-
 	public String bakerStep(String s) {
 		
 		StringBuffer res = new StringBuffer();
@@ -47,4 +49,3 @@ public class BakerSequence extends CharSequence{
 		WORD_LENGHT = bakerWordLenght[difficultyLevel - 1];
 	}
 }
-
