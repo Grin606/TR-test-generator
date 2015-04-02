@@ -10,11 +10,13 @@ public abstract class TaskBoxGenerator {
 	Testing_Problem[] tasks;
 	int len;
 	int numberOfTask;
+	Random ran = new Random();
 		
 	public Testing_Problem generate(int level) {
-		Random ran = new Random();
+		
 		
 		int seq = ran.nextInt(numberOfTask);
+		
 		tasks[seq].generate(level);
 		return tasks[seq];		
 	}

@@ -125,13 +125,13 @@ public class TestProcessor {
 			}
 						time3 = System.currentTimeMillis();
 			
-						
+			
 			testTask = box.generate(lvl);
 			
 						time4 = System.currentTimeMillis();
 					
 			res = img.getImage(testTask);			
-			
+		
 						time5 = System.currentTimeMillis();			
 			
 			imgName = fileNaming(res);

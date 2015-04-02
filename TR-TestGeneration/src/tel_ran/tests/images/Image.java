@@ -112,6 +112,7 @@ public class Image {
 	
 	public BufferedImage getImage (Testing_Problem task) throws Exception {		
 		
+		
 		height = Image.margin*2; 		
 				
 		

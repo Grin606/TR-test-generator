@@ -29,8 +29,11 @@ public class Picture_211E_Test extends PictureTablesTest{
 
 		Picture[][][] problem = new Picture[PROBLEM_LENGHT][t.getHeight()][t.getWidth()];
 		Picture[][][] answers = new Picture[ANSWERS_NUMBER][t.getHeight()][t.getWidth()];
+		
 				
 		makeProblem(t, problem, answers);
+		
+		
 		
 		p.thp = new ThreeDimensionalPictureArray(problem);
 		Picture[][] cAnswer = answers[0]; 
@@ -71,17 +74,24 @@ public class Picture_211E_Test extends PictureTablesTest{
 		Picture[][] a = answers[0];
 		Table33 t = new Table33(a);
 		
+		
 		tt = birth(t);           // Wrong answers
+		
+		
+		
 		answers[1] = tt.getTable();
 		
 		tt=death(t);
 		answers[2] = tt.getTable();
+		
 
 	    switch (kind) {
 	    case 0: tt = (Table33) deviateColor(rc1, rc2, t);break;
 	    case 1: tt = (Table33) deviateInside(ri1,ri2, t);break;
 	    case 2: tt = (Table33) deviateShape(rs1, rs2, t);break;
 	    }
+	    
+		
 		answers[3] = tt.getTable();
 
 		shuffleTables(answers);
@@ -173,15 +183,24 @@ public class Picture_211E_Test extends PictureTablesTest{
 		
 		if (t.isTableFull()) return tt;
 		
+		
+		
 		int rpe = tt.getRandomCellEmpty();
+		
+		
+		
 		int rie = rpe/tt.getHeight();
 		int rje = rpe%tt.getHeight();
 		
+		
 		int rpf = tt.getRandomCellNotEmpty();
+		
 		int rif = rpf/tt.getHeight();
 		int rjf = rpf%tt.getHeight();
 
+		
 		Picture p = tt.getCell(rif, rjf);
+		
 		tt.getTableToChange()[rie][rje] = p;
 		
 		return tt;
