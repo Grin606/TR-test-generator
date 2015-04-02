@@ -28,7 +28,7 @@ public class Image {
 				
 	
 	/** Color of the image background. default value = white **/
-	static Color backgroundColor = Color.WHITE; 
+	public static Color backgroundColor = Color.WHITE; 
 	/** Color of text on the image. Default value = black **/
 	static Color fontColor = Color.BLACK; 	
 	/** Color of borders in the table of answers. Default value = black **/
