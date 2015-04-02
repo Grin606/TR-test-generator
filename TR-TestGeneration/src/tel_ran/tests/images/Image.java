@@ -8,7 +8,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import tel_ran.tests.dataset.DataSet;
+import tel_ran.tests.dataset.Frames;
 import tel_ran.tests.generator.Testing_Problem;
+import tel_ran.tests.pictures.Picture;
 
 
 /**
@@ -36,16 +39,20 @@ public class Image {
 	/** Name of font for the all text on the image. Default value = Arial **/
 	private String fontName = "Arial"; 	
 	/** Size of text for task's description. Default value = 14 **/
-	private int fontTaskSize = 14;	
+	private int fontTaskSize = 14;
+	protected static final int fontTaskSizeMin = 8;
 	/** Size of text for answers's labels like 'A', 'B', 'C'... Default value = 16 **/ 
 	private int fontLabelsSize = 13;	
+	protected static final int fontLabelSizeMin = 10;
 	/** Size of text for answers. Default value = 14 **/
-	private int fontAnswerSize = 14;			
+	private int fontNotesSize = 14;		
+	protected static final int fontNotesSizeMin = 6;
+	protected static final int minimumObject = 5;
 		
 	/** the distance form the image's edge to the objects on it **/
-	static int margin = 3;						
+	static int margin = 0;						
 	/** the distance from borders to text in tables and from one object to other  **/
-	static int padding = 4;	
+	static int padding = 6;	
 	/** minimum height of the picture **/
 	/** minimum width of image **/
 	static int minWidth = 480;	
@@ -74,21 +81,22 @@ public class Image {
 	static final FontRenderContext frc = new FontRenderContext(null, true, true);
 	
 	private int height;	
+	private int fontResize = 0;
+	
 		
 	/**
 	 * Constructor creates a new object with all default value	 
 	 * and sets all fonts from default values
 	 */
 	public Image() {
-		super();
+		super();	
 		setFonts();
 	}
-	
-	
+		
 	private void setFonts() {
-		fontMainText = new Font(fontName, Font.PLAIN, fontTaskSize);
-		fontLabels = new Font(fontName, Font.BOLD, fontLabelsSize);
-		fontAnswers = new Font(fontName, Font.PLAIN, fontAnswerSize);
+		fontMainText = new Font(fontName, Font.PLAIN, fontTaskSize - fontResize);
+		fontLabels = new Font(fontName, Font.BOLD, fontLabelsSize - fontResize);
+		fontAnswers = new Font(fontName, Font.PLAIN, fontNotesSize - fontResize);
 	}
 	
 	
@@ -104,67 +112,24 @@ public class Image {
 	
 	public BufferedImage getImage (Testing_Problem task) throws Exception {		
 		
-		height = Image.margin; 							
+		height = Image.margin*2; 		
+				
 		
-		//temporary variables
-		int temp;		
-		String[][] answers;
-		int insWidth = minWidth - Image.margin*2;	
-		
+		Resizing rs = new Resizing(fontMainText, fontLabels, fontAnswers);
 		// objects in the picture
-		List<ImageObject> allObject = new ArrayList<ImageObject>();			
-		ImageObject desc = null; // description of the task. It may be empty
-		ImageObject table = null; 	// set of answers, if the answers should have the form of table
 		
 		
 							long time9 = System.currentTimeMillis();
 
+		List<ImageObject> allObject = setListOfObject(task, rs);	
+						
+					
+		height += calculate(allObject, height);	
 		
-		/*
-		 * calculation of the Answers - for answers that are defined as an one-dimensional array of strings
-		 * and should be represented as a table		 * 
-		 */							
-		
-		switch (task.WhatKindOfProblem()) {
-	
-		case Testing_Problem.ONE_DIM_STRING_ARRAY:						
-			String[] tasks = task.getODSA_p();	
-			for (String tsk : tasks) {				
-				desc = setDescr(desc, tsk, insWidth);							
-				allObject.add(desc);
-			} 
-			break;
-		case Testing_Problem.TWO_DIM_STRING_ARRAY:			
-			table = setTable(null, task.getTDSA_p(), null, fontMainText, task.whatProblemFrames());						
-			allObject.add(table);
-			break;
-		default:
-			assert false;
-		}		
-				
-		height += Image.padding*4;
 		
 							long time12 = System.currentTimeMillis();
 		
-	
-							
-		if (task.WhatKindOfAnswers() == Testing_Problem.ONE_DIM_STRING_ARRAY) {
-						
-			temp = task.getNumOfAnswers();
-			String[] taskLabels = Arrays.copyOf(Testing_Problem.answerCharSymbols, temp);			
-			answers = new String[1][temp]; 
-			answers[0] = task.getODSA_a();
-//			answers[0][0] = "0";
-//			answers[0][1] = "2";
-//			answers[0][2] = "3";
-//			answers[0][3] = "4";
-//			answers[0][4] = "5";
-			
-			table = setTable(taskLabels, answers, fontLabels, fontAnswers, 2);	
-			allObject.add(table);
-		}			
-		
-		height += Image.margin;
+		setXY(allObject);
 		
 							long time10 = System.currentTimeMillis();
 					
@@ -173,48 +138,129 @@ public class Image {
 		Graphics2D pict = res.createGraphics();
 		
 		pict.setColor(Image.backgroundColor);
-		pict.fillRect(0, 0, minWidth, height);
-		
+		pict.fillRect(0, 0, minWidth, height);		
 		
 		Iterator<ImageObject> it = allObject.iterator();			
 		while (it.hasNext()) {
-			it.next().draw(pict);			
+			it.next().draw(pict);				
 		}
+		
 							long time11 = System.currentTimeMillis();
-							time01 += time10-time9; //calculation
+							time01 += time12-time9; //calculation
 							time02 += time11-time10; //drawing
-							time03 += time12-time9; //calculation task
+							time03 += time10-time12; //setting
+							
 							time04 += time10-time12; //calc answers
 		
 		return res;
 	}	
 	
-	private ImageObject setTable(String[] header, String[][]fields, Font fntH, Font fntF, int fr) throws Exception {
-		ImageObject table = new TablesString(header, fields, fntH, fntF, fr);
-		table.setBorderColor(borderColor);
-		table.calculation();	
-		table.setStartX((Image.minWidth - Image.margin*2 - table.getWidth())/2);
-		table.setStartY(height);
-		heightUp(table);		
+	private ArrayList<ImageObject> setListOfObject(Testing_Problem task, Resizing rs) {
+		ArrayList<ImageObject> res = new ArrayList<ImageObject>();
+		ImageObject io = null;			
 		
-		return table;		
+		if (task.p != null) {
+		
+			switch (task.WhatKindOfProblem()) {
+				case Testing_Problem.ONE_DIM_STRING_ARRAY:				
+					io = new ListObject(task.getODSA_p(), rs, Resizing.MainText, Image.padding);
+					io.setBorders(task.whatProblemFrames(), borderColor);	
+					break;			
+				case Testing_Problem.ONE_DIM_PICTURE_ARRAY:
+					io = new ListObject(task.getODPA_p(), rs, Image.padding);
+					io.setBorders(task.whatProblemFrames(), borderColor);	
+					break;
+				case Testing_Problem.TWO_DIM_STRING_ARRAY:					
+					io = new TableObject(task.getTDSA_p(), Resizing.MainText, rs, Image.padding);
+					io.setBorders(Frames.ALL_BORDERS, borderColor);	
+					break;
+				case Testing_Problem.TWO_DIM_PICTURE_ARRAY:					
+					io = new TableObject(task.getTDPA_p(), rs, Image.padding);	
+					io.setBorders(Frames.ALL_BORDERS, borderColor);	
+					break;					
+				case Testing_Problem.THREE_DIM_PICTURE_ARRAY:
+					io = new ListObjectInLine(task.getTHDPA_p(), rs, Image.padding);	
+					io.setBorders(Frames.INNER_OBJECT_BORDEDS, borderColor);		
+					break;
+				default: assert false;					
+			}	
+			io.setFontColor(fontColor);
+								
+			res.add(io);
+		}
+				
+		if(task.a != null) {	
+			int temp = task.getNumOfAnswers();
+			String[] answers = new String[temp];
+			System.arraycopy(Testing_Problem.answerCharSymbols, 0, answers, 0, temp);
+			
+			switch (task.WhatKindOfAnswers()) {			
+			
+				case Testing_Problem.ONE_DIM_STRING_ARRAY:	
+					String[][] ans = new String[1][temp];
+					ans[0] = task.getODSA_a();
+					io = new TableObject(ans, Resizing.MainText, rs, Image.padding);
+					io.setHeader(answers, Resizing.HeaderText);							
+					io.setBorders(Frames.GRID, borderColor);	
+					break;		
+				case Testing_Problem.THREE_DIM_PICTURE_ARRAY:
+					io = new TableObject(task.getTHDPA_a(), rs, Image.padding);
+					io.setNotes(answers, Resizing.HeaderText);						
+					io.setBorders(Frames.INNER_OBJECT_BORDEDS, borderColor);	
+					break;	
+				default: return res;
+				}	
+			io.setFontColor(fontColor);				
+			res.add(io);	
+				
+		}
+		return res;
 	}
+	
+	private int calculate(List<ImageObject> allObject, int height) throws Exception {
+				
+		int w;		
+		int s = allObject.size();
+		
+		for (int i = 0; i < s; i ++) {
+			ImageObject io = allObject.get(i);
+			io.calculation();
+			w = io.getWidth();
+			
+			if (w > Image.minWidth) {	
+				
+				if (!io.getRotated()) {
+					ImageObject newio = io.reform(Image.minWidth-Image.margin*2);
+					if (newio != null) {
+						io = newio;						
+						height += io.getHeight() + Image.padding*4;
+						allObject.set(i, io);
+					}
+				} else {
+					io.resize(Image.minWidth-Image.margin*4);	
+					height = io.getHeight() + Image.padding*4;
+				}
+			} 
+			else 
+				height += io.getHeight() + Image.padding*4;						
+		}		
+	
+			
+		return height;
+				
+	}
+		
+	private void setXY(List<ImageObject> lst) throws Exception {
+		int x = Image.margin;
+		int y = Image.margin;
+		for (ImageObject io : lst) {
+			io.setStartXY(x, y);			
+			y += io.getHeight() + Image.padding*4;
+			
+		}				
+	}
+	
 
-	private ImageObject setDescr(ImageObject description, String task, int size) throws Exception {
-		description = new TaskDescription(task, fontMainText, size, Image.frc);
-		description.setMargin(padding);
-		description.setFontColor(fontColor);
-		description.calculation();	
-		description.setStartX((Image.minWidth - Image.margin*2 - description.getWidth())/2);
-		description.setStartY(height);
-		heightUp(description);
-		return description;
-	}
-	
-	private void heightUp(ImageObject obj) {
-		height += obj.getHeight() + Image.padding;		
-	}
-	
 	public Color getFontColor() {
 		return fontColor;
 	}

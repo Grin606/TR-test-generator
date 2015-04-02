@@ -13,7 +13,9 @@ public class StringDevider {
 		fontFields = font;
 	}
 	
-	public String[] dev(String str, int len, int max) {
+	public String[] dev(String str, int max) {
+		if (str == null)
+			return null;
 		String[] words = str.split(" ");	
 		ArrayList<StringBuffer> lines = new ArrayList<StringBuffer>();
 		StringBuffer sb = new StringBuffer("");
