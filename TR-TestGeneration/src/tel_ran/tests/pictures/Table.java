@@ -960,7 +960,7 @@ public class Table {
 	public int getRandomCellNotEmpty() {
 		
 		while(true) {
-			int rp = RandFunc.IntRandomInRange(0,height*(width-1));
+			int rp = RandFunc.IntRandomInRange(0,height*width-1);
 			int ri = rp/height;
 			int rj = rp%height;
 			if (table[ri][rj].getShape() != Picture.EMPTY) return rp;
@@ -970,7 +970,7 @@ public class Table {
 	public int getRandomCellEmpty() {
 		
 		while(true) {
-			int rp = RandFunc.IntRandomInRange(0,height*(width-1));
+			int rp = RandFunc.IntRandomInRange(0,height*width-1);
 			int ri = rp/height;
 			int rj = rp%height;
 			if (table[ri][rj].getShape() == Picture.EMPTY) return rp;
@@ -1019,6 +1019,9 @@ public class Table {
 		
 		for (int i=0; i<height; i++) {
 			for (int j=0; j<width; j++) {
+				if (table[i][j].getShape() != Picture.EMPTY) 
+					c[table[i][j].getShape()]++;
+								
 				c[table[i][j].getShape()]++;
 			}
 		}
