@@ -17,21 +17,26 @@ import javax.imageio.ImageIO;
 
 import tel_ran.tests.attention.AttentionNumTest;
 import tel_ran.tests.attention.AttentionNumbersLoop;
+import tel_ran.tests.box_generator.AbstractBoxGenerator;
+import tel_ran.tests.box_generator.AccurateBoxGenerator;
+import tel_ran.tests.box_generator.QuantativeBoxGenerator;
+import tel_ran.tests.box_generator.TaskBoxGenerator;
 import tel_ran.tests.generator.*;
+import tel_ran.tests.generator.character.CharRandomSequence;
+import tel_ran.tests.generator.numeric.NumComputations;
+import tel_ran.tests.generator.numeric.NumEstimations;
+import tel_ran.tests.generator.numeric.NumRandomSequence;
+import tel_ran.tests.generator.numeric.NumTableTest;
+import tel_ran.tests.generator.pictures.Picture_211E_Test;
 import tel_ran.tests.images.Image;
 import tel_ran.tests.repository.QuestionsRepository;
 
 public class TestProcessor {
 	
 	//These constants are designed to simplify the choice of the task's type outside 
-	public static final int COMPUTATION = 0;
-	public static final int ESTIMATION = 1;
-	public static final int SEQUENCE = 2;	
-	public static final int CHAR_SEQUENCE = 3;
-	public static final int NumTableTest = 4;
-	public static final int ATTENTION = 5;
-	public static final int ATTENTION2 = 6;
-	public static final int PICTURES = 7;
+	public static final int ATTENTION = 0;
+	public static final int QUANTATIVE = 1;
+	public static final int ABSTRACT = 2;	
 	
 	private String baseName = "answers"; //name of answers' file
 	
@@ -75,7 +80,8 @@ public class TestProcessor {
 	public void processStart(int testType, int number, String path, int maxLvl) throws Exception {
 		
 						long time1 = System.currentTimeMillis();
-		Testing_Problem testTask = null;		
+		TaskBoxGenerator box = null;		
+		Testing_Problem testTask = null;
 		BufferedImage res;	
 		String fileName = path + baseName + ".txt";	
 		String imgName;
@@ -101,14 +107,9 @@ public class TestProcessor {
 		BufferedWriter bw = new BufferedWriter(fw);			
 		
 		switch(testType) {
-		case 0: testTask = new NumComputations(); break;
-		case 1: testTask = new NumEstimations(); break;
-		case 2: testTask = new NumRandomSequence(); break;
-		case 3: testTask = new CharRandomSequence(); break;	
-		case 4: testTask = new NumTableTest(); break;
-		case 5: testTask = new AttentionNumTest(); break;
-		case 6: testTask = new AttentionNumbersLoop(); break;
-		case 7: testTask = new Picture_211E_Test(); break;
+		case 0: box = new AccurateBoxGenerator(); break;
+		case 1: box = new QuantativeBoxGenerator(); break;
+		case 2: box = new AbstractBoxGenerator(); break;		
 		
 		default: assert false;
 		}
@@ -124,7 +125,8 @@ public class TestProcessor {
 			}
 						time3 = System.currentTimeMillis();
 			
-			testTask.generate(lvl);
+						
+			testTask = box.generate(lvl);
 			
 						time4 = System.currentTimeMillis();
 					

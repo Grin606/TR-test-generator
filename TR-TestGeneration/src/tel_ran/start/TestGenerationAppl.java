@@ -10,7 +10,7 @@ import tel_ran.tests.repository.QuestionsRepository;
 
 public class TestGenerationAppl {
 	
-	public static final int TYPE = TestProcessor.PICTURES;
+	public static final int TYPE = TestProcessor.ABSTRACT;
 	public static final int NUMB = 20;
 	public static final String PTH = "d:/res/";
 	public static final int DIF_LEVEL = 1;
