@@ -31,6 +31,7 @@ public class TestProcessor {
 	public static final int NumTableTest = 4;
 	public static final int ATTENTION = 5;
 	public static final int ATTENTION2 = 6;
+	public static final int PICTURES = 7;
 	
 	private String baseName = "answers"; //name of answers' file
 	
@@ -107,6 +108,7 @@ public class TestProcessor {
 		case 4: testTask = new NumTableTest(); break;
 		case 5: testTask = new AttentionNumTest(); break;
 		case 6: testTask = new AttentionNumbersLoop(); break;
+		case 7: testTask = new Picture_211E_Test(); break;
 		
 		default: assert false;
 		}
@@ -186,8 +188,8 @@ public class TestProcessor {
 						System.out.println("2. Генерация задач - \t\t" + time34);
 						System.out.println("3. Обработка картинок - \t" + time54);
 						System.out.println("   3.1. Калькуляция \t\t" + Image.time01);
-						System.out.println("        3.1.1. в части задач \t" + Image.time03);
-						System.out.println("        3.1.2. в части ответов \t" + Image.time04);
+						System.out.println("        3.1.1. расчет и ресайз \t" + Image.time03);
+						System.out.println("        3.1.2. сеттинг координат \t" + Image.time04);
 						System.out.println("   3.2. Рисование в буфере \t" + Image.time02);
 						System.out.println("4. Заипсь в файлы - \t\t" + time56);
 						System.out.println("   4.1. Картинки - \t\t" + time85);
