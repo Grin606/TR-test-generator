@@ -5,8 +5,8 @@ import tel_ran.tests.tools.RandFunc;
 
 public abstract class Picture {
 	
-	private int width;
-	private int height;
+	private int width=20;
+	private int height=20;
 	
 	private Color color;
 	private int colorInt;
@@ -47,7 +47,7 @@ public abstract class Picture {
 	public static final int INSIDE_OBLIQUE_CROSS = 7;
 	public static final String[] insideArray = {"Empty", "Full", "VertLine", "HorLine", "Erect cross", "NW-SE", "NE-SW", "Oblique cross"};
 		 
-	abstract void draw(Graphics2D gr, int x_UpperLeft, int y_UpperLeft, int percent);
+	public abstract void draw(Graphics2D gr, int x_UpperLeft, int y_UpperLeft, int percent);
 	public void draw(Graphics2D gr, int x, int y) {
 		draw(gr, x, y, 100);
 	}		 

@@ -10,6 +10,7 @@ public class Rectangle extends Picture {
 	}
 	
 	@Override
+	public
 	void draw(Graphics2D gr, int x_UpperLeft, int y_UpperLeft, int percent) {
 		System.out.printf("%10s%10s%15s", getName(), getColorString(), getInsideString());
 	}

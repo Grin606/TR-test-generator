@@ -11,8 +11,7 @@ public class Circle extends Picture {
 	}
 
 	@Override
-	public void draw(Graphics2D gr, int x, int y, int percent) {
-		System.out.printf("%10s%10s%15s", getName(), getColorString(), getInsideString());
+	public void draw(Graphics2D gr, int x, int y, int percent) {		
 		int width=getWidth();
 		int height=getHeight();
 		Color color = getColor();
