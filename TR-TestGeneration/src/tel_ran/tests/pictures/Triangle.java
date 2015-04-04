@@ -23,8 +23,7 @@ public class Triangle extends Picture {
 		height = (int)(height*scale);
 		
 		
-		gr.setColor(Color.WHITE);
-		gr.fillRect(x, y, width, height);
+		super.fillPict(gr, x, y, width, height);
 		gr.setColor(color);
 		int xPoints[]={x+width/2, x+width, x, x+width/2};
 		int yPoints[]={y,y+height, y+height,y};
@@ -32,17 +31,18 @@ public class Triangle extends Picture {
 		gr.fillPolygon(xPoints, yPoints, 4);
 		if (getInside()==Picture.INSIDE_EMPTY){
 			gr.setColor(Color.WHITE);
-			int xP[]={x+width/2, x+width-THICK, x+THICK, x+width/2};
-			int yP[]={y+THICK+1,y+height-THICK, y+height-THICK,y+THICK};
+			int xP[]={x+width/2, x+width-THICK-1, x+THICK+1, x+width/2};
+			int yP[]={y+THICK+3,y+height-THICK, y+height-THICK,y+THICK+3};
 			gr.drawPolygon(xP, yP, 4);
 			gr.fillPolygon(xP, yP, 4);
 		}
-		if (getInside()==Picture.INSIDE_ERECT_CROSS){
+		super.drawInside(gr,x,y,width,height);
+/*		if (getInside()==Picture.INSIDE_ERECT_CROSS){
 			gr.setColor(Color.WHITE);
 			gr.drawLine(x+width/4, y+height/2, x+width/4*3, y+height/2);
 			gr.drawLine(x+width/2, y, x+width/2, y+height);
 		}
-
+*/
 	}
 
 }

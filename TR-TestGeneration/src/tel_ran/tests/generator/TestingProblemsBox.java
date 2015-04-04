@@ -1,13 +1,12 @@
 package tel_ran.tests.generator;
 
 import tel_ran.tests.generator.numeric.*;
-import tel_ran.tests.generator.pictures.Picture_211E_Test;
-import tel_ran.tests.generator.pictures.Picture_311F_Test;
+import tel_ran.tests.generator.pictures.*;
 import tel_ran.tests.sequences.*;
 
 public class TestingProblemsBox {
 	
-	public static final int numberOfTestingProblems = 12;
+	public static final int numberOfTestingProblems = 14;
 	
 	public Testing_Problem[] tpBox;
 	
@@ -27,6 +26,8 @@ public class TestingProblemsBox {
 		tpBox[9] = new NumTableTest();
 		tpBox[10] = new Picture_211E_Test();
 		tpBox[11] = new Picture_311F_Test();
+		tpBox[12] = new Picture_Roman_Test();
+		tpBox[13] = new Picture_AllDifferent_Test();
 	}
 
 }

@@ -23,8 +23,7 @@ public class Square extends Picture {
 		height = (int)(height*scale);
 		
 		
-		gr.setColor(Color.WHITE);
-		gr.fillRect(x, y, width, height);
+		super.fillPict(gr, x, y, width, height);
 		gr.setColor(color);
 		int xPoints[]={x, x+width, x+width, x, x};
 		int yPoints[]={y,y,y+height, y+height,y};
@@ -32,16 +31,12 @@ public class Square extends Picture {
 		gr.fillPolygon(xPoints, yPoints, 5);
 		if (getInside()==Picture.INSIDE_EMPTY){
 			gr.setColor(Color.WHITE);
-			int xP[]={x+THICK-1, x+width-THICK, x+width-THICK, x+THICK-1, x+THICK-1};
-			int yP[]={y+THICK-1, y+THICK-1, y+height-THICK, y+height-THICK, y+THICK};
+			int xP[]={x+THICK, x+width-THICK, x+width-THICK, x+THICK, x+THICK};
+			int yP[]={y+THICK, y+THICK, y+height-THICK, y+height-THICK, y+THICK};
 			gr.drawPolygon(xP, yP, 5);
 			gr.fillPolygon(xP, yP, 5);
 		}
-		if (getInside()==Picture.INSIDE_ERECT_CROSS){
-			gr.setColor(Color.WHITE);
-			gr.drawLine(x+width/2, y, x+width/2, y+height);
-			gr.drawLine(x, y+height/2, x+width, y+height/2);
-		}
+		super.drawInside(gr,x,y,width,height);
 		
 	}
 }

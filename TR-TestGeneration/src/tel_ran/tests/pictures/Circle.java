@@ -1,3 +1,4 @@
+
 package tel_ran.tests.pictures;
 
 import java.awt.*;
@@ -21,9 +22,7 @@ public class Circle extends Picture {
 		width = (int)(width*scale);
 		height = (int)(height*scale);
 
-		
-		gr.setColor(Color.WHITE);
-		gr.fillRect(x, y, width, height);
+		super.fillPict(gr, x, y, width, height);
 		gr.setColor(color);
 		gr.drawOval(x, y, width, height);
 		gr.fillOval(x, y, width, height);
@@ -32,14 +31,16 @@ public class Circle extends Picture {
 			gr.drawOval(x+THICK, y+THICK, width-THICK*2, height-THICK*2);
 			gr.fillOval(x+THICK, y+THICK, width-THICK*2, height-THICK*2);
 		}
-		if (getInside()==Picture.INSIDE_ERECT_CROSS){
+		super.drawInside(gr,x,y,width,height);
+		
+/*		if (getInside()==Picture.INSIDE_ERECT_CROSS){
 			gr.setColor(Color.WHITE);
 			int xCurr=(x+width/2);
 			int yCurr=(y+height/2);
 			gr.drawLine(xCurr, y, xCurr, y+height);
 			gr.drawLine(x, yCurr, x+width, yCurr);
 		}
-	}
+*/	}
 
 
 	

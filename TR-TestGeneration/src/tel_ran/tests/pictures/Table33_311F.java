@@ -2,7 +2,7 @@ package tel_ran.tests.pictures;
 
 import tel_ran.tests.tools.RandFunc;
 
-public class Table33_311F {
+public class Table33_311F extends Table33{
 	
 public Table33 t;
 	

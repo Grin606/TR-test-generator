@@ -24,17 +24,21 @@ public abstract class Picture {
 	public static final int CIRCLE = 3;
 	public static final int RECTANGLE = 4;
 	public static final int RUMB = 5;
+	public static final String[] shapeArray = {"Empty", "Triangle", "Square", "Circle", "Rectangle", "Rhomb"};
+	private static final String PACKAGE = "tel_ran.tests.pictures.";
 	
 	protected static final int THICK =3;
 	
 	public static final int NUMBER_OF_COLORS = 6;
-//	public static final int COLOR_MAGENTA = 0;
-//	public static final int COLOR_BLACK = 1;
-//	public static final int COLOR_BLUE = 2;
-//	public static final int COLOR_GREEN = 3;
-//	public static final int COLOR_YELLOW = 4;
-//	public static final int COLOR_RED = 5;
-	public static final String[] colorArray = {"Magenta", "Black", "Blue", "Green", "Yellow","Red"};
+	public static final int COLOR_MAGENTA = 0;
+	public static final int COLOR_BLACK = 1;
+	public static final int COLOR_BLUE = 2;
+	public static final int COLOR_GRAY = 3;
+	public static final int COLOR_ORANGE = 4;
+	public static final int COLOR_RED = 5;
+	public static final String[] colorArray = {"Magenta", "Black", "Blue", "Gray", "Orange","Red"};
+	
+	protected static Color backgroundColor = Color.WHITE;
 	
 	public static final int NUMBER_OF_INSIDES = 8;
 	public static final int INSIDE_EMPTY = 0;
@@ -71,7 +75,7 @@ public abstract class Picture {
 			return false;
 		
 		Picture other = (Picture) obj;
-		if (colorInt != other.colorInt)
+		if (color.equals(other.color))
 			return false;
 		if (inside != other.inside)
 			return false;
@@ -86,7 +90,7 @@ public abstract class Picture {
 	public Picture copyPicture() {
 		
 		Picture p;
-		p = setShape(shape);
+		p = getPictureShape(shape);
 		p.setColor(color);
 		p.setInside(inside);
 		return p;
@@ -98,23 +102,20 @@ public abstract class Picture {
 	
 	public static Picture setPicture (int ip, Color ic, int ii){
 		
-		Picture p = setShape(ip);
+		Picture p = getPictureShape(ip);
 		p.setColor(ic);
 		p.setInside(ii);
 		
 		return p;
 	}
 	
-	public static Picture setPicture (int ip, int ic, int ii){
+	public static Picture setPicture (int iShape, int iColor, int iInside){
 		
-		Picture p = setShape(ip);
-		p.setColor(ic);
-		p.setInside(ii);
-		
-		return p;
+		return setPicture (iShape, colorByInt(iColor), iInside);		
 	}
 	
 	public static Picture setRandomPicture(boolean noEmpty) {
+		
 		Picture p = setRandomShape(noEmpty);
 		p.setRandomColor();
 		p.setRandomInside();
@@ -124,27 +125,23 @@ public abstract class Picture {
 	
 	// shape
 	
-	public static Picture setShape(int is) {
+	public static Picture getPictureShape(int iShape) {
 		
 		Picture p;
 		
-		switch(is) {
-		case Picture.EMPTY: p = new Empty(); break;
-		case Picture.TRIANGLE: p = new Triangle(); break;
-		case Picture.SQUARE: p = new Square(); break;
-		case Picture.CIRCLE: p =  new Circle(); break;
-		case Picture.RECTANGLE: p =  new Rectangle(); break;
-		case Picture.RUMB: p =  new Rhomb();break;
-		default: return null;
+		try {
+			Class cl = Class.forName(PACKAGE+shapeArray[iShape]);
+			p = (Picture) cl.newInstance();
+		} catch (Exception e) {
+			return null;
 		}
-		
-		p.shape = is;
+				
+		p.shape = iShape;
 		return p;
 	}
 	
-	public static Picture setRandomShape(boolean noEmpty) {
-		if (noEmpty) return setShape(RandFunc.IntRandomInRange(1, NUMBER_OF_SHAPES-1));	
-		else return setShape(RandFunc.IntRandomInRange(0, NUMBER_OF_SHAPES-1));
+	public static Picture setRandomShape(boolean noEmpty) {	
+		return getPictureShape(RandFunc.IntRandomInRange((noEmpty ? 1 : 0), NUMBER_OF_SHAPES-1));
 	}
 	
 	public int getShape() {
@@ -173,10 +170,10 @@ public abstract class Picture {
 			this.color = Color.BLUE;
 			break;
 		case 3:
-			this.color = Color.GREEN;
+			this.color = Color.GRAY;
 			break;
 		case 4:
-			this.color = Color.YELLOW;
+			this.color = Color.ORANGE;
 			break;
 		case 5:
 			this.color = Color.RED;
@@ -193,8 +190,8 @@ public abstract class Picture {
 		if (color == Color.MAGENTA) colorInt = 0;
 		if (color == Color.BLACK) colorInt = 1;
 		if (color == Color.BLUE) colorInt = 2;
-		if (color == Color.GREEN) colorInt = 3;
-		if (color == Color.YELLOW) colorInt = 4;
+		if (color == Color.GRAY) colorInt = 3;
+		if (color == Color.ORANGE) colorInt = 4;
 		if (color == Color.RED) colorInt = 5;
 	
 	}
@@ -225,6 +222,8 @@ public abstract class Picture {
 		return insideArray[inside];
 	}
 	
+	// name
+	
 	public void setName(String s) {
 		name = s;
 	}
@@ -254,7 +253,7 @@ public abstract class Picture {
 	//service
 	
 	public boolean isEmpty() {
-		return (getShape() != 0);
+		return (getShape() != Picture.EMPTY);
 	}
 	
 	public static Color colorByInt (int ic) {
@@ -265,11 +264,45 @@ public abstract class Picture {
 		case 0: return Color.MAGENTA;
 		case 1: return Color.BLACK;
 		case 2: return Color.BLUE;
-		case 3: return Color.GREEN;
-		case 4: return Color.YELLOW;
+		case 3: return Color.GRAY;
+		case 4: return Color.ORANGE;
 		case 5: return Color.RED;
 		default: return null;
 		}
 	}
-
+	
+	public void fillPict(Graphics2D gr, int x, int y, int width2, int height2) {
+		gr.setColor(backgroundColor);
+		gr.fillRect(x, y, width, height);
+		
+	}
+	public void drawInside(Graphics2D gr, int x, int y, int width2, int height2) {
+		
+		gr.setColor(backgroundColor);
+	
+		if (getInside()==Picture.INSIDE_ERECT_CROSS){
+			gr.drawLine(x, y+height/2, x+width, y+height/2);
+		}
+		if (getInside()==Picture.INSIDE_HORLINE){
+			gr.drawLine(x, y+height/2, x+width, y+height/2);
+		}
+		if (getInside()==Picture.INSIDE_VERTLINE){
+			gr.drawLine(x+width/2, y, x+width/2, y+height);
+		}
+		if (getInside()==Picture.INSIDE_OBLIQUE_CROSS){
+			gr.drawLine(x, y, x+width, y+height);
+			gr.drawLine(x+width, y, x, y+height);
+		}
+		if (getInside()==Picture.INSIDE_NE_SW_LINE){
+			gr.drawLine(x+width, y, x, y+height);
+		}
+		if (getInside()==Picture.INSIDE_NW_SE_LINE){
+			gr.drawLine(x, y, x+width, y+height);
+		}
+	}
+	public static void setBackgroundColor(Color backgroundColor) {
+		Picture.backgroundColor = backgroundColor;
+	}
+	
+	
 }

@@ -6,7 +6,7 @@ import tel_ran.tests.tools.RandFunc;
 
 public class Picture_211E_Test extends PictureTablesTest{
 	
-	static final int NUMBER_OF_STEPS = 16;
+	static final int NUMBER_OF_STEPS = 18;
 	
 	final int PROBLEM_LENGHT = 2;
 	final int ANSWERS_NUMBER = 4;
@@ -14,12 +14,8 @@ public class Picture_211E_Test extends PictureTablesTest{
 	public Picture_211E_Test() {
 		
 		super();			
-		weight = 1;
-		numberOfDescripton = 5;
-		category = "Picture reasoning";
 		name = "Table 211E test";
-		numOfAnswers = 4;
-	}
+}
 
 	@Override
 	public void generate(int difficultyLevel) {
@@ -29,11 +25,8 @@ public class Picture_211E_Test extends PictureTablesTest{
 
 		Picture[][][] problem = new Picture[PROBLEM_LENGHT][t.getHeight()][t.getWidth()];
 		Picture[][][] answers = new Picture[ANSWERS_NUMBER][t.getHeight()][t.getWidth()];
-		
 				
 		makeProblem(t, problem, answers);
-		
-		
 		
 		p.thp = new ThreeDimensionalPictureArray(problem);
 		Picture[][] cAnswer = answers[0]; 
@@ -74,24 +67,17 @@ public class Picture_211E_Test extends PictureTablesTest{
 		Picture[][] a = answers[0];
 		Table33 t = new Table33(a);
 		
-		
-		tt = birth(t);           // Wrong answers
-		
-		
-		
+		tt = Table33.birth(t);           // Wrong answers
 		answers[1] = tt.getTable();
 		
-		tt=death(t);
+		tt=Table33.death(t);
 		answers[2] = tt.getTable();
-		
 
 	    switch (kind) {
 	    case 0: tt = (Table33) deviateColor(rc1, rc2, t);break;
 	    case 1: tt = (Table33) deviateInside(ri1,ri2, t);break;
 	    case 2: tt = (Table33) deviateShape(rs1, rs2, t);break;
 	    }
-	    
-		
 		answers[3] = tt.getTable();
 
 		shuffleTables(answers);
@@ -114,8 +100,8 @@ public class Picture_211E_Test extends PictureTablesTest{
 		int ic = tt.getTable()[ri][rj].getColorInt();
 		int ii = tt.getTable()[ri][rj].getInside();
 		
-		if (is == is1) p = Picture.setShape(is1);
-		if (ic == is2) p = Picture.setShape(is2);
+		if (is == is1) p = Picture.getPictureShape(is2);
+		if (is == is2) p = Picture.getPictureShape(is1);
 		
 		p.setColor(ic);
 		p.setInside(ii);
@@ -161,51 +147,7 @@ public class Picture_211E_Test extends PictureTablesTest{
 		return tt;
 	}
 	
-	public Table33 death(Table33 t) {
 		
-		Table33 tt = t.copyTable33();
-		
-		if (t.isTableEmpty()) return tt;
-		
-		int rp = tt.getRandomCellNotEmpty();
-		int ri = rp/tt.getHeight();
-		int rj = rp%tt.getHeight();
-		
-		Picture p = Picture.setShape(Picture.EMPTY);
-		tt.getTableToChange()[ri][rj] = p;
-		
-		return tt;
-	}
-	
-	public Table33 birth(Table33 t) {
-		
-		Table33 tt = t.copyTable33();
-		
-		if (t.isTableFull()) return tt;
-		
-		
-		
-		int rpe = tt.getRandomCellEmpty();
-		
-		
-		
-		int rie = rpe/tt.getHeight();
-		int rje = rpe%tt.getHeight();
-		
-		
-		int rpf = tt.getRandomCellNotEmpty();
-		
-		int rif = rpf/tt.getHeight();
-		int rjf = rpf%tt.getHeight();
-
-		
-		Picture p = tt.getCell(rif, rjf);
-		
-		tt.getTableToChange()[rie][rje] = p;
-		
-		return tt;
-	}
-	
 public Table33 tableStep(Table33 t, int step) {
 		
 		Table33 tt = t.copyTable33();
@@ -228,6 +170,9 @@ public Table33 tableStep(Table33 t, int step) {
 				case 13: tt.turn90(); break;
 				case 14: tt.turn180(); break;
 				case 15: tt.turn270(); break;
+				case 16: tt.snakeZigZagHor(); break;
+				case 17: tt.snakeZigZagVert(); break;
+
 				default:
 			}
 		return tt;

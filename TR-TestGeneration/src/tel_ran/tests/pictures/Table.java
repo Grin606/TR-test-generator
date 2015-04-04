@@ -5,8 +5,14 @@ import tel_ran.tests.tools.RandFunc;
 
 public class Table {
 	
+	private static final double EMPTY_PROBABILITY = 0.333333;
 	int height;
 	int width;
+	
+	private final int empty = Picture.EMPTY; 
+	private final int nS = Picture.NUMBER_OF_SHAPES-1;
+	private final int nC = Picture.NUMBER_OF_COLORS-1;
+	private final int nI = Picture.NUMBER_OF_INSIDES-1;
 	
 	Picture[][] table;
 	
@@ -41,7 +47,7 @@ public class Table {
 			return false;
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				if (!this.table[i][j].equals(obj.table[i][j])) return false;
+				if (!this.table[i][j].equals(other.table[i][j])) return false;
 			}
 		}	
 		return true;
@@ -50,35 +56,44 @@ public class Table {
 	public Table copyTable() {
 		
 		Table res = new Table (height, width);
-		
-		res.height = height;
-		res.width = width;
-		
+				
 		for (int i=0; i< height; i++) {
 			for (int j= 0; j<width; j++) {
-				res.table[i][j] = table[i][j].copyPicture();
+				res.setCell(i, j, table[i][j]);
 			}
 		}
-		
 		return res;
 	}
 	
-	public boolean contains(Picture p) {
+	public boolean contains(Picture pic) {
 		
-		if (p==null) return false;
+		if (pic==null) return false;
 		
-		Picture tt;
+		Picture p;
 		for (int i=0; i<height; i++) {
 			for (int j=0; j<width; j++) {
-				tt = table[i][j];
-				if (tt != null && tt.equals(p)) return true;
+				p = table[i][j];
+				if (p != null && p.equals(pic)) return true;
 			}
 		}
 		return false;
 	}
 	
 	public void setCell(int i, int j, Picture p) {
-		table[i][j] = p;
+		table[i][j] = p.copyPicture();
+	}
+	
+	public void setCell (int i, int j, int iShape, int iColor, int iInside) {
+		
+		Picture p;
+		
+		p = Picture.getPictureShape(iShape);
+		if (iShape != empty) {
+			p.setColor(iColor);
+			p.setInside(iInside);
+		}
+		
+		setCell (i,j,p);
 	}
 	
 	// general Table setters
@@ -86,7 +101,7 @@ public class Table {
 	public void setRandomTable() {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				table[i][j] = Picture.setRandomPicture(true);
+				setCell(i,j,Picture.setRandomPicture(true));
 			}
 		}	
 	}
@@ -97,11 +112,10 @@ public class Table {
 		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				while(true) {
+				do {
 					p = Picture.setRandomPicture(true);
-					if (!contains(p)) break;
-				}
-				table[i][j] = p;
+				}while(contains(p));
+				setCell(i,j,p);
 			}
 		}	
 	}
@@ -110,485 +124,152 @@ public class Table {
 		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				table[i][j] = Picture.setShape(Picture.EMPTY);
+				setCell(i,j,Picture.getPictureShape(empty));
 			}
 		}	
 	}
+	
+	public void seedEmpty() {
+		
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				if (Math.random() < EMPTY_PROBABILITY) 
+					setCell(i,j,Picture.getPictureShape(empty));
+			}
+		}
+	}
+	
 	
 	// 1-x-x setters
 	
 	public void setOneShapeTable(int is) {
 		
-		Picture p;
-		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				p = Picture.setShape(is);
-				if (is != Picture.EMPTY) {
-					p.setRandomColor();
-					p.setRandomInside();
-				}
-				table[i][j] = p;
+				setCell(i,j,is,RandFunc.IntRandomInRange(0, nC-1),RandFunc.IntRandomInRange(0, nI));
 			}
 		}
 	}	
 	
-	public void setOneColorTable(Color color) {
-		
-		Picture p;
+	public void setOneColorTable(int ic) {
 		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				p = Picture.setRandomShape(true);
-				p.setColor(color);
-				p.setRandomInside();
-				table[i][j] = p;
+				setCell(i,j,RandFunc.IntRandomInRange(1, nS), ic, RandFunc.IntRandomInRange(0, nI));
 			}
 		}
-	}
-	public void setOneColorTable(int ic) {
-		setOneColorTable(Picture.colorByInt(ic));
 	}
 
 	public void setOneInsideTable(int ii) {
 		
-		Picture p;
-		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				p = Picture.setRandomShape(true);
-				p.setRandomColor();
-				p.setInside(ii);
-				table[i][j] = p;
+				setCell(i,j,RandFunc.IntRandomInRange(1, nS),RandFunc.IntRandomInRange(0, nC), ii);
 			}
 		}
 	}
 	
 	//2-1-1 table setters
 	
-	public void setTwoColorsOneShapeOneInside(Color c1, Color c2, int is, int ii){
-
-		Picture p;
-		int rc;
-
-		if (is == Picture.EMPTY) {
-			setEmptyTable();
-			return;
-		}
+	public void setTwoColorsOneShapeOneInside(int ic1, int ic2, int is, int ii){
 		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				p = Picture.setShape(is);
-				rc = RandFunc.getRandomOfTwo(0, 1);
-				switch (rc) {
-				case 0: 
-					p.setColor(c1);
-					break;
-				case 1:
-					p.setColor(c2);
-					break;
-				}
-				p.setInside(ii);
-				table[i][j] = p;
+				setCell(i,j,is,RandFunc.getRandomOfTwo(ic1, ic2), ii);
 			}
 		}	
 	}
-	public void setTwoColorsOneShapeOneInside(int c1, int c2, int is, int ii) {
-		setTwoColorsOneShapeOneInside(Picture.colorByInt(c1), Picture.colorByInt(c2), is, ii);
-	}
-	public void setTwoColorsOneShapeOneInsidePlusEmpty(Color c1, Color c2, int is, int ii){
-
-		Picture p;
-		int rc;
-
-		if (is == Picture.EMPTY) {
-			setEmptyTable();
-			return;
-		}
-		
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				if (Math.random() < 0.33333) p = Picture.setShape(Picture.EMPTY);
-				else {
-					p = Picture.setShape(is);
-					rc = RandFunc.getRandomOfTwo(0, 1);
-					switch (rc) {
-					case 0: 
-						p.setColor(c1);
-						break;
-					case 1:
-						p.setColor(c2);
-						break;
-					}
-				p.setInside(ii);
-				}
-				table[i][j] = p;
-			}
-		}	
-	}
-	public void setTwoColorsOneShapeOneInsidePlusEmpty(int c1, int c2, int is, int ii) {
-		setTwoColorsOneShapeOneInsidePlusEmpty(Picture.colorByInt(c1), Picture.colorByInt(c2), is, ii);
-	}	
-	public void setTwoInsidesOneShapeOneColor(int ii1, int ii2, int is, Color color){
-
-		Picture p;
-		int ri;
-		
-		if (is == Picture.EMPTY) {
-			setEmptyTable();
-			return;
-		}
-		
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				p = Picture.setShape(is);
-				ri = RandFunc.getRandomOfTwo(0, 1);
-				switch (ri) {
-				case 0: 
-					p.setInside(ii1);
-					break;
-				case 1:
-					p.setInside(ii2);
-					break;
-				}
-				p.setColor(color);
-				table[i][j] = p;
-			}
-		}	
+	public void setTwoColorsOneShapeOneInsidePlusEmpty(int ic1, int ic2, int is, int ii){
+		setTwoColorsOneShapeOneInside(ic1, ic2, is, ii);
+		seedEmpty();
 	}
 	
 	public void setTwoInsidesOneShapeOneColor(int ii1, int ii2, int is, int ic){
-		setTwoInsidesOneShapeOneColor(ii1, ii2, is, Picture.colorByInt(ic));
-	}
-	public void setTwoInsidesOneShapeOneColorPlusEmpty(int ii1, int ii2, int is, Color color){
-
-		Picture p;
-		int rc;
-
-		if (is == Picture.EMPTY) {
-			setEmptyTable();
-			return;
-		}
-		
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				if (Math.random() < 0.33333) p = Picture.setShape(Picture.EMPTY);
-				else {
-					p = Picture.setShape(is);
-					rc = RandFunc.getRandomOfTwo(0, 1);
-					switch (rc) {
-						case 0: 
-							p.setInside(ii1);
-							break;
-						case 1:
-							p.setInside(ii2);
-							break;
-					}
-					p.setColor(color);
-				}
-				table[i][j] = p;
-			}
-		}	
-	}
-
-	public void setTwoInsidesOneShapeOneColorPlusEmpty(int ii1, int ii2, int is, int ic) {
-		setTwoInsidesOneShapeOneColorPlusEmpty(ii1, ii2, is, Picture.colorByInt(ic));
-	}
 	
-	public void setTwoShapesOneInsideOneColor(int is1, int is2, int ii, Color color){
-
-		Picture p;
-		int rs;
-		int is=is1;
-		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				rs = RandFunc.getRandomOfTwo(0, 1);
-				switch (rs) {
-				case 0: 
-					is = is1;
-					break;
-				case 1:
-					is = is2;
-					break;
-				}
-				p = Picture.setShape(is);
-				if (is != Picture.EMPTY) {
-					p.setInside(ii);
-					p.setColor(color);
-				}
-				table[i][j] = p;
+				setCell(i,j,is,ic,RandFunc.getRandomOfTwo(ii1, ii2));
 			}
 		}	
 	}
 	
-	public void setTwoShapesOneInsideOneColor(int ii1, int ii2, int is, int ic){
-		setTwoShapesOneInsideOneColor(ii1, ii2, is, Picture.colorByInt(ic));
+	public void setTwoInsidesOneShapeOneColorPlusEmpty(int ii1, int ii2, int is, int ic){		
+		setTwoInsidesOneShapeOneColor(ii1, ii2, is, ic);
+		seedEmpty();
 	}
 	
-	public void setTwoShapesOneInsideOneColorPlusEmpty(int is1, int is2, int ii, Color color){
+	public void setTwoShapesOneInsideOneColor(int is1, int is2, int ii, int ic){
 
-		if (is1 == Picture.EMPTY || is2 == Picture.EMPTY ) {
-			setEmptyTable();
-			return;
-		}
-		
-		Picture p;
-		int rs;
-		int is=is1;
-		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				
-				if (Math.random() < 0.33333) p = Picture.setShape(Picture.EMPTY);
-				else {
-					rs = RandFunc.getRandomOfTwo(0, 1);
-					switch (rs) {
-						case 0: 
-							is = is1;
-							break;
-						case 1:
-							is = is2;
-							break;
-					}
-				p = Picture.setShape(is);
-				p.setInside(ii);
-				p.setColor(color);
-				}
-				table[i][j] = p;
+				setCell(i,j,RandFunc.getRandomOfTwo(is1, is2), ic,ii);
 			}
 		}	
 	}
 	
-	public void setTwoShapesOneInsideOneColorPlusEmpty(int is1, int is2, int ii, int ic){
-		setTwoShapesOneInsideOneColorPlusEmpty(is1, is2, ii, Picture.colorByInt(ic));
+	public void setTwoShapesOneInsideOneColorPlusEmpty(int is1, int is2, int ii, int ic){	
+		setTwoShapesOneInsideOneColor(is1, is2, ii, ic);
+		seedEmpty();
 	}
-
+	
 // 3-1-1 table setters
 
-	public void setThreeColorsOneShapeOneInside(Color c1, Color c2, Color c3, int is, int ii){
+	public void setThreeColorsOneShapeOneInside(int ic1, int ic2, int ic3, int is, int ii){
 
-		Picture p;
-		int rc;
-		
-		if (is == Picture.EMPTY) {
-			setEmptyTable();
-			return;
-		}
-		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				p = Picture.setShape(is);
-				rc = RandFunc.getRandomOfThree(0, 1, 2);
-				switch (rc) {
-				case 0: 
-					p.setColor(c1);
-					break;
-				case 1:
-					p.setColor(c2);
-					break;
-				case 2:
-					p.setColor(c3);
-					break;
-				}
-				p.setInside(ii);
-				table[i][j] = p;
+				setCell(i, j, is, RandFunc.getRandomOfThree(ic1, ic2, ic3), ii);
 			}
 		}	
-	}
-	public void setThreeColorsOneShapeOneInside(int c1, int c2, int c3, int is, int ii) {
-		setThreeColorsOneShapeOneInside(Picture.colorByInt(c1), Picture.colorByInt(c2), Picture.colorByInt(c3), is, ii);
-	}
-	
+	}	
 		
-	public void setThreeInsidesOneShapeOneColor(int ii1, int ii2, int ii3, int is, Color color){
-
-		Picture p;
-		int ri;
-	
-		if (is == Picture.EMPTY) {
-			setEmptyTable();
-			return;
-		}
-		
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				p = Picture.setShape(is);
-				ri = RandFunc.getRandomOfThree(0, 1,2);
-				switch (ri) {
-				case 0: 
-					p.setInside(ii1);
-					break;
-				case 1:
-					p.setInside(ii2);
-					break;
-				case 2:
-					p.setInside(ii3);
-					break;
-				}
-				p.setColor(color);
-				table[i][j] = p;
-			}
-		}	
-	}
-	
 	public void setThreeInsidesOneShapeOneColor(int ii1, int ii2, int ii3, int is, int ic){
-		setThreeInsidesOneShapeOneColor(ii1, ii2, ii3, is, Picture.colorByInt(ic));
-	}
-	
-	public void setThreeShapesOneInsideOneColor(int is1, int is2, int is3, int ii, Color color){
-
-		Picture p;
-		int rs;
-		int is=is1;
 		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				rs = RandFunc.getRandomOfThree(0, 1, 2);
-				switch (rs) {
-				case 0: 
-					is = is1;
-					break;
-				case 1:
-					is = is2;
-					break;
-				case 2:
-					is = is3;
-					break;
-				}
-				p = Picture.setShape(is);
-				if (is != Picture.EMPTY) {
-					p.setInside(ii);
-					p.setColor(color);
-				}
-				table[i][j] = p;
+				setCell (i,j,is,ic,RandFunc.getRandomOfThree(ii1, ii2, ii3));
 			}
 		}	
 	}
 	
-	public void setThreeShapesOneInsideOneColor(int ii1, int ii2, int ii3, int is, int ic){
-		setThreeShapesOneInsideOneColor(ii1, ii2, ii3, is, Picture.colorByInt(ic));
+	public void setThreeShapesOneInsideOneColor(int is1, int is2, int is3, int ii, int ic){
+
+			for (int i = 0; i < height; i++) {
+				for (int j = 0; j < width; j++) {
+					setCell (i,j,RandFunc.getRandomOfThree(is1, is2, is3), ic, ii);
+			}
+		}	
 	}
-	
+		
 	// 2-2-1 table setters
 	
-	public void setTwoShapesTwoColorsOneInside(int is1, int is2, Color c1, Color c2, int ii){
-		
-		Picture p;
-		int rs;
-		int rc;
-		int is=is1;
-		
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				
-				rs = RandFunc.getRandomOfTwo(0, 1);
-				switch (rs) {
-				case 0: 
-					is = is1;
-					break;
-				case 1:
-					is = is2;
-					break;
-				}
-				p = Picture.setShape(is);
-				
-				if (is != Picture.EMPTY) {
-					
-					rc = RandFunc.getRandomOfTwo(0, 1);
-					switch (rc) {
-					case 0: p.setColor(c1);break;
-					case 1: p.setColor(c2);break;
-					}
-					
-					p.setInside(ii);
-				}
-				table[i][j] = p;
-			}
-		}	
-	}
-	
 	public void setTwoShapesTwoColorsOneInside(int is1, int is2, int ic1, int ic2, int ii){
-		setTwoShapesTwoColorsOneInside(is1, is2, Picture.colorByInt(ic1), Picture.colorByInt(ic2), ii);
-	}
-	
-	public void setTwoShapesTwoInsidesOneColor(int is1, int is2, Color c, int ii1, int ii2) {
-		
-		Picture p;
-		int rs;
-		int ri;
-		int is=is1;
-		
+				
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				
-				rs = RandFunc.getRandomOfTwo(0, 1);
-				switch (rs) {
-				case 0: 
-					is = is1;
-					break;
-				case 1:
-					is = is2;
-					break;
-				}
-				p = Picture.setShape(is);
-				
-				if (is != Picture.EMPTY) {
-					
-					ri = RandFunc.getRandomOfTwo(0, 1);
-					switch (ri) {
-					case 0: p.setInside(ii1);break;
-					case 1: p.setInside(ii2);break;
-					}
-					
-					p.setColor(c);
-				}
-				table[i][j] = p;
+				setCell(i,j,RandFunc.getRandomOfTwo(is1, is2), RandFunc.getRandomOfTwo(ic1, ic2), ii);
 			}
 		}	
 	}
 	
 	public void setTwoShapesTwoInsidesOneColor(int is1, int is2, int ic, int ii1, int ii2) {
-		setTwoShapesTwoInsidesOneColor(is1, is2, Picture.colorByInt(ic), ii1, ii2);
-	}
-	
-	public void setTwoColorsTwoInsidesOneShape(int is, Color c1, Color c2, int ii1, int ii2) {
-		
-		Picture p;
-		int rc;
-		int ri;
-		
-		if (is == Picture.EMPTY) {
-			setEmptyTable();
-			return;
-		}
-		
-		p = Picture.setShape(is);
 		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				
-				rc = RandFunc.getRandomOfTwo(0, 1);
-				switch (rc) {
-				case 0: p.setColor(c1);break;
-				case 1: p.setColor(c2);break;
-				}
-					
-				ri = RandFunc.getRandomOfTwo(0, 1);
-				switch (ri) {
-				case 0: p.setInside(ii1);break;
-				case 1: p.setInside(ii2);break;
-				}
-				
-				table[i][j] = p.copyPicture();
+				setCell(i,j,RandFunc.getRandomOfTwo(is1, is2), ic, RandFunc.getRandomOfTwo(ii1, ii2));
 			}
 		}	
 	}
 	
 	public void setTwoColorsTwoInsidesOneShape(int is, int ic1, int ic2, int ii1, int ii2) {
-		setTwoColorsTwoInsidesOneShape(is, Picture.colorByInt(ic1), Picture.colorByInt(ic2), ii1, ii2);
+		
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				setCell(i,j,is,RandFunc.getRandomOfTwo(ic1, ic2),RandFunc.getRandomOfTwo(ii1, ii2));
+			}
+		}	
 	}
-	
+		
 	// movements 1 level
 	
 		// swaps
@@ -675,14 +356,10 @@ public class Table {
 	
 		// colors
 	
-	public void changeColor(int i, int j, Color color) {
+	public void changeColor(int i, int j, int color) {
 		table[i][j].setColor(color);
 	}
-	
-	public void changeColor(int i, int j, int ic) {
-		changeColor (i,j,Picture.colorByInt(ic));
-	}
-	
+		
 	public void swapColors (Color c1, Color c2){
 				
 		for (int i=0; i<height; i++) {
@@ -738,9 +415,9 @@ public class Table {
 		
 		Picture p;
 		
-		p = Picture.setShape(is);
+		p = Picture.getPictureShape(is);
 		
-		if (is != Picture.EMPTY) {
+		if (is != empty) {
 			p.setColor(t.getColor());
 			p.setInside(t.getInside());
 		}
@@ -791,7 +468,7 @@ public class Table {
 	
 		// sequences
 		
-		public void colorSequenceStep(Color[] colorSeq) {
+		public void colorSequenceStep(int[] colorSeq) {
 		
 		Table tt = copyTable();
 		
@@ -799,8 +476,8 @@ public class Table {
 		for (int ic = 0; ic < csL1; ic++) {
 			for (int i = 0; i<height; i++) {
 				for (int j=0; j<width; j++) {
-					if (table[i][j].getColor() == colorSeq[ic]) {
-						tt.changeColor(i, j, colorSeq[ic]);
+					if (table[i][j].getColorInt() == colorSeq[ic]) {
+						tt.changeColor(i, j, colorSeq[ic+1]);
 					}
 				}
 			}
@@ -808,22 +485,14 @@ public class Table {
 		
 		for (int i = 0; i<height; i++) {
 			for (int j=0; j<width; j++) {
-				if (table[i][j].getColor() == colorSeq[csL1]) {
+				if (table[i][j].getColorInt() == colorSeq[csL1]) {
 					tt.changeColor(i,j,colorSeq[0]);
 				}
 			}
 		}
 		table = tt.table;
 	}
-	
-	public void colorSequenceStep(int[] colorSeq) {
-		Color[] cs = new Color[colorSeq.length];
-		for (int i = 0; i < colorSeq.length; i++) {
-			cs[i] = Picture.colorByInt(colorSeq[i]);
-		}
-		colorSequenceStep(cs);
-	}
-	
+		
 	public void insideSequenceStep(int[] insideSeq) {
 		
 	Table tt = copyTable();
@@ -878,11 +547,11 @@ public class Table {
 	
 	public Picture[][] getTable(){
 		
-		return this.copyTable().table;
+		return (copyTable()).table;
 	}
 	
 	public Picture[][] getTableToChange(){
-		return this.table;
+		return table;
 	}
 	
 	public Picture getCell(int i, int j) {
@@ -912,7 +581,7 @@ public class Table {
 		
 		int ic = this.table[ri][rj].getColorInt();
 		
-		tt.table[ri][rj].setColor(RandFunc.IntRandomInRangeExept(0, Picture.NUMBER_OF_COLORS-1,ic));
+		tt.table[ri][rj].setColor(RandFunc.IntRandomInRangeExept(0, nC,ic));
 		
 		return tt;
 	}
@@ -929,7 +598,7 @@ public class Table {
 		
 		int ii = this.table[ri][rj].getInside();
 		
-		tt.table[ri][rj].setInside(RandFunc.IntRandomInRangeExept(1, Picture.NUMBER_OF_INSIDES-1,ii));
+		tt.table[ri][rj].setInside(RandFunc.IntRandomInRangeExept(1,nI,ii));
 		
 		return tt;
 	}
@@ -948,7 +617,7 @@ public class Table {
 		int ic = this.table[ri][rj].getColorInt();
 		int ii = this.table[ri][rj].getInside();
 		
-		Picture p = Picture.setShape(RandFunc.IntRandomInRangeExept(1, Picture.NUMBER_OF_SHAPES-1,is));
+		Picture p = Picture.getPictureShape(RandFunc.IntRandomInRangeExept(1, nS,is));
 		p.setColor(ic);
 		p.setInside(ii);
 		
@@ -963,7 +632,7 @@ public class Table {
 			int rp = RandFunc.IntRandomInRange(0,height*width-1);
 			int ri = rp/height;
 			int rj = rp%height;
-			if (table[ri][rj].getShape() != Picture.EMPTY) return rp;
+			if (table[ri][rj].getShape() != empty) return rp;
 		}
 	}
 	
@@ -973,7 +642,7 @@ public class Table {
 			int rp = RandFunc.IntRandomInRange(0,height*width-1);
 			int ri = rp/height;
 			int rj = rp%height;
-			if (table[ri][rj].getShape() == Picture.EMPTY) return rp;
+			if (table[ri][rj].getShape() == empty) return rp;
 		}
 	}
 	
@@ -983,16 +652,11 @@ public class Table {
 		
 		for (int i=0; i<height; i++) {
 			for (int j=0; j<width; j++) {
-				if (table[i][j].getShape() != Picture.EMPTY) c[table[i][j].getColorInt()]++;
+				if (table[i][j].getShape() != empty) c[table[i][j].getColorInt()]++;
 			}
 		}
 		
-		int res = 0;
-		for (int i=0; i<c.length; i++) {
-			if (c[i] != 0)res++;		
-		}
-		
-		return res;
+		return countNonZero(c);
 	}
 	
 	public int countInsides() {
@@ -1001,16 +665,11 @@ public class Table {
 		
 		for (int i=0; i<height; i++) {
 			for (int j=0; j<width; j++) {
-				if (table[i][j].getShape() != Picture.EMPTY) c[table[i][j].getInside()]++;
+				if (table[i][j].getShape() != empty) c[table[i][j].getInside()]++;
 			}
 		}
 		
-		int res = 0;
-		for (int i=0; i<c.length; i++) {
-			if (c[i] != 0)res++;		
-		}
-		
-		return res;
+		return countNonZero(c);
 	}
 	
 	public int countShapes() {
@@ -1019,20 +678,13 @@ public class Table {
 		
 		for (int i=0; i<height; i++) {
 			for (int j=0; j<width; j++) {
-				if (table[i][j].getShape() != Picture.EMPTY) 
-					c[table[i][j].getShape()]++;
-								
-				c[table[i][j].getShape()]++;
+				if (table[i][j].getShape() != empty) c[table[i][j].getShape()]++;
 			}
 		}
-		
-		int res = 0;
-		for (int i=1; i<c.length; i++) {
-			if (c[i] != 0)res++;		
-		}
-		
-		return res;
+				
+		return countNonZero(c);
 	}
+	
 	
 	public boolean isTableEmpty() {
 		
@@ -1052,6 +704,13 @@ public class Table {
 			}
 		}
 		return true;
+	}
+	
+	private int countNonZero(int[] c){	
+		
+		int res = 0;
+		for (int i : c) if (i != 0) res++;
+		return res;
 	}
 	
 	public void display () {

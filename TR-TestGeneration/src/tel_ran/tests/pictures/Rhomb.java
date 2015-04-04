@@ -24,8 +24,7 @@ public class Rhomb extends Picture {
 		height = (int)(height*scale);
 		
 		
-		gr.setColor(Color.WHITE);
-		gr.fillRect(x, y, width, height);
+		super.fillPict(gr, x, y, width, height);
 		gr.setColor(color);
 		int xPoints[]={x+width/2, x+width, x+width/2, x, x+width/2};
 		int yPoints[]={y,y+height/2,y+height, y+height/2,y};
@@ -38,12 +37,14 @@ public class Rhomb extends Picture {
 			gr.drawPolygon(xP, yP, 5);
 			gr.fillPolygon(xP, yP, 5);
 		}
-		if (getInside()==Picture.INSIDE_ERECT_CROSS){
+		super.drawInside(gr,x,y,width,height);
+		
+/*		if (getInside()==Picture.INSIDE_ERECT_CROSS){
 			gr.setColor(Color.WHITE);
 			gr.drawLine(x+width/2, y, x+width/2, y+height);
 			gr.drawLine(x, y+height/2, x+width, y+height/2);
 		}
-		
+*/		
 	}
 
 

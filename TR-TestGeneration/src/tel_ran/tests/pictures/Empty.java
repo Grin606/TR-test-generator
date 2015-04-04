@@ -8,7 +8,9 @@ public class Empty extends Picture {
 
 	public Empty() {
 		super();
+		setColor(Picture.backgroundColor);;
 		setName("Empty");
+		setInside(Picture.INSIDE_FULL);
 	}
 
 	@Override
@@ -24,8 +26,7 @@ public class Empty extends Picture {
 		height = (int)(height*scale);
 
 		
-		gr.setColor(Color.WHITE);
-		gr.fillRect(x_UpperLeft, y_UpperLeft, width, height);
+		super.fillPict(gr, x_UpperLeft, y_UpperLeft, width, height);
 
 	}
 

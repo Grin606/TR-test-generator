@@ -11,11 +11,7 @@ public class Picture_311F_Test extends PictureTablesTest{
 	public Picture_311F_Test() {
 			
 		super();			
-		weight = 1;
-		numberOfDescripton = 5;
-		category = "Picture reasoning";
 		name = "Table 211E test";
-		numOfAnswers = 4;
 	}
 
 	@Override
