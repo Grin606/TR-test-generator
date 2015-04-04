@@ -165,26 +165,27 @@ public class Image {
 			switch (task.WhatKindOfProblem()) {
 				case Testing_Problem.ONE_DIM_STRING_ARRAY:				
 					io = new ListObject(task.getODSA_p(), rs, Resizing.MainText, Image.padding);
-					io.setBorders(task.whatProblemFrames(), borderColor);	
+//					io.setBorders(task.getProblemFrames(), borderColor);
 					break;			
 				case Testing_Problem.ONE_DIM_PICTURE_ARRAY:
 					io = new ListObject(task.getODPA_p(), rs, Image.padding);
-					io.setBorders(task.whatProblemFrames(), borderColor);	
+//					io.setBorders(task.getProblemFrames(), borderColor);
 					break;
 				case Testing_Problem.TWO_DIM_STRING_ARRAY:					
 					io = new TableObject(task.getTDSA_p(), Resizing.MainText, rs, Image.padding);
-					io.setBorders(Frames.ALL_BORDERS, borderColor);	
+//					io.setBorders(task.getProblemFrames(), borderColor);
 					break;
 				case Testing_Problem.TWO_DIM_PICTURE_ARRAY:					
-					io = new TableObject(task.getTDPA_p(), rs, Image.padding);	
-					io.setBorders(Frames.ALL_BORDERS, borderColor);	
+					io = new TableObject(task.getTDPA_p(), rs, Image.padding);
+//					io.setBorders(task.getProblemFrames(), borderColor);
 					break;					
 				case Testing_Problem.THREE_DIM_PICTURE_ARRAY:
 					io = new ListObjectInLine(task.getTHDPA_p(), rs, Image.padding);	
-					io.setBorders(Frames.INNER_OBJECT_BORDEDS, borderColor);		
+//					io.setBorders(task.getProblemFrames(), borderColor);		
 					break;
 				default: assert false;					
 			}	
+			io.setBorders(task.getProblemFrames(), borderColor);
 			io.setFontColor(fontColor);
 								
 			res.add(io);
@@ -202,12 +203,12 @@ public class Image {
 					ans[0] = task.getODSA_a();
 					io = new TableObject(ans, Resizing.MainText, rs, Image.padding);
 					io.setHeader(answers, Resizing.HeaderText);							
-					io.setBorders(Frames.GRID, borderColor);	
+					io.setBorders(task.getAnswerFrames(), borderColor);	
 					break;		
 				case Testing_Problem.THREE_DIM_PICTURE_ARRAY:
 					io = new TableObject(task.getTHDPA_a(), rs, Image.padding);
 					io.setNotes(answers, Resizing.HeaderText);						
-					io.setBorders(Frames.INNER_OBJECT_BORDEDS, borderColor);	
+					io.setBorders(task.getAnswerFrames(), borderColor);	
 					break;	
 				default: return res;
 				}	

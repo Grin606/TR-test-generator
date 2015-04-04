@@ -62,20 +62,4 @@ public class DataSet {
 		if (isTHDPA()) return 5;
 		return 0;
 	}
-	
-	public void setFrames (boolean out, boolean all, boolean if_full) {
-		exv.fr.frames_out = out;
-		exv.fr.frames_all = all;
-		exv.fr.frames_if_full = if_full;
-	}
-
-	public int whatFrames() {
-		if (exv.fr.frames_out) return 1;
-		if (exv.fr.frames_all) return 2;
-		if (exv.fr.frames_if_full) return 3;
-		return 0;
-	}
-		
-
-	
 }

@@ -1,7 +1,6 @@
 package tel_ran.tests.generator;
 
 import tel_ran.tests.dataset.*;
-
 import tel_ran.tests.pictures.Picture;
 
 public abstract class Testing_Problem {
@@ -174,29 +173,16 @@ public abstract class Testing_Problem {
 		res[1] = a.thp.deep;
 		return res;
 	}
-		
-	public int whatProblemFrames() {
-		return p.whatFrames();
+	public Frames getProblemFrames() {
+		return p.exv.fr;
 	}
-	public int whatAnswerFrames() {
-		return a.whatFrames();
+	public Frames getAnswerFrames() {
+		return a.exv.fr;
 	}
 	
-	public void setProblemFrames(boolean out, boolean all, boolean if_full) {
-		p.setFrames(out,all, if_full);
-	}
-	public void setAnswerFrames(boolean out, boolean all, boolean if_full) {
-		p.setFrames(out,all, if_full);
-	}
-
-	public void setNumOfAnswers(int numOfAnswers) {
-		this.numOfAnswers = numOfAnswers;
-	}
 	
 	
 }
 	
 
-
-	
 

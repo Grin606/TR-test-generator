@@ -1,30 +1,36 @@
 package tel_ran.tests.dataset;
 
-/**
- * Class, containing info on the frames around and inside data 
- *
- */
 public class Frames {
 	
+	public static final int NO_FRAMES = 0;
+	public static final int INSIDE = 1;
+	public static final int OUTSIDE = 2;
+	public static final int INSIDE_AND_OUTSIDE = 3;
 	
-	public static final int NO_BORDERS = 0;
-	public static final int OUT_BORDERS = 1;	
-	public static final int ALL_BORDERS = 2;
-	public static final int CELL_BORDERS_IF_FULL = 3;
-	public static final int GRID = 4;
-	public static final int INNER_OBJECT_BORDEDS = 5;
+	private int frInternal = 0;
+	private int frMedium = 0;
+	private int frExternal = 0;
 	
-	public boolean frames_out;
-	public boolean frames_all;
-	public boolean frames_if_full;
-	
-	
-	/**
-	 * Constructor setting false to all fields (no frames)
-	 */
-	public Frames() {
-		frames_out = false;
-		frames_all = false;
-		frames_if_full = false;
+	public int getFrInternal() {
+		return frInternal;
 	}
+	public void setFrInternal(int fr) {
+		if (fr == 1 || fr == 3 ) return;
+		this.frInternal = fr;
+	}
+	public int getFrMedium() {
+		return frMedium;
+	}
+	public void setFrMedium(int fr) {
+		this.frMedium = fr;
+	}
+	public int getFrExternal() {
+		return frExternal;
+	}
+	public void setFrExternal(int fr) {
+		this.frExternal = fr;
+	}
+	
+	
+	
 }

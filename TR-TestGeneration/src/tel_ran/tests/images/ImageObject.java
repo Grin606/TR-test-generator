@@ -19,7 +19,8 @@ public abstract class ImageObject {
 	protected Resizing rs;			
 	protected Color fontColor; 	
 	protected Color borderColor;
-	protected int frames = 0;
+	protected int borders = 0;
+	
 	
 	Fields[] header;
 	Fields[] notes;	
@@ -35,7 +36,7 @@ public abstract class ImageObject {
 	public ImageObject(Resizing rs, int padding) {
 		super();
 		this.rs = rs;
-		this.frames = 0;
+		this.borders = 0;
 		this.margin = 0;
 		this.paddingHor = this.paddingVer = padding;	
 		headerWH = new int[2];
@@ -66,36 +67,41 @@ public abstract class ImageObject {
 		this.fontColor = fontColor;
 	}
 	
-	public void setBorders(int frames, Color borderColor) {
+	
+	
+	public void setBorders(Frames frames, Color borderColor) {
+		
 		this.borderColor = borderColor;
-		this.frames = frames;				
+				
+		setBordersSwith(frames.getFrExternal(), borderColor);
+		
+		if (frames.getFrMedium() != 0)
+			setInnerBorders(frames.getFrMedium(), borderColor);	
+		
+	}	
+	
+	protected void setBordersSwith (int frames, Color borderColor) {
+		
+		this.borders = frames;
 		
 		switch (frames) {
-		case Frames.OUT_BORDERS :
+		case Frames.OUTSIDE:
 			this.margin += Image.margin+4;
 			break;
-		case Frames.ALL_BORDERS:			
-			this.margin += Image.margin+4;
-			this.paddingHor *=2;
-			this.paddingVer +=2;
-			break;
-		case Frames.CELL_BORDERS_IF_FULL :			
+		case Frames.INSIDE_AND_OUTSIDE:			
 			this.margin += Image.margin+4;
 			this.paddingHor *=2;
 			this.paddingVer +=2;
 			break;
-		case Frames.GRID :				
+		case Frames.INSIDE :				
 			this.paddingHor *=2;
 			this.paddingVer +=2;
-			break;
-		case Frames.INNER_OBJECT_BORDEDS :
-			setInnerBorders(Frames.OUT_BORDERS, borderColor);
-			this.paddingVer += 2;
-			this.paddingHor *= 2;
 			break;
 		}
 		
-	}	
+		this.borderColor = borderColor;
+		
+	}
 		
 	protected abstract void setInnerBorders(int border, Color borderColor2);
 
@@ -119,14 +125,14 @@ public abstract class ImageObject {
 		width = 0;
 		
 		
-		switch (frames) {
-			case 1 :
+		switch (borders) {
+			case Frames.OUTSIDE :
 				width = height = 4;
 				
-			case 2:
+			case Frames.INSIDE_AND_OUTSIDE:
 				width = height = 4;
 				
-			case 3 :
+			case Frames.INSIDE :
 				width = height = 4;		
 				
 		}
@@ -170,8 +176,8 @@ public abstract class ImageObject {
 			io.setNotes(notes);		
 		if (this.fontColor!=null)
 			io.setFontColor(fontColor);
-		if (this.frames != 0)
-			io.setBorders(frames, borderColor);		
+		if (this.borders != 0)
+			io.setBordersSwith(borders, borderColor);		
 		io.setRotated(true);
 		
 		return io;	
@@ -207,9 +213,9 @@ public abstract class ImageObject {
 	
 	public void draw(Graphics2D gr) throws Exception {
 				
-		if (this.frames == Frames.OUT_BORDERS || this.frames == Frames.ALL_BORDERS)
+		if (this.borders == Frames.OUTSIDE || this.borders == Frames.INSIDE_AND_OUTSIDE)
 			drawBorders(gr);
-		if (this.frames == Frames.GRID || this.frames == Frames.ALL_BORDERS)
+		if (this.borders == Frames.INSIDE || this.borders == Frames.INSIDE_AND_OUTSIDE)
 			drawGrid(gr);
 		gr.setColor(this.fontColor);
 		if (header!=null)

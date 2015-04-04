@@ -82,7 +82,7 @@ public class FieldsObject implements Fields {
 	}
 	
 	public void setBorders(int border, Color borderColor2) {
-		field.setBorders(border, borderColor2);
+		field.setBordersSwith(border, borderColor2);
 	}
 
 
