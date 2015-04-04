@@ -26,8 +26,8 @@ public class Table33_211E extends Table33{
 		kind = RandFunc.getRandomOfThree(0, 1, 2);
 		
 		rc1 = RandFunc.IntRandomInRange(0,Picture.NUMBER_OF_COLORS-1);
-		rs1 = RandFunc.IntRandomInRange(1, Picture.NUMBER_OF_SHAPES-1);
-		ri1 = RandFunc.IntRandomInRange(0, Picture.NUMBER_OF_INSIDES-1);
+		rs1 = RandFunc.IntRandomInRange(1, Picture.NUMBER_OF_SHAPES-1);         
+		ri1 = Picture.INSIDE_FULL;//RandFunc.IntRandomInRange(0, Picture.NUMBER_OF_INSIDES-1);    // only full
 		
 		 do {   
 			switch (kind) {
@@ -37,6 +37,7 @@ public class Table33_211E extends Table33{
 		    	flag = (t.countColors() != 2);
 		    	break;
 		    case 1:
+		    	ri1 = RandFunc.IntRandomInRange(1, Picture.NUMBER_OF_INSIDES-1);
 		    	ri2 = RandFunc.IntRandomInRangeExept(0, Picture.NUMBER_OF_INSIDES-1, ri1);
 		    	t.setTwoInsidesOneShapeOneColorPlusEmpty(ri1, ri2, rs1, rc1);
 		    	flag = (t.countInsides() != 2);

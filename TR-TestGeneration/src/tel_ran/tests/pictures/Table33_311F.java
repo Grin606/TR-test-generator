@@ -38,14 +38,16 @@ public Table33 t;
 		do {
 			rc3 = RandFunc.IntRandomInRangeExept(0, Picture.NUMBER_OF_COLORS-1, rc1);
 		}while (rc3 == rc2);
+		ri1 = Picture.INSIDE_FULL;                                                     // full only
 		t.setThreeColorsOneShapeOneInside(rc1, rc2, rc3, rs1, ri1);
 		flag = (t.countColors() != 3);
 		break;
 	case 1:
-		rs2 = RandFunc.IntRandomInRangeExept(0, Picture.NUMBER_OF_SHAPES-1, rs1);
+		rs2 = RandFunc.IntRandomInRangeExept(1, Picture.NUMBER_OF_SHAPES-1, rs1);
 		do {
-			rs3 = RandFunc.IntRandomInRangeExept(0, Picture.NUMBER_OF_SHAPES-1, rs1);
+			rs3 = RandFunc.IntRandomInRangeExept(1, Picture.NUMBER_OF_SHAPES-1, rs1);
 		}while (rs3 == rs2);
+		ri1 = Picture.INSIDE_FULL;   													// full only
 		t.setThreeShapesOneInsideOneColor(rs1, rs2, rs3, ri1, rc1);
 		flag = (t.countShapes() != 3);
 		break;

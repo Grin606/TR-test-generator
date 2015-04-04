@@ -5,8 +5,8 @@ import tel_ran.tests.tools.RandFunc;
 
 public abstract class Picture {
 	
-	private int width=20;
-	private int height=20;
+	private int width=24;
+	private int height=24;
 	
 	private Color color;
 	private int colorInt;

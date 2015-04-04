@@ -28,7 +28,7 @@ public class Picture_311F_Test extends PictureTablesTest{
 		p.thp = new ThreeDimensionalPictureArray(problem);
 		Picture[][] cAnswer = answers[0]; 
 		
-		makeAnswers(answers);
+		makeAnswers(ti, answers);
 		
 		a.thp = new ThreeDimensionalPictureArray(answers);
 		
@@ -63,20 +63,65 @@ public class Picture_311F_Test extends PictureTablesTest{
 	    }  
 	}
 	
-	public void makeAnswers(Picture[][][] answers) {
+	public void makeAnswers(Table33_311F ti, Picture[][][] answers) {
 		
 		Table tt;
 		
 		Picture[][] a = answers[0];
 		Table t0 = new Table(a);
+		
+		switch (ti.kind) {
+		
+		case 0:
+			
+			tt = t0.copyTable();
+			tt.swapColors(ti.rc1, ti.rc2);          
+			answers[1] = tt.copyTable().getTable();
+			
+			tt = t0.copyTable();
+			tt.swapColors(ti.rc1, ti.rc3);          
+			answers[2] = tt.copyTable().getTable();
 
-		tt = t0.deviateColor();           // Wrong answers
-		answers[1] = tt.copyTable().getTable();
-		tt = t0.deviateShape();
-		answers[2] = tt.copyTable().getTable();
-		tt = t0.deviateInside();
-		answers[3] = tt.copyTable().getTable();
+			tt = t0.copyTable();
+			tt.swapColors(ti.rc2, ti.rc3);          
+			answers[3] = tt.copyTable().getTable();
+			
+			break;
+			
+		case 1:
+			
+			tt = t0.copyTable();
+			tt.swapShapes(ti.rs1, ti.rs2);          
+			answers[1] = tt.copyTable().getTable();
+			
+			tt = t0.copyTable();
+			tt.swapShapes(ti.rs1, ti.rs3);          
+			answers[2] = tt.copyTable().getTable();
 
+			tt = t0.copyTable();
+			tt.swapShapes(ti.rs2, ti.rs3);          
+			answers[3] = tt.copyTable().getTable();
+			
+			break;
+			
+		case 2:
+			
+			tt = t0.copyTable();
+			tt.swapInsides(ti.ri1, ti.ri2);          
+			answers[1] = tt.copyTable().getTable();
+			
+			tt = t0.copyTable();
+			tt.swapInsides(ti.ri1, ti.ri3);          
+			answers[2] = tt.copyTable().getTable();
+
+			tt = t0.copyTable();
+			tt.swapInsides(ti.ri2, ti.ri3);          
+			answers[3] = tt.copyTable().getTable();
+			
+			break;
+			
+		}
 		shuffleTables(answers);
-}
+	}
+	
 }
