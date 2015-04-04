@@ -1,6 +1,4 @@
 package tel_ran.start;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import tel_ran.tests.images.Image;
@@ -18,9 +16,7 @@ public class TestGenerationAppl {
 	
 	
 	
-	public static void main(String[] args) throws Exception {
-		
-	
+	public static void main(String[] args) throws Exception {	
        
        int type = TYPE;
        int num = NUMB;       
@@ -28,8 +24,11 @@ public class TestGenerationAppl {
        QuestionsRepository rep = new QuestionsRepository();  
        Image image = new Image();
        TestProcessor proc = new TestProcessor(image, rep);
-		
-       proc.processStart(type, num, PTH, DIF_LEVEL);
+       
+       if (args.length != 0) {
+    	   proc.processStart(args[0], num, PTH, DIF_LEVEL);
+       } else 
+    	   proc.processStart(type, num, PTH, DIF_LEVEL); 
 				
 	}
 

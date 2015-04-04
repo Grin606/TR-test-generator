@@ -60,7 +60,8 @@ public class TestProcessor {
 		this.img = img;
 		this.rep = rep;
 	}
-
+	
+	
 
 
 	// Second constructor allows to specify parameters of images' names	
@@ -75,13 +76,22 @@ public class TestProcessor {
 		this.baseName = baseName;
 	}
 
+	//test method
+	public void processStart(String testName, int number, String path, int maxLvl) throws Exception {
+		TaskGenerate tg = new GetSimpleTask(testName);
+		processing(tg, number, path, maxLvl);		
+	}
 	
-
+	//main process method
 	public void processStart(int testType, int number, String path, int maxLvl) throws Exception {
-		
-						long time1 = System.currentTimeMillis();
-		TaskBoxGenerator box = null;		
+		TaskGenerate tg = new GetBoxTask(testType); 		
+		processing(tg, number, path, maxLvl);		
+	}
+
+	public void processing (TaskGenerate taskGen, int number, String path, int maxLvl) throws Exception {
 		Testing_Problem testTask = null;
+						long time1 = System.currentTimeMillis();
+				
 		BufferedImage res;	
 		String fileName = path + baseName + ".txt";	
 		String imgName;
@@ -104,15 +114,7 @@ public class TestProcessor {
 //		}
 
 		FileWriter fw = new FileWriter(base, true);
-		BufferedWriter bw = new BufferedWriter(fw);			
-		
-		switch(testType) {
-		case 0: box = new AccurateBoxGenerator(); break;
-		case 1: box = new QuantativeBoxGenerator(); break;
-		case 2: box = new AbstractBoxGenerator(); break;		
-		
-		default: assert false;
-		}
+		BufferedWriter bw = new BufferedWriter(fw);		
 		
 						long time2 = System.currentTimeMillis();
 						long time3, time4, time34 = 0L, time5, time54=0L, time6, time56 = 0L, time8, time85 = 0L, time86 = 0L;
@@ -124,9 +126,8 @@ public class TestProcessor {
 				th += step;
 			}
 						time3 = System.currentTimeMillis();
-			
-			
-			testTask = box.generate(lvl);
+						
+			testTask = taskGen.getTask(lvl); 
 			
 						time4 = System.currentTimeMillis();
 					
