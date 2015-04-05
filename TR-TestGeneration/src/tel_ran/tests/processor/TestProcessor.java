@@ -17,9 +17,9 @@ import javax.imageio.ImageIO;
 
 import tel_ran.tests.attention.AttentionNumTest;
 import tel_ran.tests.attention.AttentionNumbersLoop;
-import tel_ran.tests.box_generator.AbstractBoxGenerator;
-import tel_ran.tests.box_generator.AccurateBoxGenerator;
-import tel_ran.tests.box_generator.QuantativeBoxGenerator;
+import tel_ran.tests.box_generator.Abstract_Reasoning;
+import tel_ran.tests.box_generator.Attention;
+import tel_ran.tests.box_generator.Quantative_Reasoning;
 import tel_ran.tests.box_generator.TaskBoxGenerator;
 import tel_ran.tests.generator.*;
 import tel_ran.tests.generator.character.CharRandomSequence;
@@ -78,20 +78,29 @@ public class TestProcessor {
 
 	//test method
 	public void processStart(String testName, int number, String path, int maxLvl) throws Exception {
-		TaskGenerate tg = new GetSimpleTask(testName);
+		GetTaskGenerate tg = new GetSimpleTask(testName);
 		processing(tg, number, path, maxLvl);		
 	}
 	
 	//main process method
 	public void processStart(int testType, int number, String path, int maxLvl) throws Exception {
-		TaskGenerate tg = new GetBoxTask(testType); 		
+		GetTaskGenerate tg = new GetBoxTask(testType); 
+		
 		processing(tg, number, path, maxLvl);		
 	}
 
-	public void processing (TaskGenerate taskGen, int number, String path, int maxLvl) throws Exception {
+	public void processing (GetTaskGenerate taskGen, int number, String path, int maxLvl) throws Exception {
+		String dirName = taskGen.getDirName();		
+		dirName = path.concat(dirName);	
+		
+		if(!new File(dirName).exists() && !new File(dirName).mkdir())
+				System.out.println("Creating directory " + dirName + " failed");
+			else
+				path = dirName.concat(File.separator);		
+				
 		Testing_Problem testTask = null;
 						long time1 = System.currentTimeMillis();
-				
+			
 		BufferedImage res;	
 		String fileName = path + baseName + ".txt";	
 		String imgName;

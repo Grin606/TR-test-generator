@@ -1,13 +1,13 @@
 package tel_ran.tests.processor;
 
-import tel_ran.tests.box_generator.AbstractBoxGenerator;
-import tel_ran.tests.box_generator.AccurateBoxGenerator;
-import tel_ran.tests.box_generator.QuantativeBoxGenerator;
+import tel_ran.tests.box_generator.Abstract_Reasoning;
+import tel_ran.tests.box_generator.Attention;
+import tel_ran.tests.box_generator.Quantative_Reasoning;
 import tel_ran.tests.box_generator.TaskBoxGenerator;
 import tel_ran.tests.exceptions.TasksException;
 import tel_ran.tests.generator.Testing_Problem;
 
-public class GetBoxTask implements TaskGenerate {
+public class GetBoxTask implements GetTaskGenerate {
 
 	TaskBoxGenerator box;
 	
@@ -15,9 +15,9 @@ public class GetBoxTask implements TaskGenerate {
 	
 	public GetBoxTask(int type) throws TasksException {
 		switch(type) {
-		case 0: box = new AccurateBoxGenerator(); break;
-		case 1: box = new QuantativeBoxGenerator(); break;
-		case 2: box = new AbstractBoxGenerator(); break;		
+		case 0: box = new Attention(); break;
+		case 1: box = new Quantative_Reasoning(); break;
+		case 2: box = new Abstract_Reasoning(); break;		
 		}		
 	}
 
@@ -26,5 +26,13 @@ public class GetBoxTask implements TaskGenerate {
 	public Testing_Problem getTask(int lvl) {		
 		return box.generate(lvl);
 	}
+
+
+	@Override
+	public String getDirName() {		
+		return box.getClass().toString().substring(34);
+	}
+	
+	
 
 }

@@ -2,7 +2,7 @@ package tel_ran.tests.processor;
 
 import tel_ran.tests.generator.Testing_Problem;
 
-public class GetSimpleTask implements TaskGenerate {
+public class GetSimpleTask implements GetTaskGenerate {
 	
 	Testing_Problem tp;
 
@@ -28,6 +28,14 @@ public class GetSimpleTask implements TaskGenerate {
 	public Testing_Problem getTask(int lvl) {	
 		tp.generate(lvl);
 		return tp;
+	}
+
+
+
+	@Override
+	public String getDirName() {				
+		return tp.getClass().toString().substring(30);
+		
 	}
 
 }
