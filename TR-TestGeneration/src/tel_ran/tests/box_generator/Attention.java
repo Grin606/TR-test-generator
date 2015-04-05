@@ -4,10 +4,10 @@ import tel_ran.tests.attention.*;
 import tel_ran.tests.exceptions.TasksException;
 import tel_ran.tests.generator.Testing_Problem;
 
-public class AccurateBoxGenerator extends TaskBoxGenerator {
+public class Attention extends TaskBoxGenerator {
 
 	
-	public AccurateBoxGenerator() throws TasksException {
+	public Attention() throws TasksException {
 		super();
 		this.numberOfTask = 2;
 		tasks = new Testing_Problem[numberOfTask];

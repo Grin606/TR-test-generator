@@ -14,11 +14,11 @@ import tel_ran.tests.sequences.GeometricSequence;
 import tel_ran.tests.sequences.PeriodicalSequense;
 
 
-public class QuantativeBoxGenerator extends TaskBoxGenerator {
+public class Quantative_Reasoning extends TaskBoxGenerator {
 	
 	
 		
-	public QuantativeBoxGenerator() throws TasksException {
+	public Quantative_Reasoning() throws TasksException {
 		super();
 		this.numberOfTask = 12;
 		tasks = new Testing_Problem[numberOfTask];

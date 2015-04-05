@@ -5,10 +5,10 @@ import tel_ran.tests.generator.Testing_Problem;
 import tel_ran.tests.generator.pictures.*;
 
 
-public class AbstractBoxGenerator extends TaskBoxGenerator {
+public class Abstract_Reasoning extends TaskBoxGenerator {
 	
 	
-	public AbstractBoxGenerator() throws TasksException {		
+	public Abstract_Reasoning() throws TasksException {		
 		super();
 		this.numberOfTask = 4;
 		tasks = new Testing_Problem[numberOfTask];
