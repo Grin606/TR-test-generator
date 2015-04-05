@@ -65,6 +65,7 @@ import tel_ran.tests.tools.RandFunc;
 			
 			Picture[][] a = answers[0];
 			Table33 t = new Table33(a);
+			answers[0] = getTableRoman(t,corner);
 			
 			tt = Table33.birth(t);           // Wrong answers
 			answers[1] = getTableRoman(tt, corner);
