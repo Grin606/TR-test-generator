@@ -29,9 +29,11 @@ import tel_ran.tests.tools.RandFunc;
 			makeProblem(t, problem, answers, ti.getOrientation(), ti.getCorner());
 			
 			p.thp = new ThreeDimensionalPictureArray(problem);
-			Picture[][] cAnswer = answers[0]; 
+			
 			
 			makeAnswers(answers, ti.getCorner());
+			Picture[][] cAnswer = answers[0]; 
+			shuffleTables(answers);
 			
 			a.thp = new ThreeDimensionalPictureArray(answers);
 			
@@ -77,7 +79,7 @@ import tel_ran.tests.tools.RandFunc;
 			tt.swap(0, 0, 1, 0);
 			answers[3] = getTableRoman(tt,corner);
 
-			shuffleTables(answers);
+			
 		}
 		
 		public Picture[][] getTableRoman(Table33 t, int corner) {
