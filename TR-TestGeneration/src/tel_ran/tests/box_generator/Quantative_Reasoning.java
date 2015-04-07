@@ -22,6 +22,7 @@ public class Quantative_Reasoning extends TaskBoxGenerator {
 		super();
 		this.numberOfTask = 12;
 		tasks = new Testing_Problem[numberOfTask];
+		this.category = "Quantative Reasoning";
 		
 		int index = 0;
 		

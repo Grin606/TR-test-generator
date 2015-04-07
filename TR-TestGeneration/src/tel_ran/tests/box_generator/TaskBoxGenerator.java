@@ -7,10 +7,11 @@ import tel_ran.tests.tools.RandFunc;
 
 public abstract class TaskBoxGenerator {
 	
-	Testing_Problem[] tasks;
-	int len;
-	int numberOfTask;
-	Random ran = new Random();
+	protected Testing_Problem[] tasks;
+	protected int len;
+	protected int numberOfTask;
+	private Random ran = new Random();
+	protected String category;
 		
 	public Testing_Problem generate(int level) {
 		
@@ -24,5 +25,12 @@ public abstract class TaskBoxGenerator {
 	public int getNumberOfTask() {
 		return this.numberOfTask;
 	}
+
+	public String getCategory() {
+		return category;
+	}
+	
+	
+	
 	
 }

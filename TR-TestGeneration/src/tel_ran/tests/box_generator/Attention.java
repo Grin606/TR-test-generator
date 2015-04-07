@@ -11,6 +11,7 @@ public class Attention extends TaskBoxGenerator {
 		super();
 		this.numberOfTask = 2;
 		tasks = new Testing_Problem[numberOfTask];
+		this.category = "Attention Test";
 		
 		int index = 0;
 		

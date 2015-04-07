@@ -12,6 +12,7 @@ public class Abstract_Reasoning extends TaskBoxGenerator {
 		super();
 		this.numberOfTask = 4;
 		tasks = new Testing_Problem[numberOfTask];
+		this.category = "Abstract Reasoning";
 		
 		int index = 0;
 		
