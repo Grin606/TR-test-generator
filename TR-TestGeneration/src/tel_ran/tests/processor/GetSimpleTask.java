@@ -34,7 +34,7 @@ public class GetSimpleTask implements GetTaskGenerate {
 
 	@Override
 	public String getDirName() {				
-		return tp.getClass().toString().substring(30);
+		return tp.getName();
 		
 	}
 

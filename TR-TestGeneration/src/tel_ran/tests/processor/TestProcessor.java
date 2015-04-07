@@ -2,32 +2,14 @@ package tel_ran.tests.processor;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.zip.CRC32;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import tel_ran.tests.attention.AttentionNumTest;
-import tel_ran.tests.attention.AttentionNumbersLoop;
-import tel_ran.tests.box_generator.Abstract_Reasoning;
-import tel_ran.tests.box_generator.Attention;
-import tel_ran.tests.box_generator.Quantative_Reasoning;
-import tel_ran.tests.box_generator.TaskBoxGenerator;
 import tel_ran.tests.generator.*;
-import tel_ran.tests.generator.character.CharRandomSequence;
-import tel_ran.tests.generator.numeric.NumComputations;
-import tel_ran.tests.generator.numeric.NumEstimations;
-import tel_ran.tests.generator.numeric.NumRandomSequence;
-import tel_ran.tests.generator.numeric.NumTableTest;
-import tel_ran.tests.generator.pictures.Picture_211E_Test;
 import tel_ran.tests.images.Image;
 import tel_ran.tests.repository.QuestionsRepository;
 
@@ -38,7 +20,6 @@ public class TestProcessor {
 	public static final int QUANTATIVE = 1;
 	public static final int ABSTRACT = 2;	
 	
-	private String baseName = "answers"; //name of answers' file
 	
 	Image img;
 	QuestionsRepository rep;
@@ -48,48 +29,31 @@ public class TestProcessor {
 	
 	
 
-	// First constructor allows to use generator with default values of images' names	
-	public TestProcessor() {
-		super();
-	}
-	
-	
-
 	public TestProcessor(Image img, QuestionsRepository rep) {
 		super();
 		this.img = img;
 		this.rep = rep;
 	}
 	
-	
-
-
-	// Second constructor allows to specify parameters of images' names	
-	public TestProcessor(String fileName, int index, String baseName) {
-		super();
-
-		this.baseName = baseName;
-		// -------  check for file-name
-	}
-
-	public void setBaseName(String baseName) {
-		this.baseName = baseName;
+	public TestProcessor() {
+		this.rep = new QuestionsRepository();  
+		this.img  = new Image();	      
 	}
 
 	//test method
-	public void processStart(String testName, int number, String path, int maxLvl) throws Exception {
+	public List<String[]> processStart(String testName, int number, String path, int maxLvl) throws Exception {
 		GetTaskGenerate tg = new GetSimpleTask(testName);
-		processing(tg, number, path, maxLvl);		
+		return processing(tg, number, path, maxLvl);		
 	}
 	
 	//main process method
-	public void processStart(int testType, int number, String path, int maxLvl) throws Exception {
+	public List<String[]> processStart(int testType, int number, String path, int maxLvl) throws Exception {
 		GetTaskGenerate tg = new GetBoxTask(testType); 
 		
-		processing(tg, number, path, maxLvl);		
+		return processing(tg, number, path, maxLvl);		
 	}
 
-	public void processing (GetTaskGenerate taskGen, int number, String path, int maxLvl) throws Exception {
+	public List<String[]> processing (GetTaskGenerate taskGen, int number, String path, int maxLvl) throws Exception {
 		String dirName = taskGen.getDirName();		
 		dirName = path.concat(dirName);	
 		
@@ -102,28 +66,16 @@ public class TestProcessor {
 						long time1 = System.currentTimeMillis();
 			
 		BufferedImage res;	
-		String fileName = path + baseName + ".txt";	
 		String imgName;
-		String hash;
-		StringBuffer desc;
 		String[] dsc;
-		String tt;
 		int step, lvl = 1;
 		if (number % maxLvl == 0)
 			step = number/maxLvl;
 		else
 			step = number/maxLvl +1;		
 		int th = step;
-		int tmp;
 		
-		File base = new File(fileName);
-//		if (base.exists()) {
-//			base.delete();
-//			base.createNewFile();
-//		}
 
-		FileWriter fw = new FileWriter(base, true);
-		BufferedWriter bw = new BufferedWriter(fw);		
 		
 						long time2 = System.currentTimeMillis();
 						long time3, time4, time34 = 0L, time5, time54=0L, time6, time56 = 0L, time8, time85 = 0L, time86 = 0L;
@@ -153,29 +105,15 @@ public class TestProcessor {
 						
 			
 			
-			dsc = new String[5];
-			desc = new StringBuffer("");
-			desc.append(imgName).append(dev);
-			dsc[0] = imgName;
-			
-			tt = testTask.getCategory();
-			desc.append(tt).append(dev);
-			dsc[1] = tt;
-			
-			desc.append(lvl).append(dev);
-			dsc[2] = Integer.toString(lvl);
-			
-			tt = testTask.getCorrectAnswerChar();
-			desc.append(tt).append(dev);
-			dsc[3] = tt;
-			
-			tmp = testTask.getNumberOfDescripton();
-			desc.append(tmp);
-			dsc[4] = Integer.toString(tmp);
-							
-			bw.write(desc.toString());
-			bw.newLine();			
-			
+			dsc = new String[7];
+			dsc[0] = testTask.getDescription();
+			dsc[1] = imgName;
+			dsc[2] = testTask.getName();
+			dsc[3] = Integer.toString(lvl);			
+			dsc[4] = testTask.getCorrectAnswerChar();			
+			dsc[5] = Integer.toString(testTask.getNumberOfDescripton());
+			dsc[6] = Integer.toString(testTask.getNumOfAnswers());
+						
 			rep.addQuestion(dsc);
 			
 						time6 = System.currentTimeMillis();
@@ -187,28 +125,28 @@ public class TestProcessor {
 						
 		}
 		
-		
-		bw.close();
-		fw.close();
 						long time7 = System.currentTimeMillis();
 						long time71 = time7 - time1;
 						long time21 = time2 - time1;
 		
-						System.out.println("Общее время исполнения - \t" + time71);
-						System.out.println(" ");
-						System.out.println("1. Генерация файлов и свич - \t" + time21);
-						System.out.println("2. Генерация задач - \t\t" + time34);
-						System.out.println("3. Обработка картинок - \t" + time54);
-						System.out.println("   3.1. Калькуляция \t\t" + Image.time01);
-						System.out.println("        3.1.1. расчет и ресайз \t" + Image.time03);
-						System.out.println("        3.1.2. сеттинг координат \t" + Image.time04);
-						System.out.println("   3.2. Рисование в буфере \t" + Image.time02);
-						System.out.println("4. Заипсь в файлы - \t\t" + time56);
-						System.out.println("   4.1. Картинки - \t\t" + time85);
-						System.out.println("   4.2. Текст и список - \t" + time86);
-						System.out.println(" ");
+//						System.out.println("Общее время исполнения - \t" + time71);
+//						System.out.println(" ");
+//						System.out.println("1. Генерация файлов и свич - \t" + time21);
+//						System.out.println("2. Генерация задач - \t\t" + time34);
+//						System.out.println("3. Обработка картинок - \t" + time54);
+//						System.out.println("   3.1. Калькуляция \t\t" + Image.time01);
+//						System.out.println("        3.1.1. расчет и ресайз \t" + Image.time03);
+//						System.out.println("        3.1.2. сеттинг координат \t" + Image.time04);
+//						System.out.println("   3.2. Рисование в буфере \t" + Image.time02);
+//						System.out.println("4. Заипсь в файлы - \t\t" + time56);
+//						System.out.println("   4.1. Картинки - \t\t" + time85);
+//						System.out.println("   4.2. Текст и список - \t" + time86);
+//						System.out.println(" ");
+//						
+		rep.displayList();
+//		rep.displayInFile(path);
 						
-		rep.displayList();					
+		return rep.getList();
 	}
 	
 	

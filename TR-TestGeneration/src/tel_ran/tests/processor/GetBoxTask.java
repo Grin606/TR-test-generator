@@ -30,7 +30,7 @@ public class GetBoxTask implements GetTaskGenerate {
 
 	@Override
 	public String getDirName() {		
-		return box.getClass().toString().substring(34);
+		return box.getCategory();
 	}
 	
 	
