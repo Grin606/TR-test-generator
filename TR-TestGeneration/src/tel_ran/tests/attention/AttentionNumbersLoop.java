@@ -11,9 +11,10 @@ public class AttentionNumbersLoop extends Testing_Problem {
 	public AttentionNumbersLoop() {
 		super();
 		//weight = NUMBER_OF_TYPES;//???
-		numberOfDescripton = 6;
+		numberOfDescripton = 7;
 		category = "Attention";
-		name = "NumberLoops";
+		name = "LongAttentionLines";
+		numOfAnswers = 4;
 	}
 
 	@Override

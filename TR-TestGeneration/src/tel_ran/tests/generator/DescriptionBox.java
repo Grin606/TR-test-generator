@@ -15,8 +15,8 @@ public class DescriptionBox {
 	description[3] = "What number is to be set instead of question mark?";
 	description[4] = "What 'word' is to be set instead of question mark?";
 	description[5] = "What table is to be next?";
-	description[6] = "";
-	description[7] = "";
+	description[6] = "Which sequence is incorrect?";
+	description[7] = "In which row the sequence is incorrect?";
 
 	}
 }

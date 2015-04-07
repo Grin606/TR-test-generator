@@ -11,9 +11,10 @@ public class AttentionNumTest extends OneDimStringAnswers {
 	public AttentionNumTest() {
 		super();
 		//weight = NUMBER_OF_TYPES;//???
-		numberOfDescripton = 5;
+		numberOfDescripton = 6;
 		category = "Attention";
 		name = "NumAttention";
+		numOfAnswers = 5;
 	}
 
 	@Override
