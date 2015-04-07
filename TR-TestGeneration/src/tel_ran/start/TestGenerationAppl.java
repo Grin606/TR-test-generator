@@ -1,14 +1,11 @@
 package tel_ran.start;
 import java.util.*;
 
-import tel_ran.tests.images.Image;
 import tel_ran.tests.processor.TestProcessor;
-import tel_ran.tests.repository.QuestionsRepository;
-
 
 public class TestGenerationAppl {
 	
-	public static final int TYPE = TestProcessor.QUANTATIVE;
+	public static final int TYPE = TestProcessor.ABSTRACT;
 	public static final int NUMB = 20;
 	public static final String PTH = "d:/res/";
 	public static final int DIF_LEVEL = 1;
@@ -20,10 +17,9 @@ public class TestGenerationAppl {
        
        int type = TYPE;
        int num = NUMB;       
-              
-       QuestionsRepository rep = new QuestionsRepository();  
-       Image image = new Image();
-       TestProcessor proc = new TestProcessor(image, rep);
+         
+     
+      TestProcessor proc = new TestProcessor();
        
        if (args.length != 0) {
     	   proc.processStart(args[0], num, PTH, DIF_LEVEL);
