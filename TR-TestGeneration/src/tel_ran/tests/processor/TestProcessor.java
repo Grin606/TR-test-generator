@@ -144,7 +144,7 @@ public class TestProcessor {
 //						System.out.println(" ");
 //						
 		rep.displayList();
-//		rep.displayInFile(path);
+		rep.displayInFile(path);
 						
 		return rep.getList();
 	}

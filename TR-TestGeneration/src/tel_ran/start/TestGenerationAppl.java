@@ -5,10 +5,10 @@ import tel_ran.tests.processor.TestProcessor;
 
 public class TestGenerationAppl {
 	
-	public static final int TYPE = TestProcessor.ABSTRACT;
+	public static final int TYPE = TestProcessor.ATTENTION;
 	public static final int NUMB = 20;
 	public static final String PTH = "d:/res/";
-	public static final int DIF_LEVEL = 1;
+	public static final int DIF_LEVEL = 3;
 	static Scanner reader = new Scanner(System.in);
 	
 	

@@ -1,6 +1,7 @@
 package tel_ran.tests.generator;
 
 import tel_ran.tests.dataset.*;
+import tel_ran.tests.exceptions.TasksException;
 import tel_ran.tests.pictures.Picture;
 
 public abstract class Testing_Problem {
