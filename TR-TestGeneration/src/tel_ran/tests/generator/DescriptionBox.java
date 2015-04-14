@@ -2,7 +2,7 @@ package tel_ran.tests.generator;
 
 public class DescriptionBox {
 	
-	public static final int NUMBER_OF_DESCRIPTIONS = 8;
+	public static final int NUMBER_OF_DESCRIPTIONS = 10;
 	public String[] description;
 	
 	public DescriptionBox() {
@@ -17,6 +17,8 @@ public class DescriptionBox {
 	description[5] = "What table is to be next?";
 	description[6] = "Which sequence is incorrect?";
 	description[7] = "In which row the sequence is incorrect?";
+	description[8] = "In which row the sequence is correct?";
+	description[9] = "Count the number of the following figures:";
 
 	}
 }

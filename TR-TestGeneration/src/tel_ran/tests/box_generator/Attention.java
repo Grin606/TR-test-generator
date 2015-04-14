@@ -1,8 +1,8 @@
 package tel_ran.tests.box_generator;
 
-import tel_ran.tests.attention.*;
 import tel_ran.tests.exceptions.TasksException;
 import tel_ran.tests.generator.Testing_Problem;
+import tel_ran.tests.generator.attention.*;
 
 public class Attention extends TaskBoxGenerator {
 
