@@ -1,4 +1,4 @@
-package tel_ran.tests.attention;
+package tel_ran.tests.generator.attention;
 
 import java.util.HashSet;
 import java.util.Random;
