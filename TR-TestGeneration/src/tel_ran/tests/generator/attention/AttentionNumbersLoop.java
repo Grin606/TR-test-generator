@@ -30,13 +30,14 @@ public class AttentionNumbersLoop extends AttentionTest {
 		StringBuffer[] problem = new StringBuffer[numRows];
 		Random rand = new Random();
 		StringBuffer str;
-		int[] check = new int[10];
+		
 //		int n = 10;
 		
 //		Set<Integer> set = new HashSet<Integer>();
 		
 		for (int j = 0; j < numRows; j++) {
 			
+			int[] check = new int[10];			
 			str = new StringBuffer("");			
 			for (int i = 0; i < loopLength; i++) {
 				int num = rand.nextInt(10);
