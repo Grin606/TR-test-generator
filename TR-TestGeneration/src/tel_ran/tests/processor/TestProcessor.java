@@ -5,6 +5,7 @@ import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -71,6 +72,7 @@ public class TestProcessor {
 						long time1 = System.currentTimeMillis();
 			
 		BufferedImage res;	
+		HashSet<String> unique = new HashSet<String>(); 
 		String imgName;
 		String[] dsc;
 		int step, lvl = 1;
@@ -80,7 +82,8 @@ public class TestProcessor {
 		int th = step;
 		
 						long time2 = System.currentTimeMillis();
-						long time3, time4, time34 = 0L, time5, time54=0L, time6, time56 = 0L, time8, time85 = 0L, time86 = 0L;
+						long time3, time4, time34 = 0L, time5, time54=0L, time6, time56 = 0L, time8, time95 = 0L, 
+								time86 = 0L, time9, time98 = 0L;
 		
 		for (int i = 0; i < number; i++) {
 			
@@ -100,29 +103,42 @@ public class TestProcessor {
 			
 			imgName = fileNaming(res);
 			
-			File newImage = new File(path + imgName);
-			ImageIO.write(res, "jpeg", newImage);	
+						time6 = System.currentTimeMillis();	
+			
+			if (unique.add(imgName)) {
+			
+				File newImage = new File(path + imgName);
+				ImageIO.write(res, "jpeg", newImage);	
 			
 						time8 = System.currentTimeMillis();				
 			
 			
-			dsc = new String[7];
-			dsc[0] = testTask.getDescription();
-			dsc[1] = dirName.concat(imgName);
-			dsc[2] = testTask.getName();
-			dsc[3] = Integer.toString(lvl);			
-			dsc[4] = testTask.getCorrectAnswerChar();			
-			dsc[5] = Integer.toString(testTask.getNumberOfDescripton());
-			dsc[6] = Integer.toString(testTask.getNumOfAnswers());
+				dsc = new String[7];
+				dsc[0] = testTask.getDescription();
+				dsc[1] = dirName.concat(imgName);
+				dsc[2] = testTask.getName();
+				dsc[3] = Integer.toString(lvl);			
+				dsc[4] = testTask.getCorrectAnswerChar();			
+				dsc[5] = Integer.toString(testTask.getNumberOfDescripton());
+				dsc[6] = Integer.toString(testTask.getNumOfAnswers());
 						
-			rep.addQuestion(dsc);
+				rep.addQuestion(dsc);
+				
+						time9 = System.currentTimeMillis(); 
 			
-						time6 = System.currentTimeMillis();
-						time34 += time4 - time3; 
-						time54 += time5 - time4;
-						time56 += time6 - time5;
-						time86 += time6 - time8;
-						time85 += time8 - time5;
+						
+						time86 += time8 - time6;
+						time95 += time9 - time5;
+						time98 += time9 - time8;
+			}
+			else {
+				i--;
+			}
+							
+				time34 += time4 - time3; 
+				time54 += time5 - time4;
+				time56 += time6 - time5;
+			
 						
 		}
 		
@@ -135,13 +151,16 @@ public class TestProcessor {
 						System.out.println("1. Генерация файлов и свич - \t" + time21);
 						System.out.println("2. Генерация задач - \t\t" + time34);
 						System.out.println("3. Обработка картинок - \t" + time54);
-						System.out.println("   3.1. Калькуляция \t\t" + Image.time01);
-						System.out.println("        3.1.1. расчет и ресайз \t" + Image.time03);
-						System.out.println("        3.1.2. сеттинг координат \t" + Image.time04);
-						System.out.println("   3.2. Рисование в буфере \t" + Image.time02);
-						System.out.println("4. Заипсь в файлы - \t\t" + time56);
-						System.out.println("   4.1. Картинки - \t\t" + time85);
-						System.out.println("   4.2. Текст и список - \t" + time86);
+						System.out.println("   3.1. Калькуляция \t\t" + Image.time_all_calc);
+						System.out.println("        3.1.1. создание списка \t" + Image.time_creating_set);
+						System.out.println("        3.1.2. только калькуляция \t" + Image.time_only_calc);
+						System.out.println("        3.1.3. ресайзинг \t\t" + Image.time_resizing);
+						System.out.println("        3.1.4. установка координа \t" + Image.time_settings);
+						System.out.println("   3.2. Рисование в буфере \t" + Image.time_drawing);
+						System.out.println("4. Запись в файлы - \t\t" + time95);
+						System.out.println("   4.1. Создание имени картинки - \t" + time56);
+						System.out.println("   4.2. Запись картинки - \t" + time86);
+						System.out.println("   4.2. Текст и список - \t" + time98);
 						System.out.println(" ");
 						
 		rep.displayList();
@@ -153,9 +172,7 @@ public class TestProcessor {
 	
 	
 	private String fileNaming (BufferedImage img) throws NoSuchAlgorithmException {
-		StringBuffer name = hashImage(img);		
-//		Date date = new Date();
-//		Long dat = date.getTime();
+		StringBuffer name = hashImage(img);
 		name.append(".jpg");
 		
 		return name.toString();
