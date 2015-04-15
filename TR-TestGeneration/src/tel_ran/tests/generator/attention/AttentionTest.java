@@ -31,11 +31,8 @@ public abstract class AttentionTest extends Testing_Problem {
 		String[] res = new String[n];
 		for(int i = 0; i < n; i++) {
 			res[i] = stb[i].toString();
-		}
-		
-		p.setODSA(res);	
-		
-		
+		}		
+		p.setODSA(res);		
 	}
 
 	protected abstract void reniewDifficulty();
