@@ -2,11 +2,13 @@ package tel_ran.tests.pictures;
 
 public class Table33 extends Table {
 	
+	public static final int NUMBER_OF_STEPS = 14;
+	
 	public Table33() {
 		super(3,3); 
 	}
 	
-	public Table33(Picture[][] a) {
+	public Table33(PictureN[][] a) {
 		super(3,3);
 		for (int i=0; i<3; i++) {
 			for (int j=0; j<3; j++) {
@@ -33,7 +35,7 @@ public class Table33 extends Table {
 	
 	public void snakeClockwise() {
 		
-		Picture tt = table[0][0];
+		PictureN tt = table[0][0];
 		
 		table[0][0] = table[1][0];
 		table[1][0] = table[2][0];
@@ -46,7 +48,7 @@ public class Table33 extends Table {
 	}
 	public void snakeCounterClockwise() {
 		
-		Picture tt = table[0][0];
+		PictureN tt = table[0][0];
 		
 		table[0][0] = table[0][1];
 		table[0][1] = table[0][2];
@@ -60,7 +62,7 @@ public class Table33 extends Table {
 	
 	public void snakeZigZagVert() {
 		
-		Picture tt = table[2][2];
+		PictureN tt = table[2][2];
 		
 		table[2][2] = table[1][2];
 		table[1][2] = table[0][2];
@@ -75,7 +77,7 @@ public class Table33 extends Table {
 	
 	public void snakeZigZagHor() {
 		
-		Picture tt = table[2][2];
+		PictureN tt = table[2][2];
 		
 		table[2][2] = table[2][1];
 		table[2][1] = table[2][0];
@@ -92,8 +94,8 @@ public class Table33 extends Table {
 	
 	public void turn90() {
 		
-		Picture tt1 = table[0][0];
-		Picture tt2 = table[0][1];
+		PictureN tt1 = table[0][0];
+		PictureN tt2 = table[0][1];
 		
 		table[0][0] = table[0][2];
 		table[0][1] = table[1][2];
@@ -128,44 +130,37 @@ public class Table33 extends Table {
 		// transformations 1 level
 	
 	public void setEmptyToCenter() {
-		table[1][1] = Picture.getPictureShape(0);
+		PictureN p = table[1][1];
+		p.setEmptyPicture();
 	}
 	
-public static Table33 death(Table33 t) {
+	public static Table33 tableStep(Table33 t, int step) {
 		
 		Table33 tt = t.copyTable33();
 		
-		if (t.isTableEmpty()) return tt;
+			switch (step) {
 		
-		int rp = tt.getRandomCellNotEmpty();
-		int ri = rp/tt.getHeight();
-		int rj = rp%tt.getHeight();
-		
-		Picture p = Picture.getPictureShape(Picture.EMPTY);
-		tt.getTableToChange()[ri][rj] = p;
-		
+				case 0: tt.swapAngles(); break;
+				case 1: tt.swapColumns(0, 2); break;
+				case 2: tt.swapRows(0, 2); break;
+				case 3: tt.stepUp(); break;
+				case 4: tt.stepDown(); break;
+				case 5: tt.stepLeft(); break;
+				case 6: tt.stepRight(); break;
+//				case 7: tt.downAndRight(); break;
+//				case 8: tt.downAndLeft(); break;
+//				case 9: tt.upAndRight(); break;
+//				case 10: tt.upAndLeft(); break;
+				case 7: tt.snakeClockwise(); break;
+				case 8: tt.snakeCounterClockwise(); break;
+				case 9: tt.turn90(); break;
+				case 10: tt.turn180(); break;
+				case 11: tt.turn270(); break;
+				case 12: tt.snakeZigZagHor(); break;
+				case 13: tt.snakeZigZagVert(); break;
+
+				default:
+			}
 		return tt;
 	}
-	
-	public static Table33 birth(Table33 t) {
-		
-		Table33 tt = t.copyTable33();
-		
-		if (t.isTableFull()) return tt;
-		
-		int rpe = tt.getRandomCellEmpty();
-		int rie = rpe/tt.getHeight();
-		int rje = rpe%tt.getHeight();
-		
-		int rpf = tt.getRandomCellNotEmpty();
-		int rif = rpf/tt.getHeight();
-		int rjf = rpf%tt.getHeight();
-
-		Picture p = tt.getCell(rif, rjf);
-		tt.getTableToChange()[rie][rje] = p;
-		
-		return tt;
-	}
-
-	
 }

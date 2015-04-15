@@ -1,17 +1,16 @@
 package tel_ran.tests.generator.pictures;
 
-import tel_ran.tests.dataset.ThreeDimensionalPictureArray;
 import tel_ran.tests.pictures.*;
 
 public class Picture_311F_Test extends PictureTablesTest{
 		
 	final int PROBLEM_LENGHT = 4;
-	final int ANSWERS_NUMBER = 4;
 		
 	public Picture_311F_Test() {
 			
 		super();			
-		name = "Table 211E test";
+		name = "Table 311F test";
+		problemLength = PROBLEM_LENGHT;
 	}
 
 	@Override
@@ -19,23 +18,14 @@ public class Picture_311F_Test extends PictureTablesTest{
 
 		Table33_311F ti = new Table33_311F();
 		Table33 t = ti.t;
-
-		Picture[][][] problem = new Picture[PROBLEM_LENGHT][t.getHeight()][t.getWidth()];
-		Picture[][][] answers = new Picture[ANSWERS_NUMBER][t.getHeight()][t.getWidth()];
 		
+		uploadProblemAndAnswers(t);
 		makeProblem(ti, problem, answers);
-		
-		p.thp = new ThreeDimensionalPictureArray(problem);
-		Picture[][] cAnswer = answers[0]; 
-		
 		makeAnswers(ti, answers);
-		
-		a.thp = new ThreeDimensionalPictureArray(answers);
-		
-		setCorrectAnswer(cAnswer, answers);
+		setDataSet();
 	}
 	
-	public void makeProblem(Table33_311F init, Picture[][][] pr, Picture[][][] a) {
+	public void makeProblem(Table33_311F init, PictureN[][][] pr, PictureN[][][] a) {
 				
 		pr[0] = init.t.getTable();
 		Table tt = init.t.copyTable();
@@ -63,11 +53,11 @@ public class Picture_311F_Test extends PictureTablesTest{
 	    }  
 	}
 	
-	public void makeAnswers(Table33_311F ti, Picture[][][] answers) {
+	public void makeAnswers(Table33_311F ti, PictureN[][][] answers) {
 		
 		Table tt;
 		
-		Picture[][] a = answers[0];
+		PictureN[][] a = answers[0];
 		Table t0 = new Table(a);
 		
 		switch (ti.kind) {
@@ -121,7 +111,6 @@ public class Picture_311F_Test extends PictureTablesTest{
 			break;
 			
 		}
-		shuffleTables(answers);
 	}
 	
 }

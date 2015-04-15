@@ -8,7 +8,5 @@ public class Table33_AllDifferent extends Table33{
 	
 	t = new Table33();
 	t.setRandomAllDifferentCellsTable();
-	}
-	
-	
+	}	
 }

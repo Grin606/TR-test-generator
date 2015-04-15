@@ -25,25 +25,25 @@ public class Table33_211E extends Table33{
 				
 		kind = RandFunc.getRandomOfThree(0, 1, 2);
 		
-		rc1 = RandFunc.IntRandomInRange(0,Picture.NUMBER_OF_COLORS-1);
-		rs1 = RandFunc.IntRandomInRange(1, Picture.NUMBER_OF_SHAPES-1);         
-		ri1 = Picture.INSIDE_FULL;//RandFunc.IntRandomInRange(0, Picture.NUMBER_OF_INSIDES-1);    // only full
+		rc1 = RandFunc.IntRandomInRange(0,PictureN.nC1);
+		rs1 = RandFunc.IntRandomInRange(1, PictureN.nS1);         
+		ri1 = Picture.INSIDE_FULL;//RandFunc.IntRandomInRange(0, Picture.nI1);    // only full
 		
 		 do {   
 			switch (kind) {
 		    case 0:
-		    	rc2 = RandFunc.IntRandomInRangeExept(0, Picture.NUMBER_OF_COLORS-1, rc1);
+		    	rc2 = RandFunc.IntRandomInRangeExept(0, PictureN.nC1, rc1);
 		    	t.setTwoColorsOneShapeOneInsidePlusEmpty(rc1, rc2, rs1, ri1);
 		    	flag = (t.countColors() != 2);
 		    	break;
 		    case 1:
-		    	ri1 = RandFunc.IntRandomInRange(1, Picture.NUMBER_OF_INSIDES-1);
-		    	ri2 = RandFunc.IntRandomInRangeExept(0, Picture.NUMBER_OF_INSIDES-1, ri1);
+		    	ri1 = RandFunc.IntRandomInRange(0, PictureN.nI1);
+		    	ri2 = RandFunc.IntRandomInRangeExept(0, PictureN.nI1, ri1);
 		    	t.setTwoInsidesOneShapeOneColorPlusEmpty(ri1, ri2, rs1, rc1);
 		    	flag = (t.countInsides() != 2);
 		    	break;
 		    case 2:
-		    	rs2 = RandFunc.IntRandomInRangeExept(1, Picture.NUMBER_OF_SHAPES-1, rs1);
+		    	rs2 = RandFunc.IntRandomInRangeExept(1, PictureN.nS1, rs1);
 		    	t.setTwoShapesOneInsideOneColorPlusEmpty(rs1, rs2, ri1, rc1);
 		    	flag = (t.countShapes() != 2);
 		    	break;

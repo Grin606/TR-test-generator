@@ -24,9 +24,9 @@ public Table33 t;
 			
 	kind = RandFunc.getRandomOfThree(0, 1, 2);
 
-	rc1 = RandFunc.IntRandomInRange(0, Picture.NUMBER_OF_COLORS-1);
-	rs1 = RandFunc.IntRandomInRange(1, Picture.NUMBER_OF_SHAPES-1);
-	ri1 = RandFunc.IntRandomInRange(0, Picture.NUMBER_OF_INSIDES-1);
+	rc1 = RandFunc.IntRandomInRange(0, PictureN.NUMBER_OF_COLORS-1);
+	rs1 = RandFunc.IntRandomInRange(1, PictureN.NUMBER_OF_SHAPES-1);
+	ri1 = RandFunc.IntRandomInRange(0, PictureN.NUMBER_OF_INSIDES-1);
 	
 	boolean flag = true;
 	
@@ -34,27 +34,27 @@ public Table33 t;
 	switch (kind) {
 	
 	case 0:
-		rc2 = RandFunc.IntRandomInRangeExept(0, Picture.NUMBER_OF_COLORS-1, rc1);
+		rc2 = RandFunc.IntRandomInRangeExept(0, PictureN.NUMBER_OF_COLORS-1, rc1);
 		do {
-			rc3 = RandFunc.IntRandomInRangeExept(0, Picture.NUMBER_OF_COLORS-1, rc1);
+			rc3 = RandFunc.IntRandomInRangeExept(0, PictureN.NUMBER_OF_COLORS-1, rc1);
 		}while (rc3 == rc2);
 		ri1 = Picture.INSIDE_FULL;                                                     // full only
 		t.setThreeColorsOneShapeOneInside(rc1, rc2, rc3, rs1, ri1);
 		flag = (t.countColors() != 3);
 		break;
 	case 1:
-		rs2 = RandFunc.IntRandomInRangeExept(1, Picture.NUMBER_OF_SHAPES-1, rs1);
+		rs2 = RandFunc.IntRandomInRangeExept(1, PictureN.NUMBER_OF_SHAPES-1, rs1);
 		do {
-			rs3 = RandFunc.IntRandomInRangeExept(1, Picture.NUMBER_OF_SHAPES-1, rs1);
+			rs3 = RandFunc.IntRandomInRangeExept(1, PictureN.NUMBER_OF_SHAPES-1, rs1);
 		}while (rs3 == rs2);
 		ri1 = Picture.INSIDE_FULL;   													// full only
 		t.setThreeShapesOneInsideOneColor(rs1, rs2, rs3, ri1, rc1);
 		flag = (t.countShapes() != 3);
 		break;
 	case 2:
-		ri2 = RandFunc.IntRandomInRangeExept(0, Picture.NUMBER_OF_INSIDES-1, ri1);
+		ri2 = RandFunc.IntRandomInRangeExept(0, PictureN.NUMBER_OF_INSIDES-1, ri1);
 		do {
-			ri3 = RandFunc.IntRandomInRangeExept(0, Picture.NUMBER_OF_INSIDES-1, ri1);
+			ri3 = RandFunc.IntRandomInRangeExept(0, PictureN.NUMBER_OF_INSIDES-1, ri1);
 		}while (ri3 == ri2);
 		t.setThreeInsidesOneShapeOneColor(ri1, ri2, ri3, rs1, rc1);
 		flag = (t.countInsides() != 3);

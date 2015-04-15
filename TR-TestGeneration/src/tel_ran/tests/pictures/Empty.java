@@ -8,7 +8,7 @@ public class Empty extends Picture {
 
 	public Empty() {
 		super();
-		setColor(Picture.backgroundColor);;
+		setColor(Picture.backgroundColor);
 		setName("Empty");
 		setInside(Picture.INSIDE_FULL);
 	}
