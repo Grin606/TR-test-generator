@@ -21,10 +21,12 @@ import tel_ran.tests.pictures.Picture;
  */
 public class Image {
 	
-						public static long time01 = 0L;
-						public static long time02 = 0L;
-						public static long time03 = 0L;
-						public static long time04 = 0L;
+						public static long time_all_calc = 0L;
+						public static long time_only_calc = 0L;
+						public static long time_resizing = 0L;
+						public static long time_creating_set = 0L;
+						public static long time_settings = 0L;
+						public static long time_drawing = 0L;
 				
 	
 	/** Color of the image background. default value = white **/
@@ -122,17 +124,17 @@ public class Image {
 		
 							long time9 = System.currentTimeMillis();
 
-		List<ImageObject> allObject = setListOfObject(task, rs);	
-						
-					
-		height += calculate(allObject, height);	
+		List<ImageObject> allObject = setListOfObject(task, rs);		
 		
+							long time10 = System.currentTimeMillis();
+							
+		height += calculate(allObject, height);			
 		
 							long time12 = System.currentTimeMillis();
 		
 		setXY(allObject);
 		
-							long time10 = System.currentTimeMillis();
+							long time13 = System.currentTimeMillis();
 					
 		BufferedImage res = new BufferedImage(minWidth, height, BufferedImage.TYPE_BYTE_INDEXED);
 		
@@ -143,15 +145,14 @@ public class Image {
 		
 		Iterator<ImageObject> it = allObject.iterator();			
 		while (it.hasNext()) {
-			it.next().draw(pict);				
+			it.next().draw(pict);			
 		}
 		
 							long time11 = System.currentTimeMillis();
-							time01 += time12-time9; //calculation
-							time02 += time11-time10; //drawing
-							time03 += time10-time12; //setting
-							
-							time04 += time10-time12; //calc answers
+							time_all_calc += time12-time9; 
+							time_creating_set += time10-time9; 
+							time_drawing += time11-time13; 
+							time_settings = time13-time12; 							
 		
 		return res;
 	}	
@@ -186,8 +187,7 @@ public class Image {
 				default: assert false;					
 			}	
 			io.setBorders(task.getProblemFrames(), borderColor);
-			io.setFontColor(fontColor);
-								
+			io.setFontColor(fontColor);								
 			res.add(io);
 		}
 				
@@ -220,17 +220,21 @@ public class Image {
 	}
 	
 	private int calculate(List<ImageObject> allObject, int height) throws Exception {
-				
+		
+
+		
 		int w;		
 		int s = allObject.size();
 		
 		for (int i = 0; i < s; i ++) {
+							long time0 = System.currentTimeMillis();
 			ImageObject io = allObject.get(i);
 			io.calculation();
 			w = io.getWidth();
-			
+							long time1 = System.currentTimeMillis();
+							
 			if (w > Image.minWidth) {	
-				
+											
 				if (!io.getRotated()) {
 					ImageObject newio = io.reform(Image.minWidth-Image.margin*2);
 					if (newio != null) {
@@ -239,12 +243,17 @@ public class Image {
 						allObject.set(i, io);
 					}
 				} else {
+					
 					io.resize(Image.minWidth-Image.margin*4);	
 					height = io.getHeight() + Image.padding*4;
 				}
+							long time2 = System.currentTimeMillis();
+							time_resizing += time2-time1;
 			} 
-			else 
-				height += io.getHeight() + Image.padding*4;						
+			else {
+				height += io.getHeight() + Image.padding*4;					
+			}
+							time_only_calc += time1 - time0;
 		}		
 	
 			
