@@ -17,7 +17,7 @@ public abstract class PictureTablesTest extends Testing_Problem {
 	
 	public PictureTablesTest() {
 		super();
-		weight = 1;
+//		weight = 1;
 		numberOfDescripton = 5;
 		category = "Picture reasoning";
 		numOfAnswers = 4;

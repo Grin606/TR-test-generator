@@ -25,7 +25,7 @@ public class NumTableTest extends NumTest {
 		
 		fB = new FunctionsBox();
 		numOfFunctions = FunctionsBox.NUMBER_OF_FUNCTIONS;
-		weight = numOfFunctions;
+//		weight = numOfFunctions;
 		numberOfDescripton = 3;
 		category = "Numerical Reasoning";
 		name = "NumTableTest";

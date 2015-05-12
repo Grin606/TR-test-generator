@@ -1,18 +1,21 @@
 package tel_ran.tests.box_generator;
 
 import tel_ran.tests.exceptions.TasksException;
+import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.Testing_Problem;
 import tel_ran.tests.generator.pictures.*;
 
 
 public class Abstract_Reasoning extends TaskBoxGenerator {
 	
+	public static final String category = "Abstract Reasoning";
 	
 	public Abstract_Reasoning() throws TasksException {		
 		super();
 		this.numberOfTask = 4;
-		tasks = new Testing_Problem[numberOfTask];
-		this.category = "Abstract Reasoning";
+		tasks = new ITestingProblem[numberOfTask];
+		cat = category;
+
 		
 		int index = 0;
 		

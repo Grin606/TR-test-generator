@@ -1,6 +1,8 @@
 package tel_ran.tests.box_generator;
 
 import tel_ran.tests.exceptions.TasksException;
+import tel_ran.tests.generator.AbstractTest;
+import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.Testing_Problem;
 import tel_ran.tests.generator.numeric.NumComputations;
 import tel_ran.tests.generator.numeric.NumEstimations;
@@ -16,13 +18,13 @@ import tel_ran.tests.sequences.PeriodicalSequense;
 
 public class Quantative_Reasoning extends TaskBoxGenerator {
 	
-	
+	public static final String category = "Quantative Reasoning";
 		
 	public Quantative_Reasoning() throws TasksException {
 		super();
 		this.numberOfTask = 12;
-		tasks = new Testing_Problem[numberOfTask];
-		this.category = "Quantative Reasoning";
+		tasks = new ITestingProblem[numberOfTask];		
+		cat = category;
 		
 		int index = 0;
 		

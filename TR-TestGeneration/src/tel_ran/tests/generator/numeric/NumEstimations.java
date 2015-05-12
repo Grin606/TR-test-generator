@@ -14,7 +14,7 @@ public class NumEstimations extends  NumTest {
 	public NumEstimations() {
 		
 		super();
-		weight = NUMBER_OF_TYPES;
+//		weight = NUMBER_OF_TYPES;
 		numberOfDescripton = 2;
 		category = "Computations";
 		name = "NumEstimations";

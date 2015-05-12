@@ -13,7 +13,7 @@ import tel_ran.tests.tools.*;
 		public NumComputations () {
 			
 			super();
-			weight = NUMBER_OF_TYPES;
+//			weight = NUMBER_OF_TYPES;
 			numberOfDescripton = 1;
 			category = "Computations";
 			name = "NumComputations";

@@ -14,7 +14,7 @@ public abstract class NumRandomSequence extends NumTest{
 		
 		super();
 		
-		weight = NUMBER_OF_SEQUENCES;	
+//		weight = NUMBER_OF_SEQUENCES;	
 		numberOfDescripton = 3;
 		sequence = new int[lengthOfSequence];
 		category = "Numerical Reasoning";

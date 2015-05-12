@@ -3,8 +3,9 @@ package tel_ran.tests.generator;
 import tel_ran.tests.dataset.*;
 import tel_ran.tests.exceptions.TasksException;
 import tel_ran.tests.pictures.Picture;
+import tel_ran.tests.processor.ITaskView;
 
-public abstract class Testing_Problem {
+public abstract class Testing_Problem extends AbstractTest {
 	
 	public static final int ONE_DIM_STRING_ARRAY = 1; 
 	public static final int TWO_DIM_STRING_ARRAY = 2;
@@ -12,78 +13,27 @@ public abstract class Testing_Problem {
 	public static final int TWO_DIM_PICTURE_ARRAY = 4;
 	public static final int THREE_DIM_PICTURE_ARRAY = 5;
 	
-	protected String name;
-	
-	protected int numOfAnswers = 5;
-	protected int weight = 1;
-
-	protected String category="";
-	protected int difLevel = 5;
 
 	protected String correctAnswerChar;
-	
-	protected DescriptionBox dbox;
-	protected String description;
-	protected int numberOfDescripton;
-	
-	public static final String[] answerCharSymbols = {"A","B","C","D","E","F","G","H"};
-	
+		
 	public DataSet p;            //problem
 	public DataSet a;            //answers
 	
+	
 	public Testing_Problem() {
-		
-		dbox = new DescriptionBox();
-		
+		super();	
+		numOfAnswers = 5;		
 		p = new DataSet();
 		a = new DataSet();
+		typeOfView = ITaskView.PICTURE;
 	}
 	
-	public abstract void generate(int difficultyLevel);
-	
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public int getDifLevel() {
-		return difLevel;
-	}
-	
-
-	public int getWeight() {
-		return weight;
-	}
-
+	@Override
 	public String getCorrectAnswerChar(){
 		return correctAnswerChar;
 	}
 	
-	public int getNumOfAnswers() {
-		return numOfAnswers;
-	}
-	
-	public boolean isDescNotEmpty() {
-		if (getDescription().equals("")) return false;
-		return true;
-	}
-
-	public String getDescription() {
-		return dbox.description[numberOfDescripton];
-	}
-
-	public int getNumberOfDescripton() {
-		return numberOfDescripton;
-	}
-
-	
-	public String getName() {
-		return name;
-	}
-
+	@Override
 	public int WhatKindOfProblem() {
 		return p.getKind();
 	}
@@ -174,6 +124,7 @@ public abstract class Testing_Problem {
 		res[1] = a.thp.deep;
 		return res;
 	}
+	
 	public Frames getProblemFrames() {
 		return p.exv.fr;
 	}

@@ -1,10 +1,11 @@
 package tel_ran.tests.processor;
 
+import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.Testing_Problem;
 
-public class GetSimpleTask implements GetTaskGenerate {
+public class GetSimpleTask implements IGetTaskGenerate {
 	
-	Testing_Problem tp;
+	ITestingProblem tp;
 
 	
 	
@@ -25,7 +26,7 @@ public class GetSimpleTask implements GetTaskGenerate {
 
 
 	@Override
-	public Testing_Problem getTask(int lvl) {	
+	public ITestingProblem getTask(int lvl) {	
 		tp.generate(lvl);
 		return tp;
 	}
@@ -36,6 +37,14 @@ public class GetSimpleTask implements GetTaskGenerate {
 	public String getDirName() {				
 		return tp.getName();
 		
+	}
+
+
+
+	@Override
+	public String getView() {
+		return tp.getView();
+	
 	}
 
 }
