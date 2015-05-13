@@ -34,7 +34,7 @@ public class CodeView extends AbstractTaskView {
 			
 			List<String> files = ((CodeTestingProblem)task).getCodeFiles();
 			createArchive(files, newPath);
-			deleteFiles(files, path);
+			deleteFiles(files, ((CodeTestingProblem)task).getFilePath());
 					
 			answer[0] = task.getDescription();
 			answer[1] = taskText;
@@ -57,6 +57,7 @@ public class CodeView extends AbstractTaskView {
 			f = new File(str);
 			f.delete();
 		}
+		System.out.println(path);
 		f = new File(path);
 		f.delete();		
 	}
