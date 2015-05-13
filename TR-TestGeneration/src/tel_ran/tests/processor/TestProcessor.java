@@ -3,51 +3,86 @@ package tel_ran.tests.processor;
 
 import java.io.File;
 import java.util.List;
+
+import tel_ran.tests.box_generator.Abstract_Reasoning;
+import tel_ran.tests.box_generator.Attention;
+import tel_ran.tests.box_generator.MetaCategory;
+import tel_ran.tests.box_generator.Programming_Task;
+import tel_ran.tests.box_generator.Quantative_Reasoning;
 import tel_ran.tests.generator.*;
 import tel_ran.tests.repository.QuestionsRepository;
 
+/** Main class and interface for generation of test tasks.**/
 public class TestProcessor {
 	
 	//These constants are designed to simplify the choice of the task's type outside 
-	public static final int ATTENTION = 0;
-	public static final int QUANTATIVE = 1;
-	public static final int ABSTRACT = 2;	
-	public static final int PROGRAMMING = 3;
 	
+	/**Name for meta-category of attention tasks. Used in generation of tasks (method Process Start) **/
+	public static final String ATTENTION = Attention.category;	
 	
-//	Image img;
+	/**Name for meta-category of quantative tasks. Used in generation of tasks (method Process Start) **/
+	public static final String QUANTATIVE_REASONING = Quantative_Reasoning.category;	
+	
+	/**Name for meta-category of abstract (pictures) tasks. Used in generation of tasks (method Process Start) **/
+	public static final String ABSTRACT_REASONING = Abstract_Reasoning.category;
+	
+	/**Name for meta-category of code tasks. Used in generation of tasks (method Process Start) **/
+	public static final String PROGRAMMING = Programming_Task.category;
+	
+	/** Collection of generation results. **/ 
 	QuestionsRepository rep;
 	
 	
-	String dev = "----";
+//	String dev = "----";
 	
 	
-
-	public TestProcessor(/* Image img, */QuestionsRepository rep) {
-		super();
-//		this.img = img;
-		this.rep = rep;
-	}
-	
+	/** default constructor **/
 	public TestProcessor() {
-		this.rep = new QuestionsRepository();  
-//		this.img  = new Image();	      
+		this.rep = new QuestionsRepository();        
 	}
 
-	//test method
-	public List<String[]> processStart(String testName, int number, String path, int maxLvl) throws Exception {
+	
+	/** Test generation method. It runs only one given category (not meta-category).
+	 *  It receives the full name of needed class (with package) and returns List<String[]>
+	 *  with questions (their description, text, links to files, correct answers etc.).
+	 *  testName - the full name of class to test
+	 *  number - number of questions to generate 
+	 *  path - path for files saving
+	 *  maxLvl - maximum difficulty level (1 - 5). It will generate questions from level 1 to this level
+	 *  **/
+	public List<String[]> testProcessStart(String testName, int number, String path, int maxLvl) throws Exception {
 		IGetTaskGenerate tg = new GetSimpleTask(testName);
 		return processing(tg, number, path, maxLvl);		
 	}
 	
-	//main process method
-	public List<String[]> processStart(int testType, int number, String path, int maxLvl) throws Exception {
+	
+	/** Main generation method. It runs questions creation for one given meta-category.
+	 *  It receives the short name of meta-category and returns List<String[]>
+	 *  with questions (their description, text, links to files, correct answers etc.). 
+	 *  The correct short names can be received from TestProcessor-constants or from method getMetaCategory.
+	 *  
+	 *  testName - the short name of meta-category
+	 *  number - number of questions to generate 
+	 *  path - path for files to save
+	 *  maxLvl - maximum difficulty level (1 - 5). It will generate questions from level 1 to this level
+	 *  **/
+	public List<String[]> processStart(String testType, int number, String path, int maxLvl) throws Exception {
+				
 		IGetTaskGenerate tg = new GetBoxTask(testType); 
 		
 		return processing(tg, number, path, maxLvl);		
 	}
 
-	public List<String[]> processing (IGetTaskGenerate taskGen, int number, String path, int maxLvl) throws Exception {
+	// the inner basic method for questions generation
+	//
+	private List<String[]> processing (IGetTaskGenerate taskGen, int number, String path, int maxLvl) throws Exception {
+		
+		//variables of the method
+		ITestingProblem testTask = null;		
+		String[] dsc;
+		
+		
+		// creation of folder
 		String dirName = taskGen.getDirName();		
 		String newPath = path.concat(dirName);	
 		
@@ -59,108 +94,51 @@ public class TestProcessor {
 				path = newPath.concat(File.separator);
 				dirName = File.separator.concat(dirName).concat(File.separator);
 			}
-				
-		ITestingProblem testTask = null;
-			
-		
-//		ITaskView taskView = new ImageView(newPath, dirName);
-		
-		// generate class from Testring_Problem		
-		
+					
+		// generate class for type of question view. It can be presented as a picture or as a code-text.		
 		Class<?> cl = Class.forName(taskGen.getView());
 		ITaskView taskView = (ITaskView) cl.newInstance();
 		taskView.setPath(newPath, dirName);
 		
-								
-//		BufferedImage res;	
-//		HashSet<String> unique = new HashSet<String>(); 
-//		String imgName;
-		String[] dsc;
+
+		// difficulty level
+		if (maxLvl > 5)
+			maxLvl = 5;
+		if (maxLvl < 1)
+			maxLvl = 1;
+
 		int step, lvl = 1;
-		step = number/maxLvl;
-		if (number % maxLvl != 0)
-			step++;	
+		step = number/maxLvl + 1;
+		if (number%maxLvl == 0)
+			step--;	
 		int th = step;
 				
 		for (int i = 0; i < number; i++) {
 			
-			if (i > th) {
+			if (i == th) {
 				lvl++;
 				th += step;
 			}
 						
 			testTask = taskGen.getTask(lvl); 
 								
-			dsc = taskView.getTaskViews(testTask, lvl);
-			
+			dsc = taskView.getTaskViews(testTask, lvl);			
 			if (dsc == null)
 				i--;
 			else
-				rep.addQuestion(dsc);
-			
-//						res = img.getImage(testTask);			
-		
-//						time5 = System.currentTimeMillis();			
-			
-//			imgName = fileNaming(res);
-			
-//						time6 = System.currentTimeMillis();	
-			
-//			if (unique.add(imgName)) {
-			
-//				File newImage = new File(path + imgName);
-//				ImageIO.write(res, "jpeg", newImage);	
-			
-//						time8 = System.currentTimeMillis();				
-			
-			
-//				dsc = new String[6];
-//				dsc[0] = testTask.getDescription();
-//				dsc[1] = dirName.concat(imgName);
-//				dsc[2] = testTask.getName();
-//				dsc[3] = Integer.toString(lvl);			
-//				dsc[4] = testTask.getCorrectAnswerChar();			
-//				dsc[5] = Integer.toString(testTask.getNumberOfDescripton());
-//				dsc[5] = Integer.toString(testTask.getNumOfAnswers());
-						
-				
-						
+				rep.addQuestion(dsc);							
 		}
-		
-
-//						
-//		rep.displayList();
-//		rep.displayInFile(path);
 						
 		return rep.getList();
 	}
 	
+	/** List of the meta categories. Returns List<String> **/ 
+	public static List<String> getMetaCategory() {
+		return MetaCategory.getMetaCategory();
+	}
 	
 	
-//	private String fileNaming (BufferedImage img) throws NoSuchAlgorithmException {
-//		StringBuffer name = hashImage(img);
-//		name.append(".jpg");
-//		
-//		return name.toString();
-//	}
-//	
-//	private StringBuffer hashImage (BufferedImage img) throws NoSuchAlgorithmException  {
-//		
-//		int[] data = new int [img.getHeight()*img.getWidth()];		
-//		img.getData().getPixel(0, 0, data);
-//		
-//		byte[] imageBytes = ((DataBufferByte) img.getData().getDataBuffer()).getData();		
-//		MessageDigest mdInst = MessageDigest.getInstance("MD5");
-//		mdInst.update(imageBytes);
-//		byte[] code = mdInst.digest();
-//		StringBuffer hash = new StringBuffer("");
-//		
-//		for (byte b : code)
-//			hash.append(Integer.toHexString((0xFF & b)));
-//		
-//		
-//		return hash;
-//	}	
+
 
 
 }
