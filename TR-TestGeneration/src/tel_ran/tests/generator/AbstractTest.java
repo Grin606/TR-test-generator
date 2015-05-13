@@ -26,18 +26,7 @@ public abstract class AbstractTest implements ITestingProblem {
 	public AbstractTest() {
 		dbox = new DescriptionBox();		
 	}
-	
-	public static List<String> getMetaCategory() {
-		List<String> result = new ArrayList<String>();
-		
-		result.add(Abstract_Reasoning.category);
-		result.add(Attention.category);
-		result.add(Programming_Task.category);
-		result.add(Quantative_Reasoning.category);
-		
-		return result;
-	}
-			
+				
 	public String getCategory() {
 		return category;
 	}

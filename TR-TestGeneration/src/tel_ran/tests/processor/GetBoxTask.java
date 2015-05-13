@@ -2,6 +2,7 @@ package tel_ran.tests.processor;
 
 import tel_ran.tests.box_generator.Abstract_Reasoning;
 import tel_ran.tests.box_generator.Attention;
+import tel_ran.tests.box_generator.MetaCategory;
 import tel_ran.tests.box_generator.Programming_Task;
 import tel_ran.tests.box_generator.Quantative_Reasoning;
 import tel_ran.tests.box_generator.TaskBoxGenerator;
@@ -15,13 +16,11 @@ public class GetBoxTask implements IGetTaskGenerate {
 	
 	
 	
-	public GetBoxTask(int type) throws TasksException {
-		switch(type) {
-		case 0: box = new Attention(); break;
-		case 1: box = new Quantative_Reasoning(); break;
-		case 2: box = new Abstract_Reasoning(); break;	
-		case 3: box = new Programming_Task(); break;
-		}		
+	public GetBoxTask(String type) throws TasksException, InstantiationException, IllegalAccessException {
+		
+		Class cl = MetaCategory.getClass(type);
+		box = (TaskBoxGenerator) cl.newInstance();
+
 	}
 
 

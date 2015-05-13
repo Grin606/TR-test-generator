@@ -17,7 +17,6 @@ public abstract class TaskBoxGenerator {
 	protected String cat;	
 	
 	
-	
 	public ITestingProblem generate(int level) {
 				
 		int seq = ran.nextInt(numberOfTask);
