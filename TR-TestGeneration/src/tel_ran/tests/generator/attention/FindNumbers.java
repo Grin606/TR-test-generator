@@ -1,13 +1,8 @@
 package tel_ran.tests.generator.attention;
 
-import java.awt.Frame;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.TreeSet;
 
 import tel_ran.tests.dataset.Frames;
-import tel_ran.tests.generator.Testing_Problem;
 
 public class FindNumbers extends AttentionTest {
 		

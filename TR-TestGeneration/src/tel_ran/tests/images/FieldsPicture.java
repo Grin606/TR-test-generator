@@ -1,9 +1,6 @@
 package tel_ran.tests.images;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
-
 import tel_ran.tests.exceptions.TasksException;
 import tel_ran.tests.pictures.Picture;
 

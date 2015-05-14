@@ -4,9 +4,6 @@ package tel_ran.tests.generator.attention;
 import java.util.Random;
 
 
-import tel_ran.tests.exceptions.TasksException;
-import tel_ran.tests.generator.Testing_Problem;
-
 public class AttentionNumbersLoop extends AttentionTest {
 	
 	int numRows;
@@ -30,11 +27,7 @@ public class AttentionNumbersLoop extends AttentionTest {
 		StringBuffer[] problem = new StringBuffer[numRows];
 		Random rand = new Random();
 		StringBuffer str;
-		
-//		int n = 10;
-		
-//		Set<Integer> set = new HashSet<Integer>();
-		
+				
 		for (int j = 0; j < numRows; j++) {
 			
 			int[] check = new int[10];			

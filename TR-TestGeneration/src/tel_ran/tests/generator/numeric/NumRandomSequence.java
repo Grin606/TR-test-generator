@@ -3,7 +3,7 @@ package tel_ran.tests.generator.numeric;
 import tel_ran.tests.tools.*;
 public abstract class NumRandomSequence extends NumTest{
 	
-	private int NUMBER_OF_SEQUENCES = 6;
+//	private int NUMBER_OF_SEQUENCES = 6;
 	
 	protected int lengthOfSequence = 6;
 	

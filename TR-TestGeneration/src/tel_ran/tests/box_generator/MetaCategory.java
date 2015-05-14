@@ -12,7 +12,7 @@ import tel_ran.tests.exceptions.TasksException;
  * **/
 public class MetaCategory {
 	
-	static final Class[] classNames = {Abstract_Reasoning.class, Attention.class, Programming_Task.class, Quantative_Reasoning.class}; 
+	static final Class<?>[] classNames = {Abstract_Reasoning.class, Attention.class, Programming_Task.class, Quantative_Reasoning.class}; 
 	static final String[] typeNames = {Abstract_Reasoning.category, Attention.category, Programming_Task.category, Quantative_Reasoning.category};
 	
 	
@@ -23,7 +23,7 @@ public class MetaCategory {
 		return result;
 	}
 	
-	public static Class getClass(String type) throws TasksException {
+	public static Class<?> getClass(String type) throws TasksException {
 		
 		int pose = Arrays.binarySearch(typeNames, type);
 		if (pose < 0)
@@ -31,7 +31,7 @@ public class MetaCategory {
 		return classNames[pose];		
 	}
 	
-	public static Class getClass(int type) throws TasksException {
+	public static Class<?> getClass(int type) throws TasksException {
 	
 		return classNames[type];		
 	}

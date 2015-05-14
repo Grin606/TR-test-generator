@@ -2,8 +2,6 @@ package tel_ran.tests.processor;
 
 import java.util.HashSet;
 
-import tel_ran.tests.generator.ITestingProblem;
-import tel_ran.tests.generator.Testing_Problem;
 
 public abstract class AbstractTaskView implements ITaskView {
 

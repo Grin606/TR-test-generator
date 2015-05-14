@@ -56,8 +56,7 @@ public class CodeView extends AbstractTaskView {
 		for (String str : files) {
 			f = new File(str);
 			f.delete();
-		}
-		System.out.println(path);
+		}		
 		f = new File(path);
 		f.delete();		
 	}

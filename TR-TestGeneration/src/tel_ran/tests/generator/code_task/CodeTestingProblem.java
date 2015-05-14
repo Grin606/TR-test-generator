@@ -1,12 +1,10 @@
 package tel_ran.tests.generator.code_task;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
 
 import tel_ran.tests.generator.AbstractTest;
-import tel_ran.tests.generator.Testing_Problem;
 import tel_ran.tests.processor.ITaskView;
 
 public abstract class CodeTestingProblem extends AbstractTest {
@@ -23,7 +21,7 @@ public abstract class CodeTestingProblem extends AbstractTest {
 		
 	public CodeTestingProblem() {
 		super();
-		numOfAnswers = 1;
+		numOfAnswers = 0;
 		typeOfView = ITaskView.CODE;
 	}
 

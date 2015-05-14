@@ -1,6 +1,5 @@
 package tel_ran.tests.sequences;
 
-import tel_ran.tests.generator.*;
 import tel_ran.tests.generator.numeric.NumRandomSequence;
 import tel_ran.tests.tools.RandFunc;
 

@@ -1,14 +1,5 @@
 package tel_ran.tests.generator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import tel_ran.tests.box_generator.Abstract_Reasoning;
-import tel_ran.tests.box_generator.Attention;
-import tel_ran.tests.box_generator.Programming_Task;
-import tel_ran.tests.box_generator.Quantative_Reasoning;
-
 public abstract class AbstractTest implements ITestingProblem {
 	
 	protected String name;

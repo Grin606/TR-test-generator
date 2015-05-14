@@ -5,8 +5,6 @@ import java.util.*;
 
 import tel_ran.tests.generator.code_task.CodeTestingProblem;
 import tel_ran.tests.generator.code_task.calculator.methods.Actions;
-import tel_ran.tests.repository.QuestionsRepository;
-
 
 
 public class StringCalculatorCodingTest extends CodeTestingProblem {
@@ -63,7 +61,7 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 	
 	private String generateReadme(String filePath) throws FileNotFoundException {
 		
-		String path = filePath.concat(File.separator).concat(this.readmeFileName);
+		String path = filePath.concat(File.separator).concat(CodeTestingProblem.readmeFileName);
 		
 		PrintWriter out = new PrintWriter(path);		
 		out.println("Interface: " + interfaceName + ext);

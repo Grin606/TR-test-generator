@@ -1,6 +1,5 @@
 package tel_ran.tests.images;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 public interface Fields extends Comparable<Fields> {

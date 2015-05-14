@@ -1,9 +1,7 @@
 package tel_ran.tests.box_generator;
 
 import tel_ran.tests.exceptions.TasksException;
-import tel_ran.tests.generator.AbstractTest;
 import tel_ran.tests.generator.ITestingProblem;
-import tel_ran.tests.generator.Testing_Problem;
 import tel_ran.tests.generator.numeric.NumComputations;
 import tel_ran.tests.generator.numeric.NumEstimations;
 import tel_ran.tests.generator.numeric.NumTableTest;

@@ -1,7 +1,6 @@
 package tel_ran.tests.images;
 
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.Graphics2D;
 
 import tel_ran.tests.dataset.Frames;

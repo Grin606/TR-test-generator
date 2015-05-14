@@ -1,7 +1,5 @@
 package tel_ran.tests.generator;
 
-import java.io.FileNotFoundException;
-
 public interface ITestingProblem {
 	
 		

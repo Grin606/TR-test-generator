@@ -1,11 +1,8 @@
 package tel_ran.tests.box_generator;
 
-import java.io.FileNotFoundException;
 import java.util.Random;
-
 import tel_ran.tests.generator.ITestingProblem;
-import tel_ran.tests.generator.Testing_Problem;
-import tel_ran.tests.tools.RandFunc;
+
 
 public abstract class TaskBoxGenerator {
 	

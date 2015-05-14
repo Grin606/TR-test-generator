@@ -4,14 +4,10 @@ import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import tel_ran.tests.dataset.DataSet;
-import tel_ran.tests.dataset.Frames;
 import tel_ran.tests.generator.Testing_Problem;
-import tel_ran.tests.pictures.Picture;
 
 
 /**
