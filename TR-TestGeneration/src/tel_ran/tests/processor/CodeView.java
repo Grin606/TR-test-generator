@@ -29,8 +29,12 @@ public class CodeView extends AbstractTaskView {
 		
 //		if (unique.add(taskText)) {
 			
-			String newPath = path.concat(File.separator).concat(getHashName(taskText)).concat(Long.toString(System.currentTimeMillis())).
-					concat(".zip");					
+		
+			String fileName = getHashName(taskText).concat(Long.toString(System.currentTimeMillis()));
+			String newPath = path.concat(File.separator).concat(fileName);
+			String newDir = dirName.concat(File.separator).concat(fileName);
+
+			
 			
 			List<String> files = ((CodeTestingProblem)task).getCodeFiles();
 			createArchive(files, newPath);
@@ -42,7 +46,7 @@ public class CodeView extends AbstractTaskView {
 			answer[3] = Integer.toString(lvl);			
 			answer[4] = task.getCorrectAnswerChar();
 			answer[5] = Integer.toString(task.getNumOfAnswers());
-			answer[6] = newPath;
+			answer[6] = newDir;
 			return answer;
 //		} else {
 //			return null;

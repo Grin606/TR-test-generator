@@ -38,13 +38,17 @@ public class ImageView extends AbstractTaskView {
 		res = img.getImage((Testing_Problem)task);
 		imgName = fileNaming(res);
 		
+		String newDir = dirName.concat(File.separator).concat(imgName);
+		String newPath = path.concat(File.separator).concat(imgName);	
+		
+		
 		if (unique.add(imgName)) {
 			
-			File newImage = new File(path + imgName);
+			File newImage = new File(newPath);
 			ImageIO.write(res, "jpeg", newImage);			
 		
 			answer[0] = task.getDescription();
-			answer[1] = dirName.concat(imgName);
+			answer[1] = newDir;
 			answer[2] = task.getName();
 			answer[3] = Integer.toString(lvl);			
 			answer[4] = task.getCorrectAnswerChar();

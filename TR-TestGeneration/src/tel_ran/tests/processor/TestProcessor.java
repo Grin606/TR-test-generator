@@ -10,6 +10,7 @@ import tel_ran.tests.box_generator.MetaCategory;
 import tel_ran.tests.box_generator.Programming_Task;
 import tel_ran.tests.box_generator.Quantative_Reasoning;
 import tel_ran.tests.generator.*;
+import tel_ran.tests.generator.code_task.CodeTestingProblem;
 import tel_ran.tests.repository.QuestionsRepository;
 
 /** Main class and interface for generation of test tasks.**/
@@ -28,6 +29,8 @@ public class TestProcessor {
 	
 	/**Name for meta-category of code tasks. Used in generation of tasks (method Process Start) **/
 	public static final String PROGRAMMING = Programming_Task.category;
+	
+	public static final String README_FILE = CodeTestingProblem.readmeFileName;
 	
 	/** Collection of generation results. **/ 
 	QuestionsRepository rep;
@@ -88,11 +91,11 @@ public class TestProcessor {
 		
 		if(!new File(newPath).exists() && !new File(newPath).mkdir()) {
 				System.out.println("Creating directory " + newPath + " failed");
-				dirName = File.separator;
+				dirName = "";
 		}
 			else {
 				path = newPath.concat(File.separator);
-				dirName = File.separator.concat(dirName).concat(File.separator);
+				dirName = File.separator.concat(dirName);
 			}
 					
 		// generate class for type of question view. It can be presented as a picture or as a code-text.		

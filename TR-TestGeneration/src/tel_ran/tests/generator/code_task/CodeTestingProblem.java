@@ -14,7 +14,7 @@ public abstract class CodeTestingProblem extends AbstractTest {
 	protected String filePath;
 	protected List<String> codeFiles;
 	
-	protected static final String readmeFileName = "Readme.txt"; 
+	public static final String readmeFileName = "Readme.txt"; 
 	protected static final String ext = ".java";
 	protected static final String pathGenerate = "Temporary";
 
