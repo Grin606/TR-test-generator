@@ -34,6 +34,7 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 		super();
 		name = "Calculator";  /* -- new line -- */
 		this.numberOfDescripton = 10;   /* -- new line -- */
+		this.testLanguage = "java";
 	}
 
 

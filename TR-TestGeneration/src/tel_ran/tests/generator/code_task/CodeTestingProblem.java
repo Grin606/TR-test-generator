@@ -11,6 +11,7 @@ public abstract class CodeTestingProblem extends AbstractTest {
 	
 	public String questionText; 
 	public String stubText;
+	public String testLanguage;
 	protected String filePath;
 	protected List<String> codeFiles;
 	
@@ -27,6 +28,12 @@ public abstract class CodeTestingProblem extends AbstractTest {
 
 	public String getQuestionText() {
 		return questionText;
+	}
+	
+	
+
+	public String getTestLanguage() {
+		return testLanguage;
 	}
 
 	public String getStubText() {

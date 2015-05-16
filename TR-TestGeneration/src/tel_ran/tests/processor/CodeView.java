@@ -47,7 +47,7 @@ public class CodeView extends AbstractTaskView {
 			answer[4] = task.getCorrectAnswerChar();
 			answer[5] = Integer.toString(task.getNumOfAnswers());
 			answer[6] = newDir;
-			answer[7] = "java";
+			answer[7] = ((CodeTestingProblem)task).getTestLanguage();
 			answer[8] = ((CodeTestingProblem)task).getStubText();
 			return answer;
 //		} else {
