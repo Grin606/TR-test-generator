@@ -48,11 +48,12 @@ public class ImageView extends AbstractTaskView {
 			ImageIO.write(res, "jpeg", newImage);			
 		
 			answer[0] = task.getDescription();
-			answer[1] = newDir;
+			answer[1] = null;
 			answer[2] = task.getName();
 			answer[3] = Integer.toString(lvl);			
 			answer[4] = task.getCorrectAnswerChar();
 			answer[5] = Integer.toString(task.getNumOfAnswers());
+			answer[6] = newDir;
 			return answer;
 		} else {
 			return null;
