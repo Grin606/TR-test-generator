@@ -7,7 +7,7 @@ import tel_ran.tests.generator.pictures.*;
 
 public class Abstract_Reasoning extends TaskBoxGenerator {
 	
-	public static final String category = "Abstract Reasoning";
+	public static final String category = "Abstract_Reasoning";
 	
 	public Abstract_Reasoning() throws TasksException {		
 		super();

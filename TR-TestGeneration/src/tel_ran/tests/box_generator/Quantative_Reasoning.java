@@ -16,7 +16,7 @@ import tel_ran.tests.sequences.PeriodicalSequense;
 
 public class Quantative_Reasoning extends TaskBoxGenerator {
 	
-	public static final String category = "Quantative Reasoning";
+	public static final String category = "Quantative_Reasoning";
 		
 	public Quantative_Reasoning() throws TasksException {
 		super();

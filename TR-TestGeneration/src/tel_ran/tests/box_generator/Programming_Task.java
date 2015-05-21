@@ -6,7 +6,7 @@ import tel_ran.tests.generator.code_task.calculator.StringCalculatorCodingTest;
 
 public class Programming_Task extends TaskBoxGenerator {
 	
-	public static final String category = "Programming Task";
+	public static final String category = "Programming_Task";
 	
 	public Programming_Task() throws TasksException {		
 		super();

@@ -6,7 +6,7 @@ import tel_ran.tests.generator.attention.*;
 
 public class Attention extends TaskBoxGenerator {
 
-	public static final String category = "Attention Test";	
+	public static final String category = "Attention_Test";	
 	
 	public Attention() throws TasksException {
 		super();
