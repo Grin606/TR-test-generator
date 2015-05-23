@@ -54,6 +54,8 @@ public class ImageView extends AbstractTaskView {
 			answer[4] = task.getCorrectAnswerChar();
 			answer[5] = Integer.toString(task.getNumOfAnswers());
 			answer[6] = newDir;
+			answer[7] = null;
+			answer[8] = null;
 			return answer;
 		} else {
 			return null;
