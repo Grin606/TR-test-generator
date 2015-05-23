@@ -2,6 +2,7 @@ package tel_ran.tests.processor;
 
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 import tel_ran.tests.box_generator.Abstract_Reasoning;
@@ -82,7 +83,7 @@ public class TestProcessor {
 		
 		//variables of the method
 		ITestingProblem testTask = null;		
-		String[] dsc;
+		
 		
 		
 		// creation of folder
@@ -117,6 +118,7 @@ public class TestProcessor {
 		int th = step;
 				
 		for (int i = 0; i < number; i++) {
+			String[] dsc;
 			
 			if (i == th) {
 				lvl++;
@@ -125,11 +127,15 @@ public class TestProcessor {
 						
 			testTask = taskGen.getTask(lvl); 
 								
-			dsc = taskView.getTaskViews(testTask, lvl);			
-			if (dsc == null)
+			dsc = taskView.getTaskViews(testTask, lvl);		
+						
+			if (dsc == null) {
 				i--;
-			else
-				rep.addQuestion(dsc);							
+			} else {
+				String[] result = new String[dsc.length];
+				System.arraycopy(dsc, 0, result, 0, dsc.length-1);				
+				rep.addQuestion(result);
+			}
 		}
 						
 		return rep.getList();

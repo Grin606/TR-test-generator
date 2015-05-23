@@ -3,8 +3,10 @@ package tel_ran.tests.processor;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
+import java.lang.reflect.Array;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
@@ -45,7 +47,8 @@ public class ImageView extends AbstractTaskView {
 		if (unique.add(imgName)) {
 			
 			File newImage = new File(newPath);
-			ImageIO.write(res, "jpeg", newImage);			
+			ImageIO.write(res, "jpeg", newImage);
+			
 		
 			answer[0] = task.getDescription();
 			answer[1] = null;
@@ -56,6 +59,8 @@ public class ImageView extends AbstractTaskView {
 			answer[6] = newDir;
 			answer[7] = null;
 			answer[8] = null;
+			
+			
 			return answer;
 		} else {
 			return null;
