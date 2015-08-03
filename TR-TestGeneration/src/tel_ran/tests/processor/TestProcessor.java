@@ -170,6 +170,22 @@ public class TestProcessor {
 		return result;
 	}
 	
+	/**
+	 * List of the inner categories (1 level = program.lang) by MetaCategories
+	 * @param metaCategory
+	 * @return
+	 */
+	public static List<String> getCategoriesList(String metaCategory) {
+		
+		if(metaCategory.equals(TestProcessor.MC_PROGRAMMING) || metaCategory.equals(IConstants.CATEGORY_DIR_PATHS[IConstants.PROGRAMMING_TASKS])) {
+			return getProgrammingLanguagesList();			
+		} else {
+			return null;
+		}
+
+	}
+	
+		
 	
 
 

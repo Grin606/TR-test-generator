@@ -1,5 +1,7 @@
 package tel_ran.tests.box_generator;
 
+import java.util.List;
+
 import tel_ran.tests.exceptions.TasksException;
 import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.pictures.*;
@@ -36,5 +38,7 @@ public class Abstract_Reasoning extends TaskBoxGenerator {
 	public int getCategoryIndex() {		
 		return IConstants.ABSTRACT_REASONING;
 	}
+
+
 
 }

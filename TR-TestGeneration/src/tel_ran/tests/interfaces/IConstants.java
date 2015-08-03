@@ -22,6 +22,4 @@ public interface IConstants {
 	public static final int ATTENTION = 3;
 	
 
-	
-
 }

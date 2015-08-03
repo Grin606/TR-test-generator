@@ -1,5 +1,6 @@
 package tel_ran.tests.box_generator;
 
+import java.util.List;
 import java.util.Random;
 
 import tel_ran.tests.generator.ITestingProblem;
