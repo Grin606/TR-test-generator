@@ -15,6 +15,11 @@ import tel_ran.tests.repository.QuestionsRepository;
 public class TestProcessor {
 	
 	
+	public static String MC_PROGRAMMING = IConstants.CATEGORIES[IConstants.PROGRAMMING_TASKS];
+	public static String MC_ABSTRACT = IConstants.CATEGORIES[IConstants.ABSTRACT_REASONING];
+	public static String MC_ATTENTION = IConstants.CATEGORIES[IConstants.ATTENTION];
+	public static String MC_QUANTATIVE = IConstants.CATEGORIES[IConstants.QUANTATIVE_REASOINING];
+	
 	/** Collection of generation results. **/ 
 	QuestionsRepository rep;
 	

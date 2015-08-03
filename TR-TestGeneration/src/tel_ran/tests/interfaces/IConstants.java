@@ -13,12 +13,15 @@ public interface IConstants {
 	
 	public static final String[] CATEGORY_DIR_PATHS = {"Programming_Task", "Abstract_Reasoning", "Quantative_Reasoning", "Attention"};
 	
-	static final Class<?>[] CATEGORY_CLASSES = {Programming_Task.class, Quantative_Reasoning.class, Abstract_Reasoning.class, Attention.class}; 
+	static final Class<?>[] CATEGORY_CLASSES = {Programming_Task.class,  Quantative_Reasoning.class, Abstract_Reasoning.class, Attention.class}; 
 	
 	
 	public static final int PROGRAMMING_TASKS = 0;
 	public static final int ABSTRACT_REASONING = 1;
 	public static final int QUANTATIVE_REASOINING = 2;
 	public static final int ATTENTION = 3;
+	
+
+	
 
 }
