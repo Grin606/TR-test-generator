@@ -5,6 +5,7 @@ import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.numeric.NumComputations;
 import tel_ran.tests.generator.numeric.NumEstimations;
 import tel_ran.tests.generator.numeric.NumTableTest;
+import tel_ran.tests.interfaces.IConstants;
 import tel_ran.tests.sequences.ArithmeticSequence;
 import tel_ran.tests.sequences.ArithmeticWIncSequence;
 import tel_ran.tests.sequences.BakerSequence;
@@ -16,13 +17,12 @@ import tel_ran.tests.sequences.PeriodicalSequense;
 
 public class Quantative_Reasoning extends TaskBoxGenerator {
 	
-	public static final String category = "Quantative_Reasoning";
 		
 	public Quantative_Reasoning() throws TasksException {
 		super();
 		this.numberOfTask = 12;
 		tasks = new ITestingProblem[numberOfTask];		
-		cat = category;
+		dirName = IConstants.CATEGORY_DIR_PATHS[IConstants.QUANTATIVE_REASOINING];
 		
 		int index = 0;
 		
@@ -48,6 +48,11 @@ public class Quantative_Reasoning extends TaskBoxGenerator {
 		
 	
 		
+	}
+
+	@Override
+	public int getCategoryIndex() {
+		return IConstants.QUANTATIVE_REASOINING;
 	}		
 
 }

@@ -3,16 +3,16 @@ package tel_ran.tests.box_generator;
 import tel_ran.tests.exceptions.TasksException;
 import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.attention.*;
+import tel_ran.tests.interfaces.IConstants;
 
 public class Attention extends TaskBoxGenerator {
 
-	public static final String category = "Attention_Test";	
 	
 	public Attention() throws TasksException {
 		super();
 		this.numberOfTask = 2;
 		tasks = new ITestingProblem[numberOfTask];
-		cat = category;
+		dirName = IConstants.CATEGORY_DIR_PATHS[IConstants.ATTENTION];
 		
 		int index = 0;
 		
@@ -27,7 +27,11 @@ public class Attention extends TaskBoxGenerator {
 			throw new TasksException(pr);
 		}
 
+	}
 
+	@Override
+	public int getCategoryIndex() {		
+		return IConstants.ATTENTION;
 	}
 
 }

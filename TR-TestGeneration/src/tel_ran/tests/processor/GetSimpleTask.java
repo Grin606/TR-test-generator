@@ -2,6 +2,7 @@ package tel_ran.tests.processor;
 
 import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.Testing_Problem;
+import tel_ran.tests.interfaces.IGetTaskGenerate;
 
 public class GetSimpleTask implements IGetTaskGenerate {
 	

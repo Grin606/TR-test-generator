@@ -1,8 +1,8 @@
 package tel_ran.tests.box_generator;
 
 import java.util.Random;
-import tel_ran.tests.generator.ITestingProblem;
 
+import tel_ran.tests.generator.ITestingProblem;
 
 public abstract class TaskBoxGenerator {
 	
@@ -11,7 +11,7 @@ public abstract class TaskBoxGenerator {
 	protected int numberOfTask;
 	private Random ran = new Random();	
 	String getView;
-	protected String cat;	
+	protected String dirName;	
 	
 	
 	public ITestingProblem generate(int level) {
@@ -26,14 +26,15 @@ public abstract class TaskBoxGenerator {
 		return this.numberOfTask;
 	}
 
-	public String getCategory() {
-		return this.cat;
+	public String getDirName() {
+		return dirName;
 	}
 	
 	public String getView() {
 		return tasks[0].getView();
 	}
 	
+	public abstract int getCategoryIndex();
 	
 	
 }

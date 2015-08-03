@@ -3,17 +3,16 @@ package tel_ran.tests.box_generator;
 import tel_ran.tests.exceptions.TasksException;
 import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.pictures.*;
+import tel_ran.tests.interfaces.IConstants;
 
 
 public class Abstract_Reasoning extends TaskBoxGenerator {
-	
-	public static final String category = "Abstract_Reasoning";
 	
 	public Abstract_Reasoning() throws TasksException {		
 		super();
 		this.numberOfTask = 4;
 		tasks = new ITestingProblem[numberOfTask];
-		cat = category;
+		dirName = IConstants.CATEGORY_DIR_PATHS[IConstants.ABSTRACT_REASONING];
 
 		
 		int index = 0;
@@ -31,6 +30,11 @@ public class Abstract_Reasoning extends TaskBoxGenerator {
 		}
 
 
+	}
+
+	@Override
+	public int getCategoryIndex() {		
+		return IConstants.ABSTRACT_REASONING;
 	}
 
 }

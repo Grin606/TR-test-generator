@@ -2,36 +2,18 @@ package tel_ran.tests.processor;
 
 
 import java.io.File;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-import tel_ran.tests.box_generator.Abstract_Reasoning;
-import tel_ran.tests.box_generator.Attention;
-import tel_ran.tests.box_generator.MetaCategory;
-import tel_ran.tests.box_generator.Programming_Task;
-import tel_ran.tests.box_generator.Quantative_Reasoning;
 import tel_ran.tests.generator.*;
-import tel_ran.tests.generator.code_task.CodeTestingProblem;
+import tel_ran.tests.interfaces.IConstants;
+import tel_ran.tests.interfaces.IGetTaskGenerate;
+import tel_ran.tests.interfaces.ITaskView;
 import tel_ran.tests.repository.QuestionsRepository;
 
 /** Main class and interface for generation of test tasks.**/
 public class TestProcessor {
 	
-	//These constants are designed to simplify the choice of the task's type outside 
-	
-	/**Name for meta-category of attention tasks. Used in generation of tasks (method Process Start) **/
-	public static final String ATTENTION = Attention.category;	
-	
-	/**Name for meta-category of quantative tasks. Used in generation of tasks (method Process Start) **/
-	public static final String QUANTATIVE_REASONING = Quantative_Reasoning.category;	
-	
-	/**Name for meta-category of abstract (pictures) tasks. Used in generation of tasks (method Process Start) **/
-	public static final String ABSTRACT_REASONING = Abstract_Reasoning.category;
-	
-	/**Name for meta-category of code tasks. Used in generation of tasks (method Process Start) **/
-	public static final String PROGRAMMING = Programming_Task.category;
-	
-	public static final String README_FILE = CodeTestingProblem.readmeFileName;
 	
 	/** Collection of generation results. **/ 
 	QuestionsRepository rep;
@@ -77,6 +59,31 @@ public class TestProcessor {
 		return processing(tg, number, path, maxLvl);		
 	}
 
+	
+	/** 
+	 *  Test generation method for Programming Tasks.
+	 *  It receives 2 category: MetaCategry (must be Programming Task) and Category = ProgrammingLanguage
+	 *  
+	 *  It runs questions creation for one given meta-category.
+	 *  It receives the short name of meta-category and returns List<String[]>
+	 *  with questions (their description, text, links to files, correct answers etc.). 
+	 *  The correct short names can be received from TestProcessor-constants or from method getMetaCategory.
+	 *  
+	 *  testName - the short name of meta-category
+	 *  number - number of questions to generate 
+	 *  path - path for files to save
+	 *  maxLvl - maximum difficulty level (1 - 5). It will generate questions from level 1 to this level
+	 *  **/
+	public List<String[]> processStart(String testType, String progLanguage, int number, String path, int maxLvl) throws Exception {
+		
+		if(!testType.equals(IConstants.CATEGORIES[IConstants.PROGRAMMING_TASKS]))
+			return null;
+		
+		IGetTaskGenerate tg = new GetBoxTask(testType, progLanguage); 
+		
+		return processing(tg, number, path, maxLvl);		
+	}
+	
 	// the inner basic method for questions generation
 	//
 	private List<String[]> processing (IGetTaskGenerate taskGen, int number, String path, int maxLvl) throws Exception {
@@ -143,7 +150,19 @@ public class TestProcessor {
 	
 	/** List of the meta categories. Returns List<String> **/ 
 	public static List<String> getMetaCategory() {
-		return MetaCategory.getMetaCategory();
+		List<String> result = new ArrayList<String>();
+		for (String str : IConstants.CATEGORIES)
+			result.add(str);
+		return result;
+	}
+	
+	
+	/** List of the languages for Programming Task. Returns List<String> **/ 
+	public static List<String> getProgrammingLanguagesList() {
+		List<String> result = new ArrayList<String>();
+		for (String str : IConstants.PROGRAM_LANGUAGES)
+			result.add(str);
+		return result;
 	}
 	
 	

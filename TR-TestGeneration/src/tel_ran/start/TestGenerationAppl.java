@@ -1,11 +1,13 @@
 package tel_ran.start;
+
 import java.util.*;
 
+import tel_ran.tests.interfaces.IConstants;
 import tel_ran.tests.processor.TestProcessor;
 
 public class TestGenerationAppl {
 	
-	public static final String TYPE = TestProcessor.ABSTRACT_REASONING;
+	public static final String TYPE = IConstants.CATEGORIES[IConstants.PROGRAMMING_TASKS];
 	public static final int NUMB = 10;
 	public static final String PTH = "d:\\res\\";
 	public static final int DIF_LEVEL = 5;

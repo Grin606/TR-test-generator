@@ -1,8 +1,8 @@
 package tel_ran.tests.generator;
 
 import tel_ran.tests.dataset.*;
+import tel_ran.tests.interfaces.ITaskView;
 import tel_ran.tests.pictures.Picture;
-import tel_ran.tests.processor.ITaskView;
 
 public abstract class Testing_Problem extends AbstractTest {
 	

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import tel_ran.tests.generator.AbstractTest;
-import tel_ran.tests.processor.ITaskView;
+import tel_ran.tests.interfaces.ITaskView;
 
 public abstract class CodeTestingProblem extends AbstractTest {
 	
