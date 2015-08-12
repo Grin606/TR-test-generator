@@ -185,6 +185,20 @@ public class TestProcessor {
 
 	}
 	
+	
+	/**
+	 * Return the unique name of metaCategory for old and new versions of Test-Generator Project
+	 * This name won't be changed and translated. It is used for directory creation when they saved 
+	 * pictures or other files for test questions.
+	 * It can be used also for beans.  
+	 * @param metaCategory = title-name (public) of metaCategory.
+	 * @return
+	 */
+	public static String getMetaCategoryKeyByPublicName(String metaCategory) {
+		int index = GetBoxTask.getClassIndex(metaCategory);
+		return IConstants.CATEGORY_DIR_PATHS[index];		
+		
+	}
 		
 	
 

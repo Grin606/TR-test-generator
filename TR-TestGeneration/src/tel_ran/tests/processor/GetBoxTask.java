@@ -51,7 +51,7 @@ public class GetBoxTask implements IGetTaskGenerate {
 		return result;
 	}
 	
-	private int getClassIndex(String type) {
+	public static int getClassIndex(String type) {
 		int result = -1;
 		boolean flagAction = false;
 		int size = IConstants.CATEGORIES.length;
