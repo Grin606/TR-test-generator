@@ -15,7 +15,7 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 	
 	private static final String testName = "SCalculator_Test";
 	private static final String interfaceName = "SCalculator";
-	
+	private static final String className = "StringCalculator";
 	
 	
 	
@@ -27,18 +27,13 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 //	String interfaceFilePath; 
 		
 	Random gen = new Random();
-	
-	
-	
+		
 	public StringCalculatorCodingTest() {
 		super();
 		name = "Calculator";  /* -- new line -- */
 		this.numberOfDescripton = 10;   /* -- new line -- */
 		this.testLanguage = "java";
 	}
-
-
-	
 		
 	public void generateTest(int difLevel) {
 		
@@ -120,7 +115,7 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 		
 		StringBuffer res = new StringBuffer("");
 		
-		res.append("Write the public class StringCalculator using the ").append(Integer.toString(base)).
+		res.append("Write the public class ").append(className).append(" using the ").append(Integer.toString(base)).
 				append("-based positional numerical system with the digits from DIGITS,").append(
 						"\nworking with integers and implementing\n");
 		outInterface(res);
@@ -140,7 +135,9 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 		
 		StringBuffer res = new StringBuffer("");
 		
-		res.append("public class StringCalculator implements SCalculator {\n").
+		
+		res.append(packageJavaForGradleStructure).append("\n\n").
+			append("public class ").append(className).append(" implements SCalculator {\n").
 			append("\n\t//base ").append(base).
 			append("\n\t//digits ").append(methods[0].getAlphabet()).append("\n\n");
 		
@@ -165,19 +162,30 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 		
 		PrintWriter out = new PrintWriter(path);
 				
-		out.println("import static org.junit.Assert.*;\n"
-				+ "import org.junit.Test;\n\n"
-				+ "public class " + testName + " {"
-				+ "\n\n\t@Test(timeout = " +Integer.toString(td.TIME_OUT)+")"
-				+ "\n\tpublic void test(){\n"
-				+ "\n\t\t//base "+ Integer.toString(base) 
-				+ "\n\n\t\tSCalculator sc = new StringCalculator();"); 
-		
+		out.println(packageTestForGradleStructure);
+		out.println("");
+		out.println("import static org.junit.Assert.*;");
+		out.println("import org.junit.Test;");
+		out.println(baseForImportInTestForGradleStructure + className + ";");
+		out.println(baseForImportInTestForGradleStructure + interfaceName + ";");
+		out.println("");
+		out.println("public class " + testName + "{");
+		out.println("");
+		out.println("\t@Test(timeout = " +Integer.toString(td.TIME_OUT)+")");
+		out.println("");
+		out.println("\tpublic void test(){");
+		out.println("");
+		out.println("\t\t//base "+ Integer.toString(base));
+		out.println("");
+		out.println("\t\tSCalculator sc = new " + className + "();");
+		out.println("");
+				
 		for (int i=0; i<methods.length; i++) 
 			out.println(methods[i].toJUnit());
 		
-		out.println("\n}");
-		out.println("\n}");
+		out.println("");
+		out.println("}");
+		out.println("}");
 		out.close();
 		
 		return path;
@@ -212,6 +220,7 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 	
 	private void outInterface (StringBuffer out) {
 		
+		out.append(packageJavaForGradleStructure).append("\n");
 		out.append("\npublic interface " + interfaceName + " {");
 		out.append("\n\n\tpublic static final String WRONG = \"Error\";");
 		out.append("\n\tpublic static final String DIGITS = \"").append(methods[0].getAlphabet()).append("\";\n\n");

@@ -145,7 +145,7 @@ public class TestProcessor {
 				i--;
 			} else {
 				String[] result = new String[dsc.length];
-				System.arraycopy(dsc, 0, result, 0, dsc.length-1);				
+				System.arraycopy(dsc, 0, result, 0, dsc.length);				
 				rep.addQuestion(result);
 			}
 		}

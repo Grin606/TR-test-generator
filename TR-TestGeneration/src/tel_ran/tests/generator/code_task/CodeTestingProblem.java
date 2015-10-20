@@ -18,6 +18,9 @@ public abstract class CodeTestingProblem extends AbstractTest {
 	public static final String readmeFileName = "Readme.txt"; 
 	protected static final String ext = ".java";
 	protected static final String pathGenerate = "Temporary";
+	protected static final String packageJavaForGradleStructure = "package main.java;";
+	protected static final String packageTestForGradleStructure = "package test.java;";
+	protected static final String baseForImportInTestForGradleStructure = "import main.java.";
 
 		
 	public CodeTestingProblem() {
