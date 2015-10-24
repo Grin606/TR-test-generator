@@ -9,7 +9,7 @@ public class PeriodicalSequense extends NumRandomSequence{
 	
 	public PeriodicalSequense() {
 		super();
-		name = "Arithmetic Sequence";
+		category2Name = "Arithmetic Sequence";
 		
 	}
 	public void generate(int difficultyLevel) {

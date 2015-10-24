@@ -12,7 +12,7 @@ public class ArithmeticSequence extends NumRandomSequence{
 	
 	public ArithmeticSequence() {
 		super();
-		name = "Arithmetic Sequence";
+		category2Name = "Arithmetic Sequence";
 		
 	}
 	public void generate(int difficultyLevel) {

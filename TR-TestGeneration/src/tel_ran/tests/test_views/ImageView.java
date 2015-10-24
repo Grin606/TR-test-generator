@@ -1,4 +1,4 @@
-package tel_ran.tests.processor;
+package tel_ran.tests.test_views;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -8,9 +8,9 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.imageio.ImageIO;
 
-import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.Testing_Problem;
 import tel_ran.tests.images.Image;
+import tel_ran.tests.interfaces.ITestingProblem;
 
 public class ImageView extends AbstractTaskView {
 		
@@ -50,7 +50,7 @@ public class ImageView extends AbstractTaskView {
 		
 			answer[0] = task.getDescription();
 			answer[1] = null;
-			answer[2] = task.getName();
+			answer[2] = task.getCategory2Name();
 			answer[3] = Integer.toString(lvl);			
 			answer[4] = task.getCorrectAnswerChar();
 			answer[5] = Integer.toString(task.getNumOfAnswers());

@@ -14,7 +14,7 @@ import tel_ran.tests.tools.RandFunc;
 		public Picture_Roman_Test() {
 			
 			super();			
-			name = "Table Roman test";
+			category2Name = "Table Roman test";
 			problemLength = PROBLEM_LENGHT;
 		}
 

@@ -17,7 +17,7 @@ public class NumEstimations extends  NumTest {
 //		weight = NUMBER_OF_TYPES;
 		numberOfDescripton = 2;
 		category = "Computations";
-		name = "NumEstimations";
+		category2Name = "NumEstimations";
 	}
 	
 	@Override

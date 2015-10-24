@@ -5,6 +5,7 @@ import java.util.*;
 
 import tel_ran.tests.generator.code_task.CodeTestingProblem;
 import tel_ran.tests.generator.code_task.calculator.methods.Actions;
+import tel_ran.tests.interfaces.ITaskView;
 
 
 public class StringCalculatorCodingTest extends CodeTestingProblem {
@@ -16,29 +17,28 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 	private static final String testName = "SCalculator_Test";
 	private static final String interfaceName = "SCalculator";
 	private static final String className = "StringCalculator";
-	
-	
-	
-//	String descriptionFilePath; --- we don't generate description. we write it into DescriptionBox
-//								--- and specify its number
-//	String questionFilePath; --- we don't need a file. We use here the variable String questionText form super-class
-//	String stubFilePath; ---  we don't need a file. We use here the variable String stubText form super-class
-//	String junitFilePath; --- all files has the same start path - temporary folder (its name specified in super-class
-//	String interfaceFilePath; 
 		
+	public static final String readmeFileName = "Readme.txt"; 
+	protected static final String ext = ".java";
+	protected static final String pathGenerate = "Temporary";
+	protected static final String packageJavaForGradleStructure = "package main.java;";
+	protected static final String packageTestForGradleStructure = "package test.java;";
+	protected static final String baseForImportInTestForGradleStructure = "import main.java.";
+			
 	Random gen = new Random();
 		
 	public StringCalculatorCodingTest() {
 		super();
-		name = "Calculator";  /* -- new line -- */
+		category2Name = "Calculator";  /* -- new line -- */
 		this.numberOfDescripton = 10;   /* -- new line -- */
 		this.testLanguage = "java";
 	}
 		
 	public void generateTest(int difLevel) {
+		createDir(); /* ---  create temporary folder for files  --- */
 		
 		getTestData(difLevel);
-//		generateDescription(descriptionFilePath);
+
 		generateQuestion();  /* changed */
 		generateStub();      /* changed */
 		
@@ -54,10 +54,21 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 		
 	}	
 	
+	protected void createDir() {
+		long name = System.currentTimeMillis();
+		filePath = pathGenerate.concat(File.separator).concat(Long.toString(name));
+		File dir = new File(filePath);
+		if(dir.exists())
+			createDir();
+		else {
+			dir.mkdirs();			
+		}
+	}
+	
 	
 	private String generateReadme(String filePath) throws FileNotFoundException {
 		
-		String path = filePath.concat(File.separator).concat(CodeTestingProblem.readmeFileName);
+		String path = filePath.concat(File.separator).concat(readmeFileName);
 		
 		PrintWriter out = new PrintWriter(path);		
 		out.println("Interface: " + interfaceName + ext);
@@ -267,6 +278,7 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 		
 		return res;
 	}
+
 
 //	public void setDescriptionFilePath(String descriptionFilePath) {
 //		this.descriptionFilePath = descriptionFilePath;

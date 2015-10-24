@@ -3,9 +3,9 @@ package tel_ran.tests.box_generator;
 import java.util.List;
 
 import tel_ran.tests.exceptions.TasksException;
-import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.pictures.*;
 import tel_ran.tests.interfaces.IConstants;
+import tel_ran.tests.interfaces.ITestingProblem;
 
 
 public class Abstract_Reasoning extends TaskBoxGenerator {

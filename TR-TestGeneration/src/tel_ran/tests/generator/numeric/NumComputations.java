@@ -15,8 +15,8 @@ import tel_ran.tests.tools.*;
 			super();
 //			weight = NUMBER_OF_TYPES;
 			numberOfDescripton = 1;
-			category = "Computations";
-			name = "NumComputations";
+//			category = "Computations";
+			category2Name = "NumComputations";
 		}
 		
 		@Override

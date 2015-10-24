@@ -1,15 +1,16 @@
 package tel_ran.tests.generator;
 
+import tel_ran.tests.interfaces.ITestingProblem;
+
 public abstract class AbstractTest implements ITestingProblem {
 	
-	protected String name;
+	protected String category2Name;
 	protected int numOfAnswers;
 	protected String category;
 	protected DescriptionBox dbox;
 	protected String description;
 	protected int numberOfDescripton;
-	protected int difLevel = 5;
-	protected String typeOfView;
+	protected int difLevel;	
 	
 	public static final String[] answerCharSymbols = {"A","B","C","D","E","F","G","H"};
 	
@@ -18,9 +19,9 @@ public abstract class AbstractTest implements ITestingProblem {
 		dbox = new DescriptionBox();		
 	}
 				
-	public String getCategory() {
-		return category;
-	}
+//	public String getCategory() {
+//		return category;
+//	}
 
 
 	public void setCategory(String category) {
@@ -51,8 +52,8 @@ public abstract class AbstractTest implements ITestingProblem {
 		return numberOfDescripton;
 	}
 
-	public String getName() {
-		return name;
+	public String getCategory2Name() {
+		return category2Name;
 	}
 	
 	@Override
@@ -63,10 +64,6 @@ public abstract class AbstractTest implements ITestingProblem {
 	public String getCorrectAnswerChar(){
 		return null;
 	}
-	
-	@Override
-	public String getView() {
-		return typeOfView;
-	}
+		
 	
 }

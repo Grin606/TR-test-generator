@@ -3,7 +3,8 @@ package tel_ran.tests.box_generator;
 import java.util.List;
 import java.util.Random;
 
-import tel_ran.tests.generator.ITestingProblem;
+import tel_ran.tests.interfaces.ITaskView;
+import tel_ran.tests.interfaces.ITestingProblem;
 
 public abstract class TaskBoxGenerator {
 	
@@ -31,7 +32,7 @@ public abstract class TaskBoxGenerator {
 		return dirName;
 	}
 	
-	public String getView() {
+	public ITaskView getView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return tasks[0].getView();
 	}
 	

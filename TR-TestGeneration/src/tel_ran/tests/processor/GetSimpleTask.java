@@ -1,8 +1,9 @@
 package tel_ran.tests.processor;
 
-import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.Testing_Problem;
 import tel_ran.tests.interfaces.IGetTaskGenerate;
+import tel_ran.tests.interfaces.ITaskView;
+import tel_ran.tests.interfaces.ITestingProblem;
 
 public class GetSimpleTask implements IGetTaskGenerate {
 	
@@ -36,14 +37,14 @@ public class GetSimpleTask implements IGetTaskGenerate {
 
 	@Override
 	public String getDirName() {				
-		return tp.getName();
+		return tp.getCategory2Name();
 		
 	}
 
 
 
 	@Override
-	public String getView() {
+	public ITaskView getView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return tp.getView();
 	
 	}

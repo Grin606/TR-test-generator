@@ -10,7 +10,7 @@ public class Picture_211E_Test extends PictureTablesTest{
 	public Picture_211E_Test() {
 		
 		super();			
-		name = "Table 211E test";
+		category2Name = "Table 211E test";
 		problemLength = PROBLEM_LENGHT;
 }
 

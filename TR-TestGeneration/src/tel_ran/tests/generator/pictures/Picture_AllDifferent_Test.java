@@ -13,7 +13,7 @@ public class Picture_AllDifferent_Test extends PictureTablesTest {
 	
 	public Picture_AllDifferent_Test() {	
 		super();			
-		name = "Table All Differrent test";
+		category2Name = "Table All Differrent test";
 		problemLength = PROBLEM_LENGHT;
 	}
 	

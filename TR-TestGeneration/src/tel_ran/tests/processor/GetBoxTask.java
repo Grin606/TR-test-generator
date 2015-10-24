@@ -2,9 +2,10 @@ package tel_ran.tests.processor;
 
 import tel_ran.tests.box_generator.TaskBoxGenerator;
 import tel_ran.tests.exceptions.TasksException;
-import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.interfaces.IConstants;
 import tel_ran.tests.interfaces.IGetTaskGenerate;
+import tel_ran.tests.interfaces.ITaskView;
+import tel_ran.tests.interfaces.ITestingProblem;
 
 public class GetBoxTask implements IGetTaskGenerate {
 
@@ -90,7 +91,7 @@ public class GetBoxTask implements IGetTaskGenerate {
 
 
 	@Override
-	public String getView() {		
+	public ITaskView getView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {		
 		return box.getView();
 	}
 	

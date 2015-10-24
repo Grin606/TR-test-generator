@@ -14,26 +14,16 @@ public abstract class CodeTestingProblem extends AbstractTest {
 	public String testLanguage;
 	protected String filePath;
 	protected List<String> codeFiles;
-	
-	public static final String readmeFileName = "Readme.txt"; 
-	protected static final String ext = ".java";
-	protected static final String pathGenerate = "Temporary";
-	protected static final String packageJavaForGradleStructure = "package main.java;";
-	protected static final String packageTestForGradleStructure = "package test.java;";
-	protected static final String baseForImportInTestForGradleStructure = "import main.java.";
-
-		
+			
 	public CodeTestingProblem() {
 		super();
-		numOfAnswers = 0;
-		typeOfView = ITaskView.CODE;
+		numOfAnswers = 0;		
 	}
 
 	public String getQuestionText() {
 		return questionText;
 	}
-	
-	
+		
 
 	public String getTestLanguage() {
 		return testLanguage;
@@ -51,24 +41,22 @@ public abstract class CodeTestingProblem extends AbstractTest {
 		return codeFiles;
 	}
 	
-	protected void createDir() {
-		long name = System.currentTimeMillis();
-		filePath = pathGenerate.concat(File.separator).concat(Long.toString(name));
-		File dir = new File(filePath);
-		if(dir.exists())
-			createDir();
-		else {
-			dir.mkdirs();			
-		}
-	}
+
 	
-	public void generate(int difLevel)  {
-				
-		createDir(); /* ---  create temporary folder for files  --- */
+	public void generate(int difLevel)  {				
+		
 		codeFiles = new LinkedList<String>();
 		generateTest(difLevel);
 		
 	}
+	
+	@Override
+	public ITaskView getView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		Class<?> cl = Class.forName(ITaskView.CODE);
+		ITaskView taskView = (ITaskView) cl.newInstance();
+		return taskView;
+	}
+
 	
 	abstract protected void generateTest(int difLevel); 
 }

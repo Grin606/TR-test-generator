@@ -24,7 +24,6 @@ public abstract class Testing_Problem extends AbstractTest {
 		numOfAnswers = 5;		
 		p = new DataSet();
 		a = new DataSet();
-		typeOfView = ITaskView.PICTURE;
 	}
 	
 	@Override
@@ -131,6 +130,12 @@ public abstract class Testing_Problem extends AbstractTest {
 		return a.exv.fr;
 	}
 	
+	@Override
+	public ITaskView getView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		Class<?> cl = Class.forName(ITaskView.PICTURE);
+		ITaskView taskView = (ITaskView) cl.newInstance();
+		return taskView;
+	}
 	
 	
 }

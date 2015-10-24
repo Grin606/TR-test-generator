@@ -9,7 +9,7 @@ public class BakerSequence extends CharRandomSequence{
 	
 	public BakerSequence () {
 		super();
-		name = "Cesar Sequence";
+		category2Name = "Cesar Sequence";
 		
 	}
 	public void generate(int difficultyLevel) {

@@ -16,8 +16,8 @@ public class FindNumbers extends AttentionTest {
 	public FindNumbers() {
 		super();
 		numberOfDescripton = 9;		
-		name = "FindNumbers";
-		numOfAnswers = 5;	
+		category2Name = "FindNumbers";
+		numOfAnswers = 5;
 		
 		
 	}

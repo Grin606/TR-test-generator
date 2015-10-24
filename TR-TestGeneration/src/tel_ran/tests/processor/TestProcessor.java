@@ -9,6 +9,7 @@ import tel_ran.tests.generator.*;
 import tel_ran.tests.interfaces.IConstants;
 import tel_ran.tests.interfaces.IGetTaskGenerate;
 import tel_ran.tests.interfaces.ITaskView;
+import tel_ran.tests.interfaces.ITestingProblem;
 import tel_ran.tests.repository.QuestionsRepository;
 
 /** Main class and interface for generation of test tasks.**/
@@ -112,9 +113,8 @@ public class TestProcessor {
 			}
 					
 		// generate class for type of question view. It can be presented as a picture or as a code-text.		
-		Class<?> cl = Class.forName(taskGen.getView());
-		ITaskView taskView = (ITaskView) cl.newInstance();
-		taskView.setPath(newPath, dirName);
+		
+		
 		
 
 		// difficulty level
@@ -138,7 +138,9 @@ public class TestProcessor {
 			}
 						
 			testTask = taskGen.getTask(lvl); 
-								
+			
+			ITaskView taskView = testTask.getView();
+			taskView.setPath(newPath, dirName);								
 			dsc = taskView.getTaskViews(testTask, lvl);		
 						
 			if (dsc == null) {

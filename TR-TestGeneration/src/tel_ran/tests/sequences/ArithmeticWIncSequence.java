@@ -11,7 +11,7 @@ public class ArithmeticWIncSequence extends NumRandomSequence{
 	
 	public ArithmeticWIncSequence() {
 		super();
-		name = "Arithmetic Sequence Wuith Increment";
+		category2Name= "Arithmetic Sequence Wuith Increment";
 		
 	}
 	public void generate(int difficultyLevel) {

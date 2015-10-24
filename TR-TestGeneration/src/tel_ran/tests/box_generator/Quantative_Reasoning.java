@@ -1,11 +1,11 @@
 package tel_ran.tests.box_generator;
 
 import tel_ran.tests.exceptions.TasksException;
-import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.numeric.NumComputations;
 import tel_ran.tests.generator.numeric.NumEstimations;
 import tel_ran.tests.generator.numeric.NumTableTest;
 import tel_ran.tests.interfaces.IConstants;
+import tel_ran.tests.interfaces.ITestingProblem;
 import tel_ran.tests.sequences.ArithmeticSequence;
 import tel_ran.tests.sequences.ArithmeticWIncSequence;
 import tel_ran.tests.sequences.BakerSequence;

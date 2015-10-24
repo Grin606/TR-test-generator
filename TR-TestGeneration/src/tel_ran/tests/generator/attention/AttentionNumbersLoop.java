@@ -14,7 +14,7 @@ public class AttentionNumbersLoop extends AttentionTest {
 
 	public AttentionNumbersLoop() {
 		super();				
-		name = "LongAttentionLines";
+		category2Name = "LongAttentionLines";
 		numOfAnswers = 4;			
 	}
 

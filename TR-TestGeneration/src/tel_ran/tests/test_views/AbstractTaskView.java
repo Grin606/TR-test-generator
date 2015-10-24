@@ -1,4 +1,4 @@
-package tel_ran.tests.processor;
+package tel_ran.tests.test_views;
 
 import java.util.HashSet;
 

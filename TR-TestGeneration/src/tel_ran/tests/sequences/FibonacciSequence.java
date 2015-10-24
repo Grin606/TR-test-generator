@@ -10,7 +10,7 @@ public class FibonacciSequence extends NumRandomSequence{
 	
 	public FibonacciSequence() {
 		super();
-		name = "Arithmetic Sequence";
+		category2Name = "Arithmetic Sequence";
 		
 	}
 	public void generate(int difficultyLevel) {

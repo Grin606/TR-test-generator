@@ -1,9 +1,9 @@
 package tel_ran.tests.box_generator;
 
 import tel_ran.tests.exceptions.TasksException;
-import tel_ran.tests.generator.ITestingProblem;
 import tel_ran.tests.generator.code_task.calculator.StringCalculatorCodingTest;
 import tel_ran.tests.interfaces.IConstants;
+import tel_ran.tests.interfaces.ITestingProblem;
 
 public class Programming_Task extends TaskBoxGenerator {
 		

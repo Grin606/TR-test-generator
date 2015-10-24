@@ -10,7 +10,7 @@ public class GeometricSequence extends NumRandomSequence{
 	
 	public GeometricSequence() {
 		super();
-		name = "Geometric Sequence";
+		category2Name = "Geometric Sequence";
 		
 	}
 	public void generate(int difficultyLevel) {

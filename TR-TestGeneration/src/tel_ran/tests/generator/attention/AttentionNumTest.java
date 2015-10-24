@@ -12,8 +12,8 @@ public class AttentionNumTest extends OneDimStringAnswers {
 		super();
 		//weight = NUMBER_OF_TYPES;//???
 		numberOfDescripton = 6;
-		category = "Attention";
-		name = "NumAttention";
+//		category = "Attention";
+		category2Name = "NumAttention";
 		numOfAnswers = 5;
 	}
 
