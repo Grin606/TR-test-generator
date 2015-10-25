@@ -73,6 +73,8 @@ import tel_ran.tests.tools.*;
 			SUMM_RANGE = computationSummRange[difficultyLevel - 1];
 			PRODUCT_RANGE = computationsProductRange[difficultyLevel - 1];
 		}
+
+	
 	}		
 
 

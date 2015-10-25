@@ -25,14 +25,18 @@ public class CodeView extends AbstractTaskView {
 			throws Exception {
 		
 		
-		String taskText = ((CodeTestingProblem)task).getQuestionText();			
-		String fileName = getHashName(taskText).concat(Long.toString(System.currentTimeMillis())).concat(".zip");
-		String newPath = path.concat(File.separator).concat(fileName);
-		String newDir = dirName.concat(File.separator).concat(fileName);			
+		String taskText = task.getQuestionText();			
+		String fileName = getHashName(taskText).concat(".zip");
+		String newDir = null;		
+		
+		List<String> files = task.getFiles();
+		if(files!=null) {
+			String newPath = path.concat(File.separator).concat(fileName);
+			newDir = dirName.concat(File.separator).concat(fileName);	
+			createArchive(files, newPath);
+			deleteFiles(files, task.getPathToFiles());
 			
-		List<String> files = ((CodeTestingProblem)task).getCodeFiles();
-		createArchive(files, newPath);
-		deleteFiles(files, ((CodeTestingProblem)task).getFilePath());
+		}
 					
 		answer[0] = task.getDescription();
 		answer[1] = taskText;
@@ -41,8 +45,8 @@ public class CodeView extends AbstractTaskView {
 		answer[4] = task.getCorrectAnswerChar();
 		answer[5] = Integer.toString(task.getNumOfAnswers());
 		answer[6] = newDir;
-		answer[7] = ((CodeTestingProblem)task).getTestLanguage();
-		answer[8] = ((CodeTestingProblem)task).getStubText();
+		answer[7] = task.getTestLanguage();
+		answer[8] = task.getStubText();
 		return answer;
 				
 	}

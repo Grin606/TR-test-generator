@@ -1,5 +1,6 @@
 package tel_ran.tests.generator;
 
+import tel_ran.tests.interfaces.DescriptionBox;
 import tel_ran.tests.interfaces.ITestingProblem;
 
 public abstract class AbstractTest implements ITestingProblem {

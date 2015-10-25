@@ -1,48 +1,39 @@
-package tel_ran.tests.generator.code_task.calculator;
+package tel_ran.tests.generator.code_task.java;
 
 import java.io.*;
 import java.util.*;
 
-import tel_ran.tests.generator.code_task.CodeTestingProblem;
 import tel_ran.tests.generator.code_task.calculator.methods.Actions;
-import tel_ran.tests.interfaces.ITaskView;
 
 
-public class StringCalculatorCodingTest extends CodeTestingProblem {
+
+public class StringCalculatorCodingTest extends JavaTestingProblem {
 	
 	private Actions[] methods;
 	private int base;
 	private TestData td;
-	
-	private static final String testName = "SCalculator_Test";
-	private static final String interfaceName = "SCalculator";
-	private static final String className = "StringCalculator";
 		
-	public static final String readmeFileName = "Readme.txt"; 
-	protected static final String ext = ".java";
-	protected static final String pathGenerate = "Temporary";
-	protected static final String packageJavaForGradleStructure = "package main.java;";
-	protected static final String packageTestForGradleStructure = "package test.java;";
-	protected static final String baseForImportInTestForGradleStructure = "import main.java.";
-			
+					
 	Random gen = new Random();
 		
 	public StringCalculatorCodingTest() {
 		super();
 		category2Name = "Calculator";  /* -- new line -- */
-		this.numberOfDescripton = 10;   /* -- new line -- */
-		this.testLanguage = "java";
+		testName = "SCalculator_Test";
+		interfaceName = "SCalculator";
+		className = "StringCalculator";
 	}
-		
-	public void generateTest(int difLevel) {
+	
+	@Override
+	public void generate(int difLevel) {
+		codeFiles = new LinkedList<String>();		
 		createDir(); /* ---  create temporary folder for files  --- */
 		
 		getTestData(difLevel);
 
 		generateQuestion();  /* changed */
 		generateStub();      /* changed */
-		
-		
+				
 		try {
 			this.codeFiles.add(generateJUnit(filePath));  /* return result as a list of string = paths to all of the files */
 			this.codeFiles.add(generateInterface(filePath));  /* return result as a list of string = paths to all of the files */
@@ -53,34 +44,8 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 		}  
 		
 	}	
-	
-	protected void createDir() {
-		long name = System.currentTimeMillis();
-		filePath = pathGenerate.concat(File.separator).concat(Long.toString(name));
-		File dir = new File(filePath);
-		if(dir.exists())
-			createDir();
-		else {
-			dir.mkdirs();			
-		}
-	}
-	
-	
-	private String generateReadme(String filePath) throws FileNotFoundException {
+
 		
-		String path = filePath.concat(File.separator).concat(readmeFileName);
-		
-		PrintWriter out = new PrintWriter(path);		
-		out.println("Interface: " + interfaceName + ext);
-		out.println("JUnit: " + testName + ext);
-		out.close();
-		
-		return path;
-	}
-
-
-
-
 	public void getTestData(int difLevel) {	
 		
 		td = new TestData();
@@ -107,22 +72,14 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 				return;
 			}
 		}
+
 	}
-	
-	
-	// ------ Minus generate Description! All our description are in DescriptionBox. ---- !!!
-	
-//	private void generateDescription(String filePath) throws FileNotFoundException {
-//		
-//		PrintStream out = new PrintStream (filePath);
-//		out.println("Implement the interface");
-//		out.close();
-//	}
 	
 	
 	// ------------- generate STRING instead of FILE ---------- !!!! 
 	
-	private void generateQuestion() {
+	
+	protected void generateQuestion() {
 		
 		StringBuffer res = new StringBuffer("");
 		
@@ -142,7 +99,8 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 	
 	// ------------- generate STRING instead of FILE ---------- !!!! 
 	
-	private void generateStub() {
+	
+	protected void generateStub() {
 		
 		StringBuffer res = new StringBuffer("");
 		
@@ -161,13 +119,8 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 		
 	}
 	
-	
-	// ------------- generate File using PrintWriter instead of PrintStream ---------- !!!! 
-	// ------------- + correct File-Name (it should be = name of class) --------- !!!!
-	// ------------- return String = path with the name of the file -------------- !!!!
-	// ------------- + static variable for naming -------------------------------- !!!!
-	
-	private String generateJUnit(String filePath) throws FileNotFoundException {
+
+	protected String generateJUnit(String filePath) throws FileNotFoundException {
 		
 		String path = filePath.concat(File.separator).concat(testName).concat(ext);
 		
@@ -203,13 +156,7 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 		
 	}
 	
-	
-	// ------------- generate File using PrintWriter instead of PrintStream ---------- !!!! 
-	// ------------- + correct File-Name (it should be = name of class) --------- !!!!
-	// ------------- return String = path with the name of the file -------------- !!!!
-	// ------------- + static variable for naming -------------------------------- !!!!
-	
-	private String generateInterface(String filePath) throws FileNotFoundException {
+	protected String generateInterface(String filePath) throws FileNotFoundException {
 		
 		String path = filePath.concat(File.separator).concat(interfaceName).concat(ext);
 		
@@ -278,31 +225,6 @@ public class StringCalculatorCodingTest extends CodeTestingProblem {
 		
 		return res;
 	}
-
-
-//	public void setDescriptionFilePath(String descriptionFilePath) {
-//		this.descriptionFilePath = descriptionFilePath;
-//	}
-//
-//	public void setQuestionFilePath(String questionFilePath) {
-//		this.questionFilePath = questionFilePath;
-//	}
-//
-//	public void setStubFilePath(String stubFilePath) {
-//		this.stubFilePath = stubFilePath;
-//	}
-//
-//	public void setJUnitFilePath(String junitFilePath) {
-//		this.junitFilePath = junitFilePath;
-//	}
-//
-//	public void setInterfaceFilePath(String interfaceFilePath) {
-//		this.interfaceFilePath = interfaceFilePath;
-//	}
-
-
-
-
-	
+		
 	
 }

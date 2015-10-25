@@ -1,5 +1,7 @@
 package tel_ran.tests.generator;
 
+import java.util.List;
+
 import tel_ran.tests.dataset.*;
 import tel_ran.tests.interfaces.ITaskView;
 import tel_ran.tests.pictures.Picture;
@@ -25,6 +27,21 @@ public abstract class Testing_Problem extends AbstractTest {
 		p = new DataSet();
 		a = new DataSet();
 	}
+	
+	@Override
+	public String getTestLanguage() {		
+		return null;
+	}
+	
+	@Override
+	public String getPathToFiles() {
+		return null;
+	}
+	
+	public List<String> getFiles() {
+		return null;
+	}
+	
 	
 	@Override
 	public String getCorrectAnswerChar(){
@@ -135,6 +152,18 @@ public abstract class Testing_Problem extends AbstractTest {
 		Class<?> cl = Class.forName(ITaskView.PICTURE);
 		ITaskView taskView = (ITaskView) cl.newInstance();
 		return taskView;
+	}
+	
+	@Override
+	public String getStubText() {
+		
+		return null;
+	}
+	
+
+	@Override
+	public String getQuestionText() {		
+		return null;
 	}
 	
 	

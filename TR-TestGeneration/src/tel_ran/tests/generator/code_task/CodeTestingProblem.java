@@ -1,7 +1,5 @@
 package tel_ran.tests.generator.code_task;
 
-import java.io.File;
-import java.util.LinkedList;
 import java.util.List;
 
 import tel_ran.tests.generator.AbstractTest;
@@ -12,14 +10,25 @@ public abstract class CodeTestingProblem extends AbstractTest {
 	public String questionText; 
 	public String stubText;
 	public String testLanguage;
-	protected String filePath;
 	protected List<String> codeFiles;
+	protected String filePath;
 			
+	
+	
 	public CodeTestingProblem() {
 		super();
 		numOfAnswers = 0;		
 	}
-
+		
+	@Override
+	public String getPathToFiles() {
+		return filePath;
+	}
+	
+	public List<String> getFiles() {
+		return codeFiles;
+	}
+	
 	public String getQuestionText() {
 		return questionText;
 	}
@@ -33,22 +42,7 @@ public abstract class CodeTestingProblem extends AbstractTest {
 		return stubText;
 	}
 	
-	public String getFilePath() {
-		return filePath;
-	}
 
-	public List<String> getCodeFiles() {
-		return codeFiles;
-	}
-	
-
-	
-	public void generate(int difLevel)  {				
-		
-		codeFiles = new LinkedList<String>();
-		generateTest(difLevel);
-		
-	}
 	
 	@Override
 	public ITaskView getView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -57,6 +51,4 @@ public abstract class CodeTestingProblem extends AbstractTest {
 		return taskView;
 	}
 
-	
-	abstract protected void generateTest(int difLevel); 
 }
