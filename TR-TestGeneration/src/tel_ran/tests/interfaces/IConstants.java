@@ -7,7 +7,7 @@ import tel_ran.tests.box_generator.Quantative_Reasoning;
 
 public interface IConstants {
 	
-	public static final String[] PROGRAM_LANGUAGES = {"Java"};
+	public static final String[] PROGRAM_LANGUAGES = {"Java","HTML"};
 	
 	public static final String[] CATEGORIES = {"Programming Tasks", "Abstract Reasoning", "Quantative Reasoning", "Attention"};
 	

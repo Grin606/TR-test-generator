@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<tasks id="task">
+	<task id="tel_ran.tests.generator.code_task.html.TagNesting" />
+	<task id="tel_ran.tests.generator.code_task.html.ListsTesting" />
+	<task id="tel_ran.tests.generator.code_task.html.InLineTesting" />
+</tasks>
+<tags id="tag">
+	<tag id="address" class="tag-block" />
+	<tag id="div" class="tag-block">
+		<attribute class="attr-optional" name="id" />
+		<attribute class="attr-optional" name="class" />
+	</tag>
+	<tag id="h1" class="tag-block" />
+	<tag id="h2" class="tag-block" />
+	<tag id="h3" class="tag-block" />
+	<tag id="h4" class="tag-block" />
+	<tag id="h5" class="tag-block" />
+	<tag id="h6" class="tag-block" />
+	<tag id="p" class="tag-block" />
+	<tag id="pre" class="tag-block" />
+	<tag id="abbr" class="tag-inline">
+		<attribute class="attr-optional" name="title" />
+	</tag>
+	<tag id="b" class="tag-inline" />
+	<tag id="bdo" class="tag-inline">
+		<attribute class="attr-mandatory" name="dir">
+			<value>ltr</value>
+			<value>rtl</value>
+		</attribute>
+	</tag>
+	<tag id="cite" class="tag-inline" />
+	<tag id="dfn" class="tag-inline">
+		<attribute class="attr-optional" name="title" />
+	</tag>
+	<tag id="em" class="tag-inline" />
+	<tag id="i" class="tag-inline" />
+	<tag id="kbd" class="tag-inline" />
+	<tag id="q" class="tag-inline" />
+	<tag id="samp" class="tag-inline" />
+	<tag id="span" class="tag-inline">
+		<attribute class="attr-optional" name="id" />
+		<attribute class="attr-optional" name="class" />
+	</tag>
+	<tag id="var" class="tag-inline" />
+	<tag id="ul" class="tag-listType" minsize="3" maxsize="5">
+		<attribute class="attr-optional" name="id" />
+		<attribute class="attr-optional" name="class" />
+		<attribute class="attr-optional" name="title" />
+		<child name="li" class="tag-mandatory" />
+	</tag>
+	<tag id="ol" class="tag-listType" minsize="3" maxsize="5">
+		<attribute class="attr-optional" name="start">
+			<value>1</value>
+			<value>2</value>
+			<value>3</value>
+			<value>4</value>
+			<value>5</value>
+		</attribute>
+		<attribute class="attr-optional" name="id" />
+		<attribute class="attr-optional" name="class" />
+		<attribute class="attr-optional" name="title" />
+		<child name="li" class="tag-mandatory" />
+	</tag>
+	<tag id="dl" class="tag-listType" minsize="2" maxsize="3">
+		<attribute class="attr-optional" name="id" />
+		<attribute class="attr-optional" name="class" />
+		<attribute class="attr-optional" name="title" />
+		<child name="dt" class="tag-mandatory" />
+		<child name="dd" class="tag-mandatory" />
+	</tag>
+	<tag id="li" class="tag-listChild" minsize="3" maxsize="5" />
+	<tag id="dt" class="tag-listChild" minsize="1" maxsize="2" />
+	<tag id="dd" class="tag-listChild" minsize="5" maxsize="10" />
+	<tag id="table" class="tag-tableType">
+		<child name="caption" class="tag-optional" />
+		<child name="thead" class="tag-optional" />
+		<child name="tfoot" class="tag-optional" />
+		<child name="tbody" class="tag-mandatory" />
+	</tag>
+	<tag id="caption" class="tag-tableChild"/>
+	<tag id="thead" class="tag-tableChild">
+		<child name="tr" class="tag-mandatory" />
+	</tag>
+	<tag id="tfoot" class="tag-tableChild">
+		<child name="tr" class="tag-mandatory" />
+	</tag>
+	<tag id="tbody" class="tag-tableChild" minsize="3" maxsize="5">
+		<child name="tr" class="tag-mandatory" />
+	</tag>
+	<tag id="tr" class="tag-tableChild" minsize="3" maxsize="5">
+		<child name="td" class="tag-mandatory" />
+		<child name="th" class="tag-optional" />
+	</tag>
+	<tag id="td" class="tag-rowChild" />
+	<tag id="th" class="tag-rowChild" />
+</tags>
+</document>

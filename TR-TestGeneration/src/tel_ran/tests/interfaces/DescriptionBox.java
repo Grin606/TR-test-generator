@@ -2,7 +2,7 @@ package tel_ran.tests.interfaces;
 
 public class DescriptionBox {
 	
-	public static final int NUMBER_OF_DESCRIPTIONS = 11;
+	public static final int NUMBER_OF_DESCRIPTIONS = 12;
 	public String[] description;
 	
 	public DescriptionBox() {
@@ -20,6 +20,7 @@ public class DescriptionBox {
 	description[8] = "In which row the sequence is correct?";
 	description[9] = "Count the number of the following figures:";
 	description[10] = "Implement the interface";
+	description[11] = "Check HTML-code and correct the errors.";
 
 	}
 }
