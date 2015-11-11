@@ -18,8 +18,8 @@ public class HtmlCorrectingProblem extends CodeTestingProblem {
 	private static final String TASK_PREFIX = "task";
 	private static final String HTML = "HTML";
 	private static final String TEMP_PATH = "Temporary";
-	private static final String CHECK_FILE_NAME = "check.txt";
-	public String matching;
+	public static final String CHECK_FILE_NAME = "check.txt";
+//	public String matching;
 	
 	public HtmlCorrectingProblem() {
 		super();

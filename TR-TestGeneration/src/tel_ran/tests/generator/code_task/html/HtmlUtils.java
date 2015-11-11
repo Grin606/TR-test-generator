@@ -17,18 +17,13 @@ import org.jsoup.select.Elements;
 import com.thedeanda.lorem.LoremIpsum;
 
 class HtmlUtils {
-	private static final String WELL_KNOWN = "Well-known fact: ";
-	private static final String STATEMENT_0 = " is not valid for HTML.";
-	private static final String[] LOGIC_STATEMENTS = {
-			"TRUE && TRUE == FALSE",
-			"TRUE && TRUE != TRUE",
-			"FALSE && TRUE == TRUE",
-			"FALSE && TRUE != FALSE",
-			"TRUE && FALSE == TRUE",
-			"TRUE && FALSE != FALSE",
-			"FALSE && FALSE == TRUE",
-			"FALSE && FALSE != FALSE"
-			};
+	private static final String LETTERS = "abcdefghijklmnopqrstuvwxyz";
+	private static final String WELL_KNOWN = "Well-known fact:";
+	private static final String STATEMENT_0 = "is not valid for HTML.";
+	private static final String STATEMENT_1 = "The function:";
+	private static final String STATEMENT_2 = "foo() { ";
+	private static final String STATEMENT_3 = "}";
+	private static final String STATEMENT_4= "returns ";
 
 	static final TaskData taskData = new TaskData();
 	static final LoremIpsum lorem = LoremIpsum.getInstance();
@@ -54,7 +49,9 @@ class HtmlUtils {
 	}
 	
 	static String getWhitespaceIndepended(String pattern) {
-		return pattern.replaceAll("\\s+?", "\\\\s*?");
+		pattern = pattern.replaceAll("\\{", " \\\\{ ").replaceAll("\\}", " \\\\} ");
+		pattern = pattern.replaceAll("\\(", "\\\\(").replaceAll("\\)", "\\\\)");
+		return pattern.replaceAll("\\s+", "\\\\s+?");
 	}
 	
 	
@@ -211,34 +208,60 @@ class HtmlUtils {
 		}
 	}
 
-	static String getAnyFalsePhrase() {
+	static String[] getAnyFalsePhrase() {
+		String[] phraseParts = new String[2];
 		switch(RND.nextInt(3)){
 		case 0 :
-			return WELL_KNOWN + mathStatement();
+			phraseParts[0] = WELL_KNOWN; 
+			phraseParts[1] = mathStatement(); 
+			return phraseParts;
 		case 1 :
-			return WELL_KNOWN + LOGIC_STATEMENTS[RND.nextInt(LOGIC_STATEMENTS.length)];
+			phraseParts[0] = STATEMENT_1; 
+			phraseParts[1] = logicStatement(); 
+			return phraseParts;
 		default :
 			List<String> tags = taskData.getSectionList(TaskData.SECTION_TAG);
-			return WELL_KNOWN + TaskData.KW_TAG + " <" + tags.get(RND.nextInt(tags.size())) + ">" + STATEMENT_0;
+			phraseParts[0] = WELL_KNOWN; 
+			phraseParts[1] = TaskData.KW_TAG + " <" + tags.get(RND.nextInt(tags.size())) + "> " + STATEMENT_0; 
+			return phraseParts;
 		}
 	}
 
 	private static String mathStatement() {
-		int a = RND.nextInt(10);
-		int b = RND.nextInt(10);
+		int a = RND.nextInt(50)+1;
+		int b = RND.nextInt(50)+1;
 		int c;
 		String leftPart;
-		if(RND.nextInt(2) == 0) {
+		if(RND.nextBoolean()) {
 			c = a + b;
 			leftPart = String.valueOf(a) + " + " + String.valueOf(b);
 		} else {
 			c = Math.max(a, b) - Math.min(a, b);
 			leftPart = String.valueOf(Math.max(a, b)) + " - " + String.valueOf(Math.min(a, b));
 		}
-		if(RND.nextInt(2) == 0)
+		if(RND.nextBoolean())
 			return leftPart + " < " + String.valueOf(c);
 		else
-			return leftPart + " > " + String.valueOf(c);
+			return leftPart + " <= " + String.valueOf(c);
+	}
+
+	private static String logicStatement() {
+		boolean a = RND.nextBoolean();
+		boolean b = RND.nextBoolean();
+		boolean c = !(a && b);
+		
+		char letter = LETTERS.charAt(RND.nextInt(LETTERS.length()));
+		String isNot = "";
+		if(RND.nextBoolean()) {
+			c = (a && b);
+			isNot = "!";
+		}
+		String res = STATEMENT_2 + " " + letter + " = " + String.valueOf(a) + ";"+
+				" " + letter + " &= " + String.valueOf(b) + ";" + 
+				" return " + isNot + letter + ";" +
+				" " + STATEMENT_3 + " " +
+				STATEMENT_4 + String.valueOf(c).toUpperCase() + ".";
+			return res;
 	}
 	
 }

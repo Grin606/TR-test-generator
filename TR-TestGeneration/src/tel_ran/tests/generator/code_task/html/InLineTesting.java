@@ -15,14 +15,25 @@ class InLineTesting implements IHtmlTask {
 
 	@Override
 	public void generateTask(Element taskRoot, int difficultyLevel) {
-		String falsePhrase = HtmlUtils.getAnyFalsePhrase();
-		Element textEl = new Element(HtmlUtils.getParagrafTag(),"").text(falsePhrase);
-		String lBracket = HtmlUtils.getElementBracket(textEl, true);
-		String rBracket = HtmlUtils.getElementBracket(textEl, false);
-		String taskText =  lBracket + falsePhrase + rBracket;
+		String[] falsePhrase = HtmlUtils.getAnyFalsePhrase();
+		Element blockEl = HtmlUtils.getAnyElement("tag-uniBlock").text(falsePhrase[0]);
+		Element errEl;
+		String errStr;
+		if(difficultyLevel > 1) {
+			errEl = blockEl.appendElement(HtmlUtils.getAnyTagName("tag-markInline")).text(falsePhrase[1]);
+			if(difficultyLevel > 2)
+				HtmlUtils.setAttributes(errEl);
+			errStr = falsePhrase[1];
+		} else {
+			errEl = blockEl.appendText(" " + falsePhrase[1]);
+			errStr = falsePhrase[0] + " " + falsePhrase[1];
+		}
+		String lBracket = HtmlUtils.getElementBracket(errEl, true);
+		String rBracket = HtmlUtils.getElementBracket(errEl, false);
+		String taskText =  lBracket + errStr + rBracket;
 		
 		taskRoot.appendElement(HtmlUtils.getLineTagName());
-		taskRoot.appendChild(textEl);
+		taskRoot.appendChild(blockEl);
 		taskRoot.appendElement(HtmlUtils.getLineTagName());
 		matching = taskRoot;
 		data = taskRoot.html().replaceFirst(lBracket + ".+" + rBracket, taskText);

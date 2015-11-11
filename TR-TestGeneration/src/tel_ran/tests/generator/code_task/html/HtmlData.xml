@@ -4,10 +4,13 @@
 	<task id="tel_ran.tests.generator.code_task.html.TagNesting" />
 	<task id="tel_ran.tests.generator.code_task.html.ListsTesting" />
 	<task id="tel_ran.tests.generator.code_task.html.InLineTesting" />
+<!-- 
+	<task id="tel_ran.tests.generator.code_task.html.TablesTesting" />
+-->
 </tasks>
 <tags id="tag">
 	<tag id="address" class="tag-block" />
-	<tag id="div" class="tag-block">
+	<tag id="div" class="tag-block tag-uniBlock">
 		<attribute class="attr-optional" name="id" />
 		<attribute class="attr-optional" name="class" />
 	</tag>
@@ -17,12 +20,12 @@
 	<tag id="h4" class="tag-block" />
 	<tag id="h5" class="tag-block" />
 	<tag id="h6" class="tag-block" />
-	<tag id="p" class="tag-block" />
+	<tag id="p" class="tag-block tag-uniBlock" />
 	<tag id="pre" class="tag-block" />
 	<tag id="abbr" class="tag-inline">
 		<attribute class="attr-optional" name="title" />
 	</tag>
-	<tag id="b" class="tag-inline" />
+	<tag id="b" class="tag-inline tag-markInLine" />
 	<tag id="bdo" class="tag-inline">
 		<attribute class="attr-mandatory" name="dir">
 			<value>ltr</value>
@@ -33,16 +36,19 @@
 	<tag id="dfn" class="tag-inline">
 		<attribute class="attr-optional" name="title" />
 	</tag>
-	<tag id="em" class="tag-inline" />
-	<tag id="i" class="tag-inline" />
-	<tag id="kbd" class="tag-inline" />
+	<tag id="em" class="tag-inline tag-markInline" />
+	<tag id="i" class="tag-inline tag-markInline" />
+	<tag id="kbd" class="tag-inline tag-markInline" />
 	<tag id="q" class="tag-inline" />
-	<tag id="samp" class="tag-inline" />
-	<tag id="span" class="tag-inline">
+	<tag id="samp" class="tag-inline tag-markInline" />
+	<tag id="span" class="tag-inline tag-markInline">
 		<attribute class="attr-optional" name="id" />
 		<attribute class="attr-optional" name="class" />
 	</tag>
-	<tag id="var" class="tag-inline" />
+	<tag id="var" class="tag-inline tag-markInline">
+		<attribute class="attr-optional" name="class" />
+		<attribute class="attr-optional" name="title" />
+	</tag>
 	<tag id="ul" class="tag-listType" minsize="3" maxsize="5">
 		<attribute class="attr-optional" name="id" />
 		<attribute class="attr-optional" name="class" />
