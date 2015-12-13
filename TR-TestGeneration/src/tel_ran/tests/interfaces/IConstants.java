@@ -9,10 +9,12 @@ import tel_ran.tests.box_generator.Quantative_Reasoning;
 
 public interface IConstants {
 	
-	public static final String[] PROGRAM_LANGUAGES = {"Java","HTML"};
+
+	public static final String[] PROGRAM_LANGUAGES = {"Java","HTML", "Javascript"};
 	public static final Class<?>[] PR_LANGUAGES_CLASSES = {
-			Programming_Task_Java.class,
-			Programming_Task_Html.class
+		Programming_Task_Java.class,
+		Programming_Task_Html.class,
+		Programming_Task_Javascript.class
 	};
 	
 	public static final String[] CATEGORIES = {"Programming Tasks", "Abstract Reasoning", "Quantative Reasoning", "Attention"};
