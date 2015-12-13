@@ -27,21 +27,21 @@ public class TestGenerationAppl {
        if (args.length != 0) {
     	   result = proc.testProcessStart(args[0], num, PTH, DIF_LEVEL);
        } else 
-    	   result = proc.processStart(type, num, PTH, DIF_LEVEL); 
+    	   result = proc.processStart(type, "Java", num, PTH, DIF_LEVEL); 
 	
        
-       for (String[] content : result) {
-    	   System.out.println("MAIN");
-    	   System.out.println("0 = " + content[0]);
-    	   System.out.println("1 = " + content[1]);
-    	   System.out.println("2 = " + content[2]);
-    	   System.out.println("3 = " + content[3]);
-    	   System.out.println("4 = " + content[4]);
-    	   System.out.println("5 = " + content[5]);
-    	   System.out.println("6 = " + content[6]);
-    	   System.out.println("7 = " + content[7]);
-    	   System.out.println("8 = " + content[8]);
-       }
+//       for (String[] content : result) {
+//    	   System.out.println("MAIN");
+//    	   System.out.println("0 = " + content[0]);
+//    	   System.out.println("1 = " + content[1]);
+//    	   System.out.println("2 = " + content[2]);
+//    	   System.out.println("3 = " + content[3]);
+//    	   System.out.println("4 = " + content[4]);
+//    	   System.out.println("5 = " + content[5]);
+//    	   System.out.println("6 = " + content[6]);
+//    	   System.out.println("7 = " + content[7]);
+//    	   System.out.println("8 = " + content[8]);
+//       }
        
 	}
 

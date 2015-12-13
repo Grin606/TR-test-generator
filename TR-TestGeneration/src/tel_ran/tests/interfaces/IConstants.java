@@ -5,6 +5,7 @@ import tel_ran.tests.box_generator.Attention;
 import tel_ran.tests.box_generator.Programming_Task;
 import tel_ran.tests.box_generator.Programming_Task_Html;
 import tel_ran.tests.box_generator.Programming_Task_Java;
+import tel_ran.tests.box_generator.Programming_Task_Javascript;
 import tel_ran.tests.box_generator.Quantative_Reasoning;
 
 public interface IConstants {
@@ -13,7 +14,7 @@ public interface IConstants {
 	public static final String[] PROGRAM_LANGUAGES = {"Java","HTML", "Javascript"};
 	public static final Class<?>[] PR_LANGUAGES_CLASSES = {
 		Programming_Task_Java.class,
-		Programming_Task_Html.class,
+		Programming_Task_Html.class, 
 		Programming_Task_Javascript.class
 	};
 	
@@ -31,6 +32,7 @@ public interface IConstants {
 	
 	public static final int JAVA = 0;
 	public static final int HTML = 1;
+	public static final int JAVASCRIPT = 2;
 	
 
 }
