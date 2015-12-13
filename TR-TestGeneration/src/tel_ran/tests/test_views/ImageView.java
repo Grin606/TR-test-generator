@@ -26,27 +26,17 @@ public class ImageView extends AbstractTaskView {
 	}
 
 
-	public ImageView(String path, String dirName) {
-		super(path, dirName);
-		img = new Image();	 	
-	}
-
 
 	@Override
 	public String[] getTaskViews(ITestingProblem task, int lvl) throws Exception {
 			
 		res = img.getImage((Testing_Problem)task);
 		imgName = fileNaming(res);
-		
-		String newDir = dirName.concat(File.separator).concat(imgName);
-		String newPath = path.concat(File.separator).concat(imgName);	
-		
+				
 		
 		if (unique.add(imgName)) {
 			
-			File newImage = new File(newPath);
-			ImageIO.write(res, "jpeg", newImage);
-			
+			String newDir = this.fileService.saveImage(imgName, res);			
 		
 			answer[0] = task.getDescription();
 			answer[1] = null;

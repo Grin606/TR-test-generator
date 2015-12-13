@@ -29,9 +29,6 @@ public class Attention extends TaskBoxGenerator {
 
 	}
 
-	@Override
-	public int getCategoryIndex() {		
-		return IConstants.ATTENTION;
-	}
+	
 
 }

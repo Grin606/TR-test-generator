@@ -1,6 +1,6 @@
 package tel_ran.tests.interfaces;
 
-
+import tel_ran.tests.utils.files.FileService;
 
 public interface ITaskView {
 	
@@ -9,6 +9,6 @@ public interface ITaskView {
 	public static final int N_ANSWERS_FIELDS = 9;
 	
 	String[] getTaskViews(ITestingProblem task, int lvl) throws Exception;
-	void setPath(String path, String dirName);
+	void setFileService(FileService fileService);
 
 }

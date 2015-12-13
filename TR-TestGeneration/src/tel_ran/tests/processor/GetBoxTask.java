@@ -32,8 +32,15 @@ public class GetBoxTask implements IGetTaskGenerate {
 	 */
 	public GetBoxTask(String type, String language) throws TasksException, InstantiationException, IllegalAccessException {
 		
-		int index = getClassIndex(type);		
-		Class<?> cl = IConstants.CATEGORY_CLASSES[index];
+		int index = getClassIndex(type);	
+		Class<?> cl = null;
+		if(index == IConstants.PROGRAMMING_TASKS) {
+			index = getLanguageIndex(language);
+			cl = IConstants.PR_LANGUAGES_CLASSES[index];			
+		} else {
+			cl = IConstants.CATEGORY_CLASSES[index];
+		}
+	
 		box = (TaskBoxGenerator) cl.newInstance();
 
 	}

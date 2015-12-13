@@ -1,16 +1,16 @@
 package tel_ran.tests.processor;
 
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import tel_ran.tests.generator.*;
 import tel_ran.tests.interfaces.IConstants;
 import tel_ran.tests.interfaces.IGetTaskGenerate;
 import tel_ran.tests.interfaces.ITaskView;
 import tel_ran.tests.interfaces.ITestingProblem;
 import tel_ran.tests.repository.QuestionsRepository;
+import tel_ran.tests.utils.files.FileSaver;
+import tel_ran.tests.utils.files.FileService;
 
 /** Main class and interface for generation of test tasks.**/
 public class TestProcessor {
@@ -22,7 +22,7 @@ public class TestProcessor {
 	public static String MC_QUANTATIVE = IConstants.CATEGORIES[IConstants.QUANTATIVE_REASOINING];
 	
 	/** Collection of generation results. **/ 
-	QuestionsRepository rep;
+//	QuestionsRepository rep;
 	
 	
 //	String dev = "----";
@@ -30,7 +30,7 @@ public class TestProcessor {
 	
 	/** default constructor **/
 	public TestProcessor() {
-		this.rep = new QuestionsRepository();        
+//		this.rep = new QuestionsRepository();        
 	}
 
 	
@@ -93,68 +93,96 @@ public class TestProcessor {
 	// the inner basic method for questions generation
 	//
 	private List<String[]> processing (IGetTaskGenerate taskGen, int number, String path, int maxLvl) throws Exception {
-		
-		//variables of the method
-		ITestingProblem testTask = null;		
-		
-		
-		
+						
 		// creation of folder
-		String dirName = taskGen.getDirName();		
-		String newPath = path.concat(dirName);	
-		
-		if(!new File(newPath).exists() && !new File(newPath).mkdir()) {
-				System.out.println("Creating directory " + newPath + " failed");
-				dirName = "";
-		}
-			else {
-				path = newPath.concat(File.separator);
-				dirName = File.separator.concat(dirName);
-			}
-					
+		FileService fileService = createFolders(taskGen.getDirName(), path);
+							
 		// generate class for type of question view. It can be presented as a picture or as a code-text.		
+		QuestionsRepository rep = generateQuestionsByLevel(taskGen, number, maxLvl, fileService); 
 		
-		
-		
-
 		// difficulty level
-		if (maxLvl > 5)
-			maxLvl = 5;
-		if (maxLvl < 1)
-			maxLvl = 1;
-
-		int step, lvl = 1;
-		step = number/maxLvl + 1;
-		if (number%maxLvl == 0)
-			step--;	
+		
+						
+		return rep.getList();
+	}
+	
+	private QuestionsRepository generateQuestionsByLevel(IGetTaskGenerate taskGen, int number, int maxLvl,
+			FileService fileService) {
+		//variables of the method
+		
+		QuestionsRepository rep = new QuestionsRepository();   
+		
+		int checkedMaxLevel = checkMaxLevel(maxLvl);
+		int step = calculateStep(checkedMaxLevel, number);
 		int th = step;
-				
+		int lvl = 1;
+		int errorCounter = 0;
+		
 		for (int i = 0; i < number; i++) {
-			String[] dsc;
+			
 			
 			if (i == th) {
 				lvl++;
 				th += step;
 			}
-						
-			testTask = taskGen.getTask(lvl); 
-			
-			ITaskView taskView = testTask.getView();
-			taskView.setPath(newPath, dirName);								
-			dsc = taskView.getTaskViews(testTask, lvl);		
-						
+				
+			String[] dsc = null;
+			try {
+				dsc = getNewTask(lvl, taskGen, fileService);
+			} catch (Exception e) {				
+				e.printStackTrace();
+				errorCounter++;
+			} 
+									
 			if (dsc == null) {
 				i--;
+				if(errorCounter>10) break;
 			} else {
 				String[] result = new String[dsc.length];
 				System.arraycopy(dsc, 0, result, 0, dsc.length);				
 				rep.addQuestion(result);
 			}
 		}
-						
-		return rep.getList();
+		return rep;
 	}
-	
+
+
+	private String[] getNewTask(int lvl, IGetTaskGenerate taskGen, FileService fileService) throws Exception {
+		ITestingProblem testTask = taskGen.getTask(lvl); 		
+		ITaskView taskView = testTask.getView();
+		taskView.setFileService(fileService);								
+		return taskView.getTaskViews(testTask, lvl);			
+	}
+
+
+	private int calculateStep(int checkedMaxLevel, int number) {
+		int step = number/checkedMaxLevel + 1;
+		if (number%checkedMaxLevel == 0)
+			step--;	
+		
+		return step;
+	}
+
+
+	private int checkMaxLevel(int maxLvl) {
+		if (maxLvl > 5)
+			maxLvl = 5;
+		if (maxLvl < 1)
+			maxLvl = 1;
+
+		return maxLvl;
+	}
+
+
+	private FileService createFolders(String dirName, String path) {	
+		FileService fileService = new FileSaver();
+		fileService.setPath(path);
+		fileService.setFolderName(dirName);
+		
+		return fileService;
+	}
+
+
 	/** List of the meta categories. Returns List<String> **/ 
 	public static List<String> getMetaCategory() {
 		List<String> result = new ArrayList<String>();

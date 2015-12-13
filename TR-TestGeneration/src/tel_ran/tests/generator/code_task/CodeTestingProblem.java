@@ -4,6 +4,7 @@ import java.util.List;
 
 import tel_ran.tests.generator.AbstractTest;
 import tel_ran.tests.interfaces.ITaskView;
+import tel_ran.tests.utils.files.FileService;
 
 public abstract class CodeTestingProblem extends AbstractTest {
 	
@@ -12,9 +13,8 @@ public abstract class CodeTestingProblem extends AbstractTest {
 	public String testLanguage;
 	protected List<String> codeFiles;
 	protected String filePath;
-			
-	
-	
+//	protected FileService fileService;
+		
 	public CodeTestingProblem() {
 		super();
 		numOfAnswers = 0;		

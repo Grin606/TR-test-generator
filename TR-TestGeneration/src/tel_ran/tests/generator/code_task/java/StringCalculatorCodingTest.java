@@ -27,7 +27,7 @@ public class StringCalculatorCodingTest extends JavaTestingProblem {
 	@Override
 	public void generate(int difLevel) {
 		codeFiles = new LinkedList<String>();		
-		createDir(); /* ---  create temporary folder for files  --- */
+		createDir(0); /* ---  create temporary folder for files  --- */
 		
 		getTestData(difLevel);
 

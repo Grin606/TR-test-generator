@@ -35,8 +35,7 @@ public abstract class TaskBoxGenerator {
 	public ITaskView getView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return tasks[0].getView();
 	}
-	
-	public abstract int getCategoryIndex();
+
 	
 	
 }

@@ -26,10 +26,6 @@ public class Programming_Task extends TaskBoxGenerator {
 		}
 	}
 
-	@Override
-	public int getCategoryIndex() {
-		return IConstants.PROGRAMMING_TASKS;
-	}
-
+	
 
 }

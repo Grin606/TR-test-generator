@@ -50,11 +50,6 @@ public class Quantative_Reasoning extends TaskBoxGenerator {
 		
 	}
 
-	@Override
-	public int getCategoryIndex() {
-		return IConstants.QUANTATIVE_REASOINING;
-	}		
-
 }
 	
 	

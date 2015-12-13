@@ -3,12 +3,12 @@ package tel_ran.tests.test_views;
 import java.util.HashSet;
 
 import tel_ran.tests.interfaces.ITaskView;
+import tel_ran.tests.utils.files.FileService;
 
 
 public abstract class AbstractTaskView implements ITaskView {
 
-	String path;
-	String dirName;
+	protected FileService fileService;
 	String[] answer;
 	HashSet<String> unique;
 	
@@ -20,20 +20,11 @@ public abstract class AbstractTaskView implements ITaskView {
 		unique = new HashSet<String>(); 		
 	}
 
-
-	public AbstractTaskView(String path, String dirName) {
-		super();
-		this.path = path;
-		this.dirName = dirName;
-		answer = new String[N_ANSWERS_FIELDS];
-		unique = new HashSet<String>(); 
+	public void setFileService(FileService fileService) {
+		this.fileService = fileService;		
 	}
 
 
-	public void setPath(String path, String dirName) {
-		this.path = path;
-		this.dirName = dirName;
-	}
 
 
 

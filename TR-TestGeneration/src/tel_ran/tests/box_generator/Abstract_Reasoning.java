@@ -34,11 +34,6 @@ public class Abstract_Reasoning extends TaskBoxGenerator {
 
 	}
 
-	@Override
-	public int getCategoryIndex() {		
-		return IConstants.ABSTRACT_REASONING;
-	}
-
 
 
 }

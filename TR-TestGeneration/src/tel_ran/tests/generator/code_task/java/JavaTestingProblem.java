@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 
 import tel_ran.tests.generator.code_task.CodeTestingProblem;
+import tel_ran.tests.utils.files.FileSaver;
 
 public abstract class JavaTestingProblem extends CodeTestingProblem {
 	
@@ -26,12 +27,20 @@ public abstract class JavaTestingProblem extends CodeTestingProblem {
 		this.numberOfDescripton = 10; 
 	}
 		
-	protected void createDir() {
+	protected void createDir(int add) {
 		long name = System.currentTimeMillis();
-		filePath = pathGenerate.concat(File.separator).concat(Long.toString(name));
-		File dir = new File(filePath);
+		StringBuilder flPth = new StringBuilder();
+		flPth.append(FileSaver.basePath);
+		flPth.append(pathGenerate);
+		flPth.append(File.separator);
+		flPth.append(name);
+		flPth.append(add);
+		
+		this.filePath = flPth.toString();
+		
+		File dir = new File(this.filePath);
 		if(dir.exists())
-			createDir();
+			createDir(++add);
 		else {
 			dir.mkdirs();			
 		}
